@@ -21,7 +21,14 @@ listed, dead versions rendered dead, the `seeding` phase, gate-11 findings #6/#7
 G-exchange-live + syncoid) remain, owned by an Operator hardware day. `qn.6a` = soak-ready UI —
 **mobile is the precondition for daily use**, plus offline devices and backup-list labels ((ch)); it
 is the **last rung under the current process** and feeds the revamp friction evidence. Deferred past
-the freeze: gate **12c**, the DSM/alpha-tester prerequisites, the rest of qn.7, and qn.6+. Recent
+the freeze: gate **12c**, the DSM/alpha-tester prerequisites, the rest of qn.7, and qn.6+. **The
+PROCESS REVAMP is in flight** (product code frozen, app soaking): the GitHub substrate is live —
+branch protection, labels, templates, the machine account — and the journal moved to this repo
+([quince#4](https://github.com/novkostya/quince/pull/4),
+[quince#5](https://github.com/novkostya/quince/pull/5)); **pr.3** (agent instructions + six workflow
+skills + layered permissions) is open for review as
+[quince#6](https://github.com/novkostya/quince/pull/6)–[#8](https://github.com/novkostya/quince/pull/8);
+then pr.2 (dev-container generator), pr.5 (session host), pr.4 (QA + self-serve deploys). Recent
 history follows.
 
 **`qn.4c` is BUILT + HARDWARE-PROVEN — the DAILY-DRIVER bar is MET ((cd)/(ce)).**
@@ -2361,3 +2368,30 @@ on real traction).
   the discussion): does NOT meet the insert bar, home = the multi-storage epic as a first-class
   MODE, with a btrfs-native twin noted for DSM. Nothing pre-freeze changes; the soak + qn.7's
   chaos work feed the mode decision with real evidence.
+- 2026-07-25: **pr.3 DELIVERED — the agent instructions, the six workflow skills, and the layered
+  permission allowlist, as three bot-authored PRs open for review
+  ([#6](https://github.com/novkostya/quince/pull/6),
+  [#7](https://github.com/novkostya/quince/pull/7),
+  [#8](https://github.com/novkostya/quince/pull/8)). This is the FIRST date-anchored entry: letters
+  are retired from here on** — `(a)`–`(do)` stay forever as citations, and new entries cite PR/issue
+  numbers, which GitHub allocates race-free. #6 rewrites `CLAUDE.md` into the standing instructions
+  (project shape; the forge-as-substrate workflow — fresh clone per unit of work, small PRs with one
+  reviewable claim, approver-never-author, the DoD; issue homes; the durable hard rules, now
+  including *interface facts and version pins are looked up live, never remembered*; the
+  resurrection test). #7 adds `/onboard` (the resurrection test as a command, and the only
+  model-invocable one, so "continue quince" self-onboards), `/kickoff`, `/report`, `/review-pr`
+  (with `all`), `/land`, and `/qa` — the last a labelled placeholder, since the ruled dev-container
+  deploy needs pr.2/pr.4 and inventing a deploy URL is exactly the lie state honesty forbids. #8
+  commits the generic allowlist plus the reference environment under convention names only
+  (`quince-pve`, `quince-dev-N`), with real addresses binding per-machine in the gitignored local
+  layer; denies mirror branch protection and keep credential-file contents out of transcripts. Two
+  self-corrections during the build, both from checking instead of remembering: the bot DOES have
+  push on this repo (R1's recorded one-repo scope had decayed once the devlog existed), and a
+  blanket force-push deny would have fought the routine amend-a-PR-branch flow. Owed: architect
+  review of #6–#8; a cleanup PR here stripping this repo's program doc of the retired process loop
+  (worktrees / rsync / commit-when-asked — `CLAUDE.md` wins on process meanwhile), Operator-approved
+  since it is architect-authored; `/review-pr all` has never run against a real queue and #6–#8 are
+  its first. Friction notes filed as
+  [devlog#1](https://github.com/novkostya/quince-devlog/issues/1) — token scope vs `gh pr edit`, the
+  decayed access record, the program-doc contradiction, and a proposed DoD refinement naming the two
+  legitimate non-URL deploy outcomes.
