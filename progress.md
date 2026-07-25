@@ -25,11 +25,14 @@ the freeze: gate **12c**, the DSM/alpha-tester prerequisites, the rest of qn.7, 
 PROCESS REVAMP is in flight** (product code frozen, app soaking): the GitHub substrate is live —
 branch protection, labels, templates, the machine account — and the journal moved to this repo
 ([quince#4](https://github.com/novkostya/quince/pull/4),
-[quince#5](https://github.com/novkostya/quince/pull/5)); **pr.3** (agent instructions + six workflow
-skills + layered permissions) is open for review as
-[quince#6](https://github.com/novkostya/quince/pull/6)–[#8](https://github.com/novkostya/quince/pull/8);
-then pr.2 (dev-container generator), pr.5 (session host), pr.4 (QA + self-serve deploys). Recent
-history follows.
+[quince#5](https://github.com/novkostya/quince/pull/5)); **pr.3 is LANDED** — the standing agent
+instructions, the six workflow skills (`/onboard`, `/kickoff`, `/report`, `/review-pr`, `/land`,
+`/qa`), and the layered permission allowlist
+([quince#6](https://github.com/novkostya/quince/pull/6)–[#8](https://github.com/novkostya/quince/pull/8),
+`main` at `6df2461`), so a session now self-onboards from a command instead of a hand-written
+kickoff. **Next: pr.2** (dev-container generator; the Proxmox token exists), then pr.5 (session
+host), then pr.4 (QA + self-serve deploys, which retires the `/qa` placeholder). Recent history
+follows.
 
 **`qn.4c` is BUILT + HARDWARE-PROVEN — the DAILY-DRIVER bar is MET ((cd)/(ce)).**
 Both transports drive real encrypted backups from the browser on **supervised** muxers: a 33.3 GB
@@ -2368,11 +2371,12 @@ on real traction).
   the discussion): does NOT meet the insert bar, home = the multi-storage epic as a first-class
   MODE, with a btrfs-native twin noted for DSM. Nothing pre-freeze changes; the soak + qn.7's
   chaos work feed the mode decision with real evidence.
-- 2026-07-25: **pr.3 DELIVERED — the agent instructions, the six workflow skills, and the layered
-  permission allowlist, as three bot-authored PRs open for review
-  ([#6](https://github.com/novkostya/quince/pull/6),
-  [#7](https://github.com/novkostya/quince/pull/7),
-  [#8](https://github.com/novkostya/quince/pull/8)). This is the FIRST date-anchored entry: letters
+- 2026-07-25: **pr.3 LANDED — the agent instructions, the six workflow skills, and the layered
+  permission allowlist, as three bot-authored PRs reviewed and rebase-merged the same day
+  ([#7](https://github.com/novkostya/quince/pull/7) → `637bf06`,
+  [#8](https://github.com/novkostya/quince/pull/8) → `52adf48`+`b1d607c`,
+  [#6](https://github.com/novkostya/quince/pull/6) → `6df2461`; `main` linear,
+  `43136ec..6df2461`). This is the FIRST date-anchored entry: letters
   are retired from here on** — `(a)`–`(do)` stay forever as citations, and new entries cite PR/issue
   numbers, which GitHub allocates race-free. #6 rewrites `CLAUDE.md` into the standing instructions
   (project shape; the forge-as-substrate workflow — fresh clone per unit of work, small PRs with one
@@ -2387,11 +2391,27 @@ on real traction).
   layer; denies mirror branch protection and keep credential-file contents out of transcripts. Two
   self-corrections during the build, both from checking instead of remembering: the bot DOES have
   push on this repo (R1's recorded one-repo scope had decayed once the devlog existed), and a
-  blanket force-push deny would have fought the routine amend-a-PR-branch flow. Owed: architect
-  review of #6–#8; a cleanup PR here stripping this repo's program doc of the retired process loop
-  (worktrees / rsync / commit-when-asked — `CLAUDE.md` wins on process meanwhile), Operator-approved
-  since it is architect-authored; `/review-pr all` has never run against a real queue and #6–#8 are
-  its first. Friction notes filed as
+  blanket force-push deny would have fought the routine amend-a-PR-branch flow. **The architect
+  review caught one blocking regression that the self-corrections did not**: #6's product-shape
+  summary described the pre-qn.5b reflink-*mirror* storage model and carried a stale `work/<job>`
+  path plus a "browse never reads the head" line that qn.5b falsified — written by summarising the
+  OLD `CLAUDE.md` instead of reading design §5, on the very rung whose thesis is that agents read
+  canon. Fixed against §5 as landed (one lifecycle; per-job `working/<udid>` seeded reflink→copy,
+  never hardlink; commit = verify → `renameat2(RENAME_EXCHANGE)` → snapshot/archive; `latest/` as
+  both offsite surface and the browse root of the newest version; dirty-working kept on failure;
+  seed sentinel; roll-forward) with an explicit §5 citation so the next editor is pointed at the
+  source, not the summary. Two rulings folded in during review: **`quince-bot` now has write on
+  quince-devlog** (journal entries are implementer output by design, so the journal is part of the
+  bot's workspace — `/report`'s access probe absorbs it with no skill change), and the
+  suggestion-turned-amendment steering runtime-equipped workstations to move the broad
+  docker/nerdctl grants into their local layer. Owed: a cleanup PR here stripping this repo's
+  program doc of the retired process loop (worktrees / rsync / commit-when-asked — `CLAUDE.md` wins
+  on process meanwhile), Operator-approved since it is architect-authored; the flake filed as
+  [quince#9](https://github.com/novkostya/quince/issues/9) (`TestStorySingleFlight` leaves its
+  second job running, so `t.TempDir` cleanup races a live writer — found by CI on a docs-only diff,
+  deliberately not fixed inside a process PR). Friction notes: nine items in
   [devlog#1](https://github.com/novkostya/quince-devlog/issues/1) — token scope vs `gh pr edit`, the
-  decayed access record, the program-doc contradiction, and a proposed DoD refinement naming the two
-  legitimate non-URL deploy outcomes.
+  decayed access record, the program-doc contradiction, a proposed DoD refinement naming the two
+  legitimate non-URL deploy outcomes, identity separation being discipline rather than structure
+  until pr.5, and the strict-checks + dismiss-stale-reviews tax that makes a stack of N sibling PRs
+  cost N re-approvals.
