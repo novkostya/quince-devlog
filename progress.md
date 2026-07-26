@@ -2697,7 +2697,15 @@ on real traction).
   (2026-07-26 10:46:25Z — rulings post under the `novkostya` login, so the role is named here
   rather than inferred) confirmed it against source, found a **second** call site the report
   missed (`superviseGatedSeed`, the common path for a cold backup since qn.6b), and scheduled it
-  to stay filed while the freeze holds and go early once it lifts. And
+  to stay filed while the freeze holds and go early once it lifts. **The Operator then ruled it
+  fixable during the freeze** ([#35 comment](https://github.com/novkostya/quince/issues/35#issuecomment-5084066861),
+  2026-07-26 15:09:53Z): a cancel reported as a failure corrupts the soak's own record, so an
+  instrument that miscounts failures during the measurement period damages the very thing the
+  freeze protects — **a freeze concern rather than an exception to it**, product code by explicit
+  authorisation, with the freeze otherwise standing, the four owed items still open, and the work
+  sequenced after the process rungs (#43, #41/#44, #45). That reasoning was the authorisation for
+  this whole day's work and it reached the session before it reached the forge; it is recorded here
+  only now that it can be cited, which is the standard this entry set for itself. And
   [quince#38](https://github.com/novkostya/quince/issues/38) —
   a **third** instance of #9's shape: `succeed()` writes the terminal row and calls `AnnounceBackup`
   *after*, so a test reading the announce at terminal loses the race; measured pre-existing (`main`
