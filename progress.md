@@ -18,10 +18,13 @@ service cannot start from a clean conf.d — a temporary export sits on that box
 [quince#33](https://github.com/novkostya/quince/issues/33) (three undocumented ceremony gates),
 `pr.6` (every remaining root path becomes a forced-command wrapper), and
 [devlog#4](https://github.com/novkostya/quince-devlog/issues/4) (the implementer half of the
-review loop; the architect half has been in production for a day). **Then unfreeze**, with
-[quince#9](https://github.com/novkostya/quince/issues/9) deliberately reserved as the first
-post-freeze item so the whole loop gets an end-to-end dress rehearsal, and `qn.7` (Wi-Fi
-auto-resume) resuming the product chain. Architect handoff notes:
+review loop; the architect half has been in production for a day). **Then unfreeze.**
+[quince#9](https://github.com/novkostya/quince/issues/9)'s reservation as the first post-freeze
+item was **discharged on the Operator's instruction** (confirmed on the issue, 2026-07-26
+11:16:25Z) and the dress rehearsal has been run — #9 and
+[quince#31](https://github.com/novkostya/quince/issues/31) both landed test-only; the four items
+above are unchanged and still gate the unfreeze, after which `qn.7` (Wi-Fi auto-resume) resumes
+the product chain. Architect handoff notes:
 [devlog#10](https://github.com/novkostya/quince-devlog/issues/10).
 
 Prior state: **`qn.5b` was BUILT (CI-proven, 2026-07-24 (cp)).** `qn.5b` made the `latest` swap **atomic**
@@ -2682,7 +2685,7 @@ on real traction).
   "before the FIRST sign of life (a re-exec / process startup can take longer than a short timeout),
   or while paused for the passcode" — so the harness grants it in the same four phases and still
   guards `receiving`, the only phase where stillness is diagnostic
-  ([quince#37](https://github.com/novkostya/quince/pull/37), approved, sweep of its head owed).
+  ([quince#37](https://github.com/novkostya/quince/pull/37), merged `eb0150f`).
   **The process is the story:** the PR declared its own weakest link, the review aimed at exactly
   that link and broke it, and the result is better than either party had alone. **Two findings that
   are not flakes**, both filed rather than folded in, because the product is frozen and the branch
@@ -2690,9 +2693,12 @@ on real traction).
   job context, `cmd.Start()` then fails with `context canceled`, and `supervise` returns
   `outcomeProcErr` **without consulting `killReason`**, so a user who presses Cancel is told the
   backup *failed*, quoting an internal context; the engine checks kill-reason-first in both
-  `awaitDevice` and `runToolLoop`, and this one path skips it (Operator-ruled a freeze *concern*
-  rather than an exception — an instrument that miscounts failures during the measurement period
-  damages what the freeze protects). And [quince#38](https://github.com/novkostya/quince/issues/38) —
+  `awaitDevice` and `runToolLoop`, and this one path skips it. The **architect's** ruling on #35
+  (2026-07-26 10:46:25Z — rulings post under the `novkostya` login, so the role is named here
+  rather than inferred) confirmed it against source, found a **second** call site the report
+  missed (`superviseGatedSeed`, the common path for a cold backup since qn.6b), and scheduled it
+  to stay filed while the freeze holds and go early once it lifts. And
+  [quince#38](https://github.com/novkostya/quince/issues/38) —
   a **third** instance of #9's shape: `succeed()` writes the terminal row and calls `AnnounceBackup`
   *after*, so a test reading the announce at terminal loses the race; measured pre-existing (`main`
   3/60 under load, the branch 1/20, the same rate). Three tests now caught assuming the terminal row
