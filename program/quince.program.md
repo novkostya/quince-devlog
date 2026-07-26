@@ -186,12 +186,19 @@ intact:
   typed events coming up empty is not a backstop: it inherits the blindness it exists to cover;
   (f) *a timestamp says WHEN, never WHO*. Any turn-taking decision fetches the actor too, and when
   nothing in the record accounts for the change it says so — naming the most recent bystander is a
-  wrong answer that looks like an answer, which is worse than no answer.
+  wrong answer that looks like an answer, which is worse than no answer;
+  (g) **a check whose positive answer can be produced by the act of asking is not a check.** Twice in
+  one day: a watcher confirmed its recorded pid by grepping `/proc/<pid>/cmdline` for its own name and
+  reported success for the shell that had just *run* it; and a re-arm check looked for its state in the
+  **session scratchpad**, which the failure it defended against destroys — so it could only ever report
+  "nothing to re-arm", passing by looking in an empty room.
   The test for any such message: could it print unchanged in a situation where it is untrue? If so
-  it is a template, not a report. (Origin: pr.2 and pr.4, 2026-07-25/26 — six instances of this
-  one class, each fix turning an assertion into a measurement. Then (e) and (f), 2026-07-26: a
-  **fourth** watch failure of the same shape, and the first to deadlock two *agents* on each other
-  rather than park one agent on a human — quince#43, this repo's #13 and #16.)
+  it is a template, not a report. For (g) the test is one step earlier and it is about the wiring, not
+  the output: **could this check have failed at all, given how it is connected?** (Origin: pr.2 and
+  pr.4, 2026-07-25/26 — six instances of this one class, each fix turning an assertion into a
+  measurement. Then (e), (f) and (g), 2026-07-26: a **fourth** watch failure of the same shape, and the
+  first to deadlock two *agents* on each other rather than park one agent on a human — quince#43, this
+  repo's #13 and #16. (g) is the architect's phrasing, from reviewing the fix for the other two.)
 
   **A claim can be wrong three ways** — by being false, by being **unobservable**, or by being
   always-true. The watch failures are all the second kind, and naming the shape is what stops the
