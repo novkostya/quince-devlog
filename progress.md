@@ -2657,46 +2657,67 @@ on real traction).
   decision is reopened by "the Operator saying so in chat", a channel that stopped carrying
   authority at `pr.0`.
 
-- 2026-07-26: **Both `internal/backup` flakes fixed test-only and CI-proven — and the load that
-  reproduces them surfaced a third finding that is not a flake at all.** The two open flake issues
-  turned out to be one class each, and neither published fix shape was quite right.
-  [quince#9](https://github.com/novkostya/quince/issues/9): `TestStorySingleFlight` leaves a second
+- 2026-07-26: **One `internal/backup` flake fixed and landed; the other's category fix was found
+  INCOMPLETE in review, by a reproduction the implementer could not get — and the load that
+  reproduces them all turned up two findings that are not flakes.**
+  [quince#9](https://github.com/novkostya/quince/issues/9) is done and merged
+  ([quince#36](https://github.com/novkostya/quince/pull/36)): `TestStorySingleFlight` leaves a second
   device's job running, and **waiting for that job would not have closed it** — `run()` emits the
   terminal row, THEN discards `working/`, and only frees the per-UDID slot on its way out, so
-  terminal state is not the quiescence signal. The file already half-knew this: `startWhenReleased`
-  carries a note about "the brief single-flight window between a job's terminal row and the release
-  of its per-UDID slot". So the fix went into the harness — cancel every live job, wait for
-  `e.running` to empty, fail loudly if it will not — which closes the class for every test in the
-  package rather than the one instance. Reproduced at `-count 50` on the first attempt; green at 50,
-  at 100 under CPU contention, and the package at `-count 5`.
-  [quince#31](https://github.com/novkostya/quince/issues/31): **not reproduced**, and the entry says
-  so — the CI load profile reproduces exactly (`deviceops` 34 s, `httpapi` 17 s, the issue's own
-  numbers) but the package finished in 9 s and the named test passed 20/20 at 3× oversubscription,
-  so the spawn-latency hypothesis is unconfirmed and that one red run remains the only evidence. The
-  category was fixed anyway: `waitTerminal`/`waitState` now read their duration as a **no-progress
-  window** rather than a wall-clock budget, restarting whenever the job visibly advances. That is
-  **stronger, not merely more tolerant** — an engine taking 30 s to notice a dead transport used to
-  pass a 60 s budget and now fails, which is what raising the constants would have given up. ~30
-  budgets across the package keep their numbers and simply mean something better; failures now report
-  `phase`/`liveness` beside `state`, since `state=backing_up` alone never said whether the job was
-  progressing. Proven negatively too: a deliberately wedged job (tool hanging, liveness timeout
-  pushed out so the engine will not kill it) still fails in ~the window, naming what it saw.
-  **The third finding is a product bug: [quince#35](https://github.com/novkostya/quince/issues/35).**
-  Under load `TestStoryCancel` fails `state=failed, want cancelled` ~25% of runs. `CancelJob` cancels
-  the job context, `cmd.Start()` then fails with `context canceled`, and `supervise` returns
-  `outcomeProcErr` **without consulting `killReason`** — so a user who presses Cancel is told the
-  backup *failed*, quoting an internal context. The engine checks kill-reason-first in both
-  `awaitDevice` and `runToolLoop`; this one path skips it. Filed, not fixed: product code under
-  freeze, and folding it into a test-only branch is the scope creep the process forbids. **Owed:**
-  architect review of both PRs; a ruling on #35; and a real privacy sweep — the runner has no
-  `local/privacy-patterns.txt`, so `make privacy-check` printed *skipped*, not *clean*, and both PRs
-  leave that checklist box unticked with the gap named rather than papered over. **Process note:**
-  #9 was reserved as the first *post-freeze* item and the four owed unfreeze items
+  terminal state is not the quiescence signal. The file already half-knew this
+  (`startWhenReleased`'s note about "the brief single-flight window between a job's terminal row and
+  the release of its per-UDID slot"), so the fix went into the harness — drain the engine, fail
+  loudly if it will not quiesce — closing the class rather than the instance. Reproduced at
+  `-count 50` first attempt; green at 50, at 100 under contention. Review caught it working under
+  fire: two tests died mid-story with jobs live and **no run produced `directory not empty`**.
+  [quince#31](https://github.com/novkostya/quince/issues/31) took two passes. The implementer could
+  not reproduce it (the CI load profile reproduced exactly — `deviceops` 34 s, `httpapi` 17 s — but
+  the package finished in 9 s and the named test passed 20/20 at 3× oversubscription), shipped a
+  category fix — waits measure a **no-progress window** rather than a wall clock — and declared in
+  the PR that the mechanism was unconfirmed. **The architect then reproduced the original failure at
+  that head, under load**: `no progress for 10.001s … phase=waiting_for_passcode`. The window is
+  stronger than a budget only in phases that emit progress signals; `waiting_for_passcode` emits
+  none by design, so there it degenerated back into the very budget being removed. The second pass
+  mirrors the engine's own rule instead of inventing one — `sampler.sample` already grants grace
+  "before the FIRST sign of life (a re-exec / process startup can take longer than a short timeout),
+  or while paused for the passcode" — so the harness grants it in the same four phases and still
+  guards `receiving`, the only phase where stillness is diagnostic
+  ([quince#37](https://github.com/novkostya/quince/pull/37), approved, sweep of its head owed).
+  **The process is the story:** the PR declared its own weakest link, the review aimed at exactly
+  that link and broke it, and the result is better than either party had alone. **Two findings that
+  are not flakes**, both filed rather than folded in, because the product is frozen and the branch
+  was test-only: [quince#35](https://github.com/novkostya/quince/issues/35) — `CancelJob` cancels the
+  job context, `cmd.Start()` then fails with `context canceled`, and `supervise` returns
+  `outcomeProcErr` **without consulting `killReason`**, so a user who presses Cancel is told the
+  backup *failed*, quoting an internal context; the engine checks kill-reason-first in both
+  `awaitDevice` and `runToolLoop`, and this one path skips it (Operator-ruled a freeze *concern*
+  rather than an exception — an instrument that miscounts failures during the measurement period
+  damages what the freeze protects). And [quince#38](https://github.com/novkostya/quince/issues/38) —
+  a **third** instance of #9's shape: `succeed()` writes the terminal row and calls `AnnounceBackup`
+  *after*, so a test reading the announce at terminal loses the race; measured pre-existing (`main`
+  3/60 under load, the branch 1/20, the same rate). Three tests now caught assuming the terminal row
+  means the work is finished — a pattern in the engine's shape, not three coincidences.
+  **Ordering, discharged on the record:** #9's 2026-07-25 ruling reserved it as the first
+  post-freeze item; the Operator confirmed on #9 at 11:16:25Z that today's `/kickoff` was his
+  instruction and deliberately discharges that reservation, with the four unfreeze items
   ([quince#32](https://github.com/novkostya/quince/issues/32),
   [quince#33](https://github.com/novkostya/quince/issues/33), `pr.6`,
-  [devlog#4](https://github.com/novkostya/quince-devlog/issues/4)) are all still open — this ran on
-  the Operator's explicit instruction, under the soak-maintenance lane that (dd)/(di) established for
-  test-only work, and the record should show the ordering was overridden rather than met.
-  ([quince#36](https://github.com/novkostya/quince/pull/36),
+  [devlog#4](https://github.com/novkostya/quince-devlog/issues/4)) still open and still gating. The
+  implementer declined to cure the gap by restating the instruction itself — a bot repeating an
+  instruction is not a record of it being given — which is the state-honesty rule applied one step
+  further than the protocol asked. **The privacy gate failed the same way here as in the docs pass
+  above**, from the opposite end of the project: neither the runner nor the arch box holds the
+  pattern list, so `make privacy-check` exits 0 having grepped nothing. #36's sweep was finally run
+  from the private-layer host at approval; #37's head still owes one. Two sessions independently
+  hitting the same wall on the same day is what moved it from a footnote to filed work
+  ([quince#41](https://github.com/novkostya/quince/issues/41),
+  [quince#44](https://github.com/novkostya/quince/issues/44)). **Also filed from this cycle:**
+  [devlog#15](https://github.com/novkostya/quince-devlog/issues/15) — merging a parent PR
+  auto-closes its stacked children and reopening is refused twice, which nearly cost #37's review
+  thread; and [quince#43](https://github.com/novkostya/quince/issues/43) — the watch loop cannot see
+  a push, green checks after a fix, a comment, an unchanged verdict, or a mergeability transition
+  caused by someone else's merge, which is why both PRs sat unmergeable with neither author nor
+  reviewer told. ([quince#36](https://github.com/novkostya/quince/pull/36),
   [quince#37](https://github.com/novkostya/quince/pull/37),
-  [quince#35](https://github.com/novkostya/quince/issues/35))
+  [quince#35](https://github.com/novkostya/quince/issues/35),
+  [quince#38](https://github.com/novkostya/quince/issues/38))
