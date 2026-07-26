@@ -148,6 +148,20 @@ intact:
 
 - **State honesty.** The job engine and UI never claim more than is proven (a backup is
   `succeeded` only after verify+commit; a domain adapter that failed says so).
+- **An error message is a claim, and so is a success message.** A message must name the condition
+  actually *observed*, and two distinct conditions must never share one message — a message that
+  covers both is false half the time it appears, and it is believed exactly when it is wrong.
+  Corollaries, each earned by a defect rather than reasoned from principle:
+  (a) *silence is not a result* — a step that produced no output has not been shown to succeed
+  (`ssh -n` fed a heredoc to nothing, exited 0, and read as a successful build);
+  (b) *don't collapse "none" into "ambiguous"* — "no dev container is running" was printed while
+  two were, and its suggested fix would have created a third;
+  (c) *verify the postcondition, not the exit code* — a block that announced four commands, ran
+  one, and printed `done.`;
+  (d) *a monitor that reports nothing must distinguish "nothing happened" from "I never looked"*.
+  The test for any such message: could it print unchanged in a situation where it is untrue? If so
+  it is a template, not a report. (Origin: pr.2 and pr.4, 2026-07-25/26 — six instances of this
+  one class, each fix turning an assertion into a measurement.)
 - **A rung's goal is provable at rung close.** A spec whose acceptance gates depend on a
   future rung's deliverable is mis-scoped: split, reorder, or pull the dependency in
   until the goal sentence can be exercised end-to-end when the rung ends. Deferring a
