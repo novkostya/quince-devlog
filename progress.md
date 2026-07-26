@@ -1,21 +1,30 @@
 # quince — progress dashboard
 
-**One-line state.** ⚑ **`qn.6b` "transport patience" is LANDED ((df) build, (dj) review, main
-`3720f84`) and its LAB LEGS are now RUN ((dm), 2026-07-25): stories 9/10/11 validated on real
-hardware — candidate C (fast passcode + seed-during-gate on the zfs hook), the liveness patience
-(rode through a multi-minute device-side pause, no false kill), and kept-dirty-working
-resume-to-completion all PROVEN; the bad-link `-4` (band-roam-induced TLS reset, unrescuable
-in-flight) is a well-scoped qn.7 item. The story-4 flake fix landed ((dk)). **The pre-freeze board
-is CLEAR — next is the CODE FREEZE + PROCESS REVAMP, app soaking.** qn.6b = the patched-from-source
-15-min libimobiledevice timeout (#1413) + the `--gate` patch driving candidate C's parallel seed
-(passcode in ~1–2 s) + the liveness retune to 18 min (out-waits the tool) + amendment A (bound the
-non-backup tool ops the shared timeout leaks into). Contract changes NONE; `make gates`/image/e2e
-green; **lab legs declared owed** (15-min patience across a real flap, the gate vs a real device, the
-`-4` hang re-run). Spec approved ((dg)/(dh)); the item-4 capture proved the hang was the tool's own
-`-4` exit, not a sampler miss. `qn.6a` landed ((db), polish (dd)); redeploy staging from `ef897eb`+. `qn.6a` = soak-ready UI: mobile-first pass over the existing IA, offline devices
-listed, dead versions rendered dead, the `seeding` phase, gate-11 findings #6/#7/#10-byte + the log
-`SplitFunc`, and the two ruled contract adds (`missing` on Version, `seeding` state). `make gates` +
-`make image` + e2e green (mobile leg at 390×844). Prior state: **`qn.5b` was BUILT (CI-proven, 2026-07-24 (cp)).** `qn.5b` made the `latest` swap **atomic**
+**One-line state.** ⚑ **The product is FROZEN and soaking; the PROCESS REVAMP is complete through
+`pr.5`, and only `pr.6` (the lockout) remains.** quince itself is unchanged since `qn.6b` landed and
+its lab legs passed — hardware-proven over USB and Wi-Fi, running under real daily use on staging.
+What changed is how the project is built: PRs are how agents communicate, an approval is a literal
+PR approval, issues are the tracker, and branch protection is the authority model. **`pr.0`–`pr.5`
+landed** — machine identity (`quince-bot`) + branch protection; this journal split out of the
+product repo; `deploy/devct/` (a dev-container toolkit that builds its own template and hands out
+disposable boxes on a scoped Proxmox token); the skills (`/onboard`, `/architect`, `/kickoff`,
+`/report`, `/review-pr`, `/land`, `/qa`); deploy-by-default QA (`devct deploy` puts a clickable demo
+URL in every PR, fetched before it is claimed); and two persistent session hosts —
+**`quince-runner`** (implementer identity) and **`quince-arch`** (architect), each of whose
+preflight asserts the *other's* credential is absent, so approver ≠ author is a property of machines
+rather than a habit. Both now hold live Remote Control sessions.
+**Owed before unfreeze:** [quince#32](https://github.com/novkostya/quince/issues/32) (the arch
+service cannot start from a clean conf.d — a temporary export sits on that box),
+[quince#33](https://github.com/novkostya/quince/issues/33) (three undocumented ceremony gates),
+`pr.6` (every remaining root path becomes a forced-command wrapper), and
+[devlog#4](https://github.com/novkostya/quince-devlog/issues/4) (the implementer half of the
+review loop; the architect half has been in production for a day). **Then unfreeze**, with
+[quince#9](https://github.com/novkostya/quince/issues/9) deliberately reserved as the first
+post-freeze item so the whole loop gets an end-to-end dress rehearsal, and `qn.7` (Wi-Fi
+auto-resume) resuming the product chain. Architect handoff notes:
+[devlog#10](https://github.com/novkostya/quince-devlog/issues/10).
+
+Prior state: **`qn.5b` was BUILT (CI-proven, 2026-07-24 (cp)).** `qn.5b` made the `latest` swap **atomic**
 (`renameat2(RENAME_EXCHANGE)`) + reworked the per-job `working/` lifecycle unified across backends
 ((cg)/(co)) — `make gates`/image green; only the real-rpool lab legs (G-snapshot/G-rclone/
 G-exchange-live + syncoid) remain, owned by an Operator hardware day. `qn.6a` = soak-ready UI —
@@ -2603,3 +2612,21 @@ on real traction).
   would have reached code. **Owed:** the ceremony (both boxes, one sitting), then G2/G3/G6/G8/G9;
   pr.0b is ruled and the arch credential is placed; [quince#31](https://github.com/novkostya/quince/issues/31)
   records a second timing flake, proven by the same commit failing and passing.
+
+- 2026-07-26: **The revamp's session hosts are live, and the ceremony taught three gates the docs
+  did not have.** Both boxes hold Remote Control sessions: `quince-runner` (implementer) and
+  `quince-arch` (architect), each refusing the other's credential at service start. The Operator's
+  login worked first time; everything that *looked* like an auth failure was a later gate —
+  a respawning service fighting the interactive login, workspace trust presented by the TUI as a
+  sign-in screen (auth was provably fine: `claude -p` answered from that same directory), and a
+  one-time `Enable Remote Control? (y/n)` consent that a supervised daemon can never answer (it
+  persists once accepted). All three are filed as
+  [#33](https://github.com/novkostya/quince/issues/33). Completing the second box also found a real
+  bug — [#32](https://github.com/novkostya/quince/issues/32): `provision --role arch` writes the
+  role to conf.d but the init script never exports it, so preflight ran as the default role and
+  demanded the bot token that box must never hold. Every component was correct; nothing told
+  preflight what kind of box it was on, and the arch path had never been exercised. A temporary
+  export is in place on that box and must be removed by the fix.
+  ([#32](https://github.com/novkostya/quince/issues/32),
+  [#33](https://github.com/novkostya/quince/issues/33),
+  [devlog#10](https://github.com/novkostya/quince-devlog/issues/10))
