@@ -34,18 +34,25 @@ CI was invisible, which is where PRs spend most of their life. All three are fix
 [#66](https://github.com/novkostya/quince/pull/66),
 [#67](https://github.com/novkostya/quince/pull/67)) — the loop is now the tool's own **terminating
 verb**, arming is a **`Stop` hook** a session cannot silently skip, and a PR **becoming landable** is
-an event. **What that proves and does not:** four PRs went open → reviewed → fixed → merged tonight with
-**no human relaying anything**, which is G3's headline; but the implementer half was **one long-lived
-session**, not a fresh one per event, so the rung's founding property — *auto-resume wakes a FRESH
-session against the PR thread* — is still **unproven**.
+an event. **What that proves and does not, counted rather than summarised.** Every *review* in the run
+was delivered by the loop — four PRs went open → reviewed → fixed → approved with nobody typing
+"review posted". **The merges are a different question, and the first version of this line elided
+it:** quince#63's sixteen minutes ended only when **a human asked why it had not merged** (which is what
+produced quince#65), and quince#66 and #67 were merged 92 s and 47 s after the *implementer* commented
+that they were landable — a relay by another name, and one the loop should have made unnecessary. Only
+**quince#68 went from approved to merged on the mechanism alone**, unprompted, and it is the first PR
+after the landability fix landed. One clean merge, with a before and an after, is the honest result.
+And the implementer half was **one long-lived session**, not a fresh one per event, so the rung's
+founding property — *auto-resume wakes a FRESH session against the PR thread* — is still **unproven**.
 **Owed before unfreeze:** [quince#32](https://github.com/novkostya/quince/issues/32) (the arch
 service cannot start from a clean conf.d — a temporary export sits on that box),
 [quince#33](https://github.com/novkostya/quince/issues/33) (three undocumented ceremony gates, now
 also owning the pull-before-arm ordering), `pr.6` (every remaining root path becomes a forced-command
 wrapper), and the loop's own **G2/G3** — a real session killed mid-watch, and the two-box coroutine end
-to end. G3's *"nobody types review posted"* leg is now **observed** across four PRs, and its
-**fresh-session leg is not**; G2 is untouched. Declared unproven rather than assumed, and narrowed
-rather than quietly upgraded. **Then unfreeze.**
+to end. G3's *"nobody types review posted"* leg is now **observed** across four PRs — its **merge** leg
+on exactly one (quince#68, after the landability fix; the other three were prompted, one by a human and
+two by the implementer), and its **fresh-session leg not at all**; G2 is untouched. Declared unproven
+rather than assumed, and narrowed rather than quietly upgraded. **Then unfreeze.**
 [quince#9](https://github.com/novkostya/quince/issues/9)'s reservation as the first post-freeze
 item was **discharged on the Operator's instruction** (confirmed on the issue, 2026-07-26
 11:16:25Z) and the dress rehearsal has been run — #9 and
