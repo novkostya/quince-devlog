@@ -1,0 +1,15 @@
+# --- Operator-private / local-only material: never enters this public repo ---
+#
+# `local` is a symlink to the private layer (the privacy pattern list, lab topology, personal
+# transcripts). Every clone that can run a privacy sweep has to create it — `ln -s <private> local`
+# — so the tooling for the check mandates an artifact in the working tree, and without this file a
+# single `git add -A` commits an absolute path to the Operator's machine into a public repository.
+#
+# That is not hypothetical: it happened on quince-devlog#28 and was caught in review rather than by
+# the sweep, which reported CLEAN on a diff containing the path — the pattern list cannot match a
+# path created the same day. `quince` has carried `/local` since qn.0; this repo never had a
+# .gitignore at all, which is why the same symlink is invisible there and staged-in-waiting here.
+/local
+
+# Claude Code machine-local settings (the shared settings.json is tracked where one exists).
+/.claude/settings.local.json
