@@ -153,10 +153,13 @@ intact:
   everyone who was not in that transcript, and evaporates when the session does.
   - **A ruling recorded on the forge can be overridden only on the forge, by its owner.** A reviewer
     may not approve around a written ruling contradicted by an unverifiable claim, and is right not
-    to. (Origin, 2026-07-26: an Operator ruling on quince#9 — *"do not pick this up before the freeze
-    lifts"* — was overridden inside an implementer session's transcript with the words "Go ahead."
-    The implementer proceeded correctly and the architect correctly held quince#36 at
-    comment-not-approve; the PR then waited on one line being posted on the forge.)
+    to. Origin, and cited to the standard this rule sets: the ruling reserving quince#9 until after
+    the freeze ([quince#9, 2026-07-25](https://github.com/novkostya/quince/issues/9#issuecomment-5078867619));
+    an override given the next morning **in a session transcript, which is not part of the record and
+    cannot be quoted here**; the architect correctly holding quince#36 at comment-not-approve rather
+    than approving around it; and the confirmation that finally discharged the reservation
+    ([quince#9, 2026-07-26 11:16:25Z](https://github.com/novkostya/quince/issues/9#issuecomment-5083236849)),
+    which is where the ten seconds of posting would have gone.
   - **A session receiving an instruction that contradicts a written ruling mirrors it to the forge
     before acting on it.** Ten seconds of posting, against a held PR and a round trip through a third
     party.
@@ -192,9 +195,11 @@ intact:
 
   **A claim can be wrong three ways** — by being false, by being **unobservable**, or by being
   always-true. The watch failures are all the second kind, and naming the shape is what stops the
-  fifth: a watch covering one repo while reporting both queues clear (#3); a watch that died with
-  its session and reported healthy (#13); a watch structurally unable to see the signal it was
-  waiting for (#16); an event model that could not see a fix arrive (quince#43).
+  fifth. Each instance below names what its citation points at, because a citation a stranger cannot
+  classify does not name anything: a watch covering one repo while reporting both queues clear (#3,
+  the PR that sat unreviewed 3h24m); a watch that died with its session and reported healthy (#13);
+  a watch structurally unable to see the signal it was waiting for (quince#36, ruled in #16); an
+  event model that could not see a fix arrive (quince#43).
 - **A rung's goal is provable at rung close.** A spec whose acceptance gates depend on a
   future rung's deliverable is mis-scoped: split, reorder, or pull the dependency in
   until the goal sentence can be exercised end-to-end when the rung ends. Deferring a
