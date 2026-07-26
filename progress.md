@@ -2857,6 +2857,12 @@ on real traction).
   not to its successor), [quince#57](https://github.com/novkostya/quince/issues/57) (`waitCeiling`
   reached in CI: a job stalled in a grace phase is bounded only by the 2-minute backstop — a
   composition defect descended from quince#37, filed by the reviewer who approved it).
+  *(Corrected 2026-07-26, in the entry immediately below: #57 is **not** a composition defect and
+  quince#37 is not its ancestor — quince#37's grace-phase composition is correct, and its disputed
+  assertion that reaching the ceiling is always a bug held. The cause is
+  [quince#59](https://github.com/novkostya/quince/issues/59), a lost update that overwrites the
+  terminal job row. Annotated rather than rewritten: this entry is citable, and a log that edits
+  itself breaks the thing citations rest on.)*
 - 2026-07-26: **The CI flake was the product lying about a failed backup, and reproducing it before
   fixing it is the only reason anyone knows that.**
   [quince#57](https://github.com/novkostya/quince/issues/57) reported
