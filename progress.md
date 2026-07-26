@@ -25,12 +25,27 @@ liveness classes and a `stop` verb that verifies a pid before signalling it, a d
 hard-fails rather than shrinking, both skills, and three new canon corollaries. **None of it is live in
 either session until both boxes pull the launchpad and restart** — and the pull alone flips
 `bin/forge-watch` while the skills need the restart, so those are two moments rather than one.
+**It went live on 2026-07-26 and immediately delivered three defects of its own**
+([quince#62](https://github.com/novkostya/quince/issues/62),
+[#65](https://github.com/novkostya/quince/issues/65)): the armed loop never terminated so nothing it
+detected could wake anybody; the implementer half armed nothing at all; and an approved PR waiting on
+CI was invisible, which is where PRs spend most of their life. All three are fixed
+([quince#63](https://github.com/novkostya/quince/pull/63),
+[#66](https://github.com/novkostya/quince/pull/66),
+[#67](https://github.com/novkostya/quince/pull/67)) — the loop is now the tool's own **terminating
+verb**, arming is a **`Stop` hook** a session cannot silently skip, and a PR **becoming landable** is
+an event. **What that proves and does not:** four PRs went open → reviewed → fixed → merged tonight with
+**no human relaying anything**, which is G3's headline; but the implementer half was **one long-lived
+session**, not a fresh one per event, so the rung's founding property — *auto-resume wakes a FRESH
+session against the PR thread* — is still **unproven**.
 **Owed before unfreeze:** [quince#32](https://github.com/novkostya/quince/issues/32) (the arch
 service cannot start from a clean conf.d — a temporary export sits on that box),
 [quince#33](https://github.com/novkostya/quince/issues/33) (three undocumented ceremony gates, now
 also owning the pull-before-arm ordering), `pr.6` (every remaining root path becomes a forced-command
 wrapper), and the loop's own **G2/G3** — a real session killed mid-watch, and the two-box coroutine end
-to end — which need the restart above and are declared unproven rather than assumed. **Then unfreeze.**
+to end. G3's *"nobody types review posted"* leg is now **observed** across four PRs, and its
+**fresh-session leg is not**; G2 is untouched. Declared unproven rather than assumed, and narrowed
+rather than quietly upgraded. **Then unfreeze.**
 [quince#9](https://github.com/novkostya/quince/issues/9)'s reservation as the first post-freeze
 item was **discharged on the Operator's instruction** (confirmed on the issue, 2026-07-26
 11:16:25Z) and the dress rehearsal has been run — #9 and
@@ -2918,3 +2933,121 @@ on real traction).
   neither the implementer nor the architect can run `make privacy-check`, so the box stayed unticked
   and the supervisor swept from the host holding the pattern list, twice, the first claim expiring
   when the review fix moved the head.
+- 2026-07-26: **The rewritten loop shipped a watch that could not wake anybody, and an arming step a
+  session could simply skip — one mechanism defect and one honour-system defect, in the same hour, on
+  opposite boxes.** [quince#62](https://github.com/novkostya/quince/issues/62). The architect armed the
+  loop its own skill printed — `while :; do forge-watch tick --all; sleep 60; done` — and **a session is
+  woken by a background task COMPLETING**, so a loop with no exit condition detects everything and
+  delivers nothing. quince#61 opened at `19:07:16Z`; the session's last activity was `18:21:38Z` and a
+  human ended the stall fifty minutes later. Every instrument was green throughout: fresh heartbeat,
+  both state files rewritten every 60 s, `status --all` reporting `live`. Corollary (g) inside the
+  mechanism built to eliminate it — and what it degraded to is the sharp part: **the twenty-minute poll
+  this rung existed to replace, wearing the new mechanism's clothes.** A first correction claimed the
+  fallback heartbeat had bounded the stall; the architect's own instruments then disproved that
+  **three times, and a fourth after the count was published** — `ScheduleWakeup` armed and due at
+  `18:41`, `19:40`, `20:03` (then `20:31`), session idle each time, invoked none of them — so there was
+  no floor at all. An hour later the implementer half
+  produced the complement: checked structurally against its transcript, **no watcher, no state file,
+  no `ScheduleWakeup` — zero**, ending a turn on *"the ball is back with the reviewer"* four minutes
+  before its verdict landed. Both stops were named illegitimate **by the skill the session was
+  following**, the second in a section rewritten to prevent the first. **Landed:**
+  [quince#63](https://github.com/novkostya/quince/pull/63) makes the loop the tool's own verb —
+  `forge-watch watch` exits on the first wake-worthy event, treats the baseline (`first-observation`
+  and the `queue-empty` beside it) and a lone `fetch-failed` as non-waking, prints every tick
+  regardless (**the filter decides what wakes, never what is seen**), refuses to arm beside a `live` or
+  `wedged` watch so §4c's four answers are enforced where they are acted on, and carries its own
+  `--max-wait` floor because termination is now the only thing that wakes anything. Self-caused wakes —
+  about a third of the architect's — are **not** suppressed, deliberately: a suppression rule would be
+  a fresh claim about what cannot matter, which is §4b's defect again. **The fixture had to assert
+  termination, not health**, because every health fixture in the directory passes on the deaf watcher;
+  its teeth are stated oddly on purpose — against the hand-rolled shape the positive fixture does not
+  *fail*, it **hangs**, so the harness bounds each loop fixture with `timeout` and says so when
+  `timeout` is missing. **A defect in that PR was found by arming it for real rather than reading it:**
+  re-arming from a `dead` watch emits `tick-overdue` *by definition*, so every re-arm woke once for
+  nothing, reporting as news the gap the arming step had announced one line earlier — the fixtures the
+  author had just written all passed while it was broken, and the reviewer's own live run had missed it
+  too (a 35 s gap against a 60 s interval). **Then
+  [quince#66](https://github.com/novkostya/quince/pull/66)**: a verb that terminates correctly does
+  nothing for a session that never runs it, so `forge-watch owed` asks whether open PRs here have no
+  live watch and a **`Stop` hook** runs it when a turn ends — **blocking once** with the exact command,
+  then, on a second attempt, telling the *human* instead. The two rejected shapes were rejected on
+  structure: *"opening a PR arms the watch"* **cannot work**, because only a task the session itself
+  launched can wake it, so a process forked by a `gh` wrapper would be armed, ticking, `live` and deaf —
+  the same bug one layer down; and *"a channel that needs no arming"* is right and is the **runner
+  dispatcher already in the spec**, which needs the runner unit and is named rather than built. The
+  general shape is worth keeping: **a rule that tells a session to do something is satisfied by a
+  session that does not do it, and nothing observes the difference** — corollary (g) applied to arming
+  instead of to checking. **What made both PRs trustworthy was running the harness, not reasoning about
+  it:** the hook was proven by a headless session in a never-trusted workspace that was told *"reply
+  with the single word PING and do not use any tools"* and **tried to arm a watch instead**; exits 6
+  and 7 were confirmed to be rendered to a session as *"failed with exit code 6"* when 6 is the
+  designed heartbeat; and two documented facts turned out wrong under test — the published `Stop` hook
+  config example omits the nesting the real schema requires (the first probe silently never ran), and
+  `"hooks": {"Stop": []}` does **not** disable a project hook because hooks merge (`disableAllHooks` is
+  the switch, and it is all-or-nothing). **Found and filed, not folded in:**
+  [quince#64](https://github.com/novkostya/quince/issues/64) — `forge-watch replay` is the spec's G1
+  and is run by **no gate and no CI job**, so every round of this work has proven it by hand and pasted
+  the output, which is the honour system this repository keeps filing issues about.
+
+- 2026-07-26: **The loop's sixth blind spot was in a justification, not in code: an approved PR whose
+  CI then finishes is invisible, and that is where PRs spend most of their waiting.**
+  [quince#65](https://github.com/novkostya/quince/issues/65), filed by the architect against its own
+  conduct after [quince#63](https://github.com/novkostya/quince/pull/63) sat **approved, green,
+  mergeable and unmerged for sixteen minutes** behind a live, quiet watch. Both halves were then
+  measured live on [quince#66](https://github.com/novkostya/quince/pull/66) rather than reasoned about,
+  in a window with no push, comment or review: `updatedAt` **frozen** at `21:07:11Z` across fourteen
+  samples while `image` and then `e2e` completed; and — after an approval landed at `21:14:47Z` with CI
+  still running on a freshly pushed head — `ms=BLOCKED … BLOCKED … CLEAN at 21:19:39Z`, with
+  `updatedAt` **never moving**. So the unenumerated `updated` backstop, built so that *nothing is
+  invisible*, is **structurally blind** to the moment a PR becomes landable: nothing happens *to* the
+  PR, which is exactly why its timestamp does not move. **The cause was not the rollup lag the issue
+  named as its leading candidate.** `event=checks` fires only on `FAILURE`, deliberately, and the note
+  justifying that narrowing read *"the push preceding those checks moves `updatedAt`, so `updated`
+  carries the transition"* — true for changes-requested → fix → green, **false for approved → CI
+  completes**, where the last mover was the approval and it happened first. Nothing malfunctioned;
+  there was no fault to reproduce, which retired the issue's first ask and made the fix a one-line
+  widening. **Landed:** `mergeability` — the channel already built for *"its own `updatedAt` did not
+  move and its landability changed"* — now reports the transition **into `CLEAN`** beside `BEHIND` and
+  `DIRTY`. Not a new event type, and deliberately **not** "emit on green": green is not *someone must
+  act*, since every PR reaches it while still awaiting first review, and which of the two it means
+  depends on whose turn it is. **A transition, not an every-tick re-examination**, because an author's
+  own PR goes `CLEAN` and they cannot merge it — approver ≠ author — so a repeating signal would spin a
+  watch that exits on detection into arm-exit-arm. **It does not retire corollary (e):** it mechanises
+  the *CI* park, the only one where a field moves; a park on a human decision moves nothing and is
+  still story 6 (`stalled`), unimplemented. **Two fixtures, because one is the trap:** a pure fixture in
+  that area already passed while the live path delivered nothing for sixteen minutes, so a
+  `"kind": "loop"` fixture drives the real verb across three ticks with `updatedAt` identical
+  throughout. Teeth measured: against the classifier as it stood the pure one emits **nothing at all**
+  and the loop one runs to its idle bound — the sixteen-minute silence, reproduced in twelve seconds.
+  An existing fixture gained a third expected line, from recorded data rather than a new claim, and
+  **suppressing it because `review` fired in the same tick was refused explicitly**: "the other event
+  carries it" is the exact reasoning that caused this bug. **One near-miss recorded because it was
+  nearly written into canon:** a mid-CI reading of `BLOCKED` on a green-looking PR briefly looked like
+  proof that `CLEAN` is never reached — it was the *previous* head that was green, and *"the field says
+  BLOCKED"* and *"the field will never say CLEAN"* are different claims.
+  **It then proved itself twice, in isolation, on the PRs that carried it.** quince#67 was approved at
+  `21:31:24Z` with all three checks queued; the implementer deliberately posted nothing afterwards, so
+  nothing could move `updatedAt` and mask the result — and the watcher woke with **one line and no
+  other**, `event=mergeability pr=67 status=CLEAN`, at `reviews=1 comments=0` with `updatedAt` still
+  sitting on the approval. On `main` as it then stood, that tick was silence. quince#68 repeated it
+  unprompted an hour later, from merged `main`, which makes the fix's first ordinary beneficiary the
+  very next PR through the queue. **Four occurrences in one evening** — quince#63 (the sixteen
+  minutes), #66 (captured by sampling), #67 and #68 (emitted) — is the honest measure of how common the
+  state is: every code PR in this workflow passes through approved-and-waiting-on-CI.
+  **Reviewed rather than rubber-stamped, in both directions.** The architect ran the leg the
+  implementer declared owed — the architect half of the arming gate, on an architect box — and found
+  the hook printing the *implementer's* `--repo` form to the architect: a hint written to be copied
+  verbatim that would have armed a watch smaller than the declared set, and whose resulting state then
+  **satisfies the gate**, a check passed by obeying its own remedy
+  ([quince#66](https://github.com/novkostya/quince/pull/66)). And it corrected an over-broad caveat in
+  the implementer's own spec text: a watch armed after a PR went `CLEAN` misses it only on a **cold
+  start**, because a re-arm from `dead` diffs against the stored observation rather than reseeding —
+  and the terminating watcher makes re-arms the normal path, so the caveat described the rare case in
+  language that read like the common one ([quince#68](https://github.com/novkostya/quince/pull/68)).
+  **Filed for a ruling rather than improvised:**
+  [P2](https://github.com/novkostya/quince-devlog/blob/main/proposals.md) — five instances across two
+  nights, by both parties, of reading a *derived* signal instead of the one carrying the answer (two
+  pipelines read for the wrong exit status, a fixture's teeth verified through `tail`, a `status | head`
+  that manufactured an error from SIGPIPE, and a `BLOCKED` read off a stale head that nearly became the
+  canon claim *"CLEAN is never reached"*). It is quince#65's own shape one level up, and it has now been
+  written up five times as five separate confessions rather than once as a corollary.
