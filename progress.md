@@ -2656,3 +2656,47 @@ on real traction).
   [quince#40](https://github.com/novkostya/quince/issues/40) — stack.md still tells an agent a
   decision is reopened by "the Operator saying so in chat", a channel that stopped carrying
   authority at `pr.0`.
+
+- 2026-07-26: **Both `internal/backup` flakes fixed test-only and CI-proven — and the load that
+  reproduces them surfaced a third finding that is not a flake at all.** The two open flake issues
+  turned out to be one class each, and neither published fix shape was quite right.
+  [quince#9](https://github.com/novkostya/quince/issues/9): `TestStorySingleFlight` leaves a second
+  device's job running, and **waiting for that job would not have closed it** — `run()` emits the
+  terminal row, THEN discards `working/`, and only frees the per-UDID slot on its way out, so
+  terminal state is not the quiescence signal. The file already half-knew this: `startWhenReleased`
+  carries a note about "the brief single-flight window between a job's terminal row and the release
+  of its per-UDID slot". So the fix went into the harness — cancel every live job, wait for
+  `e.running` to empty, fail loudly if it will not — which closes the class for every test in the
+  package rather than the one instance. Reproduced at `-count 50` on the first attempt; green at 50,
+  at 100 under CPU contention, and the package at `-count 5`.
+  [quince#31](https://github.com/novkostya/quince/issues/31): **not reproduced**, and the entry says
+  so — the CI load profile reproduces exactly (`deviceops` 34 s, `httpapi` 17 s, the issue's own
+  numbers) but the package finished in 9 s and the named test passed 20/20 at 3× oversubscription,
+  so the spawn-latency hypothesis is unconfirmed and that one red run remains the only evidence. The
+  category was fixed anyway: `waitTerminal`/`waitState` now read their duration as a **no-progress
+  window** rather than a wall-clock budget, restarting whenever the job visibly advances. That is
+  **stronger, not merely more tolerant** — an engine taking 30 s to notice a dead transport used to
+  pass a 60 s budget and now fails, which is what raising the constants would have given up. ~30
+  budgets across the package keep their numbers and simply mean something better; failures now report
+  `phase`/`liveness` beside `state`, since `state=backing_up` alone never said whether the job was
+  progressing. Proven negatively too: a deliberately wedged job (tool hanging, liveness timeout
+  pushed out so the engine will not kill it) still fails in ~the window, naming what it saw.
+  **The third finding is a product bug: [quince#35](https://github.com/novkostya/quince/issues/35).**
+  Under load `TestStoryCancel` fails `state=failed, want cancelled` ~25% of runs. `CancelJob` cancels
+  the job context, `cmd.Start()` then fails with `context canceled`, and `supervise` returns
+  `outcomeProcErr` **without consulting `killReason`** — so a user who presses Cancel is told the
+  backup *failed*, quoting an internal context. The engine checks kill-reason-first in both
+  `awaitDevice` and `runToolLoop`; this one path skips it. Filed, not fixed: product code under
+  freeze, and folding it into a test-only branch is the scope creep the process forbids. **Owed:**
+  architect review of both PRs; a ruling on #35; and a real privacy sweep — the runner has no
+  `local/privacy-patterns.txt`, so `make privacy-check` printed *skipped*, not *clean*, and both PRs
+  leave that checklist box unticked with the gap named rather than papered over. **Process note:**
+  #9 was reserved as the first *post-freeze* item and the four owed unfreeze items
+  ([quince#32](https://github.com/novkostya/quince/issues/32),
+  [quince#33](https://github.com/novkostya/quince/issues/33), `pr.6`,
+  [devlog#4](https://github.com/novkostya/quince-devlog/issues/4)) are all still open — this ran on
+  the Operator's explicit instruction, under the soak-maintenance lane that (dd)/(di) established for
+  test-only work, and the record should show the ordering was overridden rather than met.
+  ([quince#36](https://github.com/novkostya/quince/pull/36),
+  [quince#37](https://github.com/novkostya/quince/pull/37),
+  [quince#35](https://github.com/novkostya/quince/issues/35))
