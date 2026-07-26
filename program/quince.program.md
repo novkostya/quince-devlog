@@ -148,6 +148,23 @@ intact:
 
 - **State honesty.** The job engine and UI never claim more than is proven (a backup is
   `succeeded` only after verify+commit; a domain adapter that failed says so).
+- **A ruling lives on the forge, and is overridden only there.** This is the specialisation of *the
+  forge is the memory* that cost the most: an instruction living only in a transcript is invisible to
+  everyone who was not in that transcript, and evaporates when the session does.
+  - **A ruling recorded on the forge can be overridden only on the forge, by its owner.** A reviewer
+    may not approve around a written ruling contradicted by an unverifiable claim, and is right not
+    to. (Origin, 2026-07-26: an Operator ruling on quince#9 — *"do not pick this up before the freeze
+    lifts"* — was overridden inside an implementer session's transcript with the words "Go ahead."
+    The implementer proceeded correctly and the architect correctly held quince#36 at
+    comment-not-approve; the PR then waited on one line being posted on the forge.)
+  - **A session receiving an instruction that contradicts a written ruling mirrors it to the forge
+    before acting on it.** Ten seconds of posting, against a held PR and a round trip through a third
+    party.
+  - **Cite a ruling by comment URL and self-declared role, never by login.** The architect and the
+    Operator post as the same identity, so the record cannot distinguish subordinate from principal
+    (quince#47). "The Operator ruled X" with no link is not a citation; it is a claim about a record
+    the reader must then go and fail to verify. Until that identity is split, the role line in the
+    comment plus its URL *is* the attribution.
 - **An error message is a claim, and so is a success message.** A message must name the condition
   actually *observed*, and two distinct conditions must never share one message — a message that
   covers both is false half the time it appears, and it is believed exactly when it is wrong.
@@ -158,10 +175,26 @@ intact:
   two were, and its suggested fix would have created a third;
   (c) *verify the postcondition, not the exit code* — a block that announced four commands, ran
   one, and printed `done.`;
-  (d) *a monitor that reports nothing must distinguish "nothing happened" from "I never looked"*.
+  (d) *a monitor that reports nothing must distinguish "nothing happened" from "I never looked"*;
+  (e) *a watcher's event model is itself a claim — a claim about what can matter*. Being wrong about
+  it costs the most exactly where you are blocked on someone else's action, so **a PR parked pending
+  an external decision is re-examined on every tick, regardless of whether any event fired**, and any
+  watch carries an unenumerated backstop beside its typed events. A backstop conditional on the
+  typed events coming up empty is not a backstop: it inherits the blindness it exists to cover;
+  (f) *a timestamp says WHEN, never WHO*. Any turn-taking decision fetches the actor too, and when
+  nothing in the record accounts for the change it says so — naming the most recent bystander is a
+  wrong answer that looks like an answer, which is worse than no answer.
   The test for any such message: could it print unchanged in a situation where it is untrue? If so
   it is a template, not a report. (Origin: pr.2 and pr.4, 2026-07-25/26 — six instances of this
-  one class, each fix turning an assertion into a measurement.)
+  one class, each fix turning an assertion into a measurement. Then (e) and (f), 2026-07-26: a
+  **fourth** watch failure of the same shape, and the first to deadlock two *agents* on each other
+  rather than park one agent on a human — quince#43, this repo's #13 and #16.)
+
+  **A claim can be wrong three ways** — by being false, by being **unobservable**, or by being
+  always-true. The watch failures are all the second kind, and naming the shape is what stops the
+  fifth: a watch covering one repo while reporting both queues clear (#3); a watch that died with
+  its session and reported healthy (#13); a watch structurally unable to see the signal it was
+  waiting for (#16); an event model that could not see a fix arrive (quince#43).
 - **A rung's goal is provable at rung close.** A spec whose acceptance gates depend on a
   future rung's deliverable is mis-scoped: split, reorder, or pull the dependency in
   until the goal sentence can be exercised end-to-end when the rung ends. Deferring a
