@@ -198,7 +198,9 @@ intact:
   pr.4, 2026-07-25/26 — six instances of this one class, each fix turning an assertion into a
   measurement. Then (e), (f) and (g), 2026-07-26: a **fourth** watch failure of the same shape, and the
   first to deadlock two *agents* on each other rather than park one agent on a human — quince#43, this
-  repo's #13 and #16. (g) is the architect's phrasing, from reviewing the fix for the other two.)
+  repo's #13 and #16. (g) was written in `bin/forge-watch`'s own comment at quince `61e2447`, by the
+  session fixing the defect it describes, and routed into canon by review — cited to the record rather
+  than to a role, because the record is what a stranger can check.)
 
   **A claim can be wrong three ways** — by being false, by being **unobservable**, or by being
   always-true. The watch failures are all the second kind, and naming the shape is what stops the
