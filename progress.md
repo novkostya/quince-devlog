@@ -2857,7 +2857,7 @@ on real traction).
   not to its successor), [quince#57](https://github.com/novkostya/quince/issues/57) (`waitCeiling`
   reached in CI: a job stalled in a grace phase is bounded only by the 2-minute backstop — a
   composition defect descended from quince#37, filed by the reviewer who approved it).
-  *(Corrected 2026-07-26, in the entry immediately below: #57 is **not** a composition defect and
+  *(Corrected 2026-07-26, in the entry immediately below: quince#57 is **not** a composition defect and
   quince#37 is not its ancestor — quince#37's grace-phase composition is correct, and its disputed
   assertion that reaching the ceiling is always a bug held. The cause is
   [quince#59](https://github.com/novkostya/quince/issues/59), a lost update that overwrites the
@@ -2890,7 +2890,7 @@ on real traction).
   **Landed** ([quince#61](https://github.com/novkostya/quince/pull/61)) is the issue's separable
   second defect, test-only: a wait now names *which* bound ended it instead of reporting "no progress
   for 0s" while failing for a stall, and `describe` carries `engine_owns`, the one field that
-  separates a stuck run goroutine from one that finished and left a row disagreeing with it — #59's
+  separates a stuck run goroutine from one that finished and left a row disagreeing with it — quince#59's
   fingerprint, previously obtainable only with a SIGQUIT dump. **The review is why it is worth
   anything:** the first version tested the message as a pure *formatter*, with the mechanism string
   handed in as a literal, while the code that *decides* which string reaches it was hand-threaded
@@ -2901,7 +2901,7 @@ on real traction).
   process — a correction the architect adopted), so a test drives the real loop to the ceiling in
   200 ms instead of two minutes. The reviewer's exact mutation now fails with exactly the text they
   predicted **while the formatter test still passes**, which is the finding made executable. 320 runs
-  under the #57-reproducing load: zero failures.
+  under the quince#57-reproducing load: zero failures.
   **Found on the way and filed, not folded in:**
   [quince#60](https://github.com/novkostya/quince/issues/60) — a cancel arriving during process
   startup terminates the job `failed` with Go's `context canceled` as the *user-facing* message,
