@@ -3358,10 +3358,11 @@ on real traction).
 - 2026-07-27: **Three documents described one tool's exits; none of them matched it, and they
   disagreed with each other about which parts they had wrong.**
   [quince#75](https://github.com/novkostya/quince/issues/75) closed by
-  [quince#85](https://github.com/novkostya/quince/pull/85) (`ed88539`), landed **before** the
-  architect's retirement deliberately: skills load at session start, so a skill fix that lands after
-  a re-provision means the fresh session boots the broken text and a second restart is owed. **The
-  maintenance window is the delivery mechanism for skill fixes.** `bin/forge-watch watch` exits **1**
+  [quince#85](https://github.com/novkostya/quince/pull/85) (`ed88539`), landed **before the
+  re-provision window** deliberately: skills load at session start, so a skill fix that lands *after*
+  a re-provision means the box reboots into the old text, runs on it, and owes a second restart to
+  make the fix live. **A maintenance window is the delivery mechanism for skill fixes**, and the
+  cheapest moment to land one is just before a restart that is already going to happen. `bin/forge-watch watch` exits **1**
   when it REFUSES to arm — *"a watch is ALREADY LIVE … refusing to arm a second one"*, which is
   [quince#50](https://github.com/novkostya/quince/issues/50)'s guard working — and `/architect` §6,
   `/kickoff` §6 and `loop-protocol.md` all enumerated the exits as *0, 6 and 7* and said **"every exit
