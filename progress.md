@@ -3951,3 +3951,80 @@ on real traction).
   [quince#130](https://github.com/novkostya/quince/issues/130),
   [quince#121](https://github.com/novkostya/quince/issues/121),
   [quince#123](https://github.com/novkostya/quince/pull/123))
+
+- 2026-07-27: **`preflight` now refuses a private layer that can never fetch — and the check that
+  enforces freshness was twice caught refusing a machine that worked.**
+  [quince#135](https://github.com/novkostya/quince/pull/135) closes
+  [quince#121](https://github.com/novkostya/quince/issues/121). *Present is not fresh*: a layer clone
+  can be present, readable, and unable to receive anything ever again, and on the arch box — the box
+  that merges, hence the last privacy gate before public history — that means sweeping forever with a
+  matcher frozen at build time, reporting `clean` exactly as a current one does. The check asserts the
+  **local wiring** rather than attempting a fetch, because `ls-remote` fails identically for "no
+  credential" and "network is down", and a false refusal in the one check that decides whether a box
+  starts is an outage.
+  **It was refused twice for that same conflation, from two directions.** The first draft asked `config
+  --get credential.helper`, which cannot see a **URL-scoped** helper — the shape the Operator had wired
+  the arch box in — so it would have refused to start the box in the configuration just confirmed
+  working on it; `--get-urlmatch` asks the question git itself asks, and both wirings pass. The
+  reviewer then found the same defect one transport further out: **SSH authenticates with a key, so an
+  SSH-cloned layer fetches forever without a helper** and was read as frozen. The author's correction
+  to the reviewer's root cause is the load-bearing part — `git@host:p.git` and a bare path *fatal* and
+  were masked by a `2>/dev/null`, but `ssh://` and `file://` are valid URLs that exit 1 printing
+  **nothing at all**, so un-masking the stderr would have repaired the loud half and left the quiet
+  half bricking boxes silently. The fix dispatches on the **scheme**; dropping the redirect is a
+  consequence, not the remedy. The non-http(s) arm reports what it did **not** establish rather than
+  claiming the layer can advance, which would have been quince#121's own defect re-committed by the
+  change that fixes it.
+  **Provenance stated rather than blurred:** the first two commits are a retired session's, rebased and
+  opened by a successor who said so in the PR; the two hardware runs on both helper wirings are the
+  architect's, cited and not reproduced. Four new fixtures were proven non-vacuous against the pre-fix
+  binary — 36/4 before, 40/0 after. `pr.6` constraint 7 was discharged in passing: both boxes
+  re-provisioned, both temporary hacks gone, verified on each box rather than taken on report.
+  ([quince#135](https://github.com/novkostya/quince/pull/135),
+  [quince#121](https://github.com/novkostya/quince/issues/121),
+  [quince#32](https://github.com/novkostya/quince/issues/32),
+  [quince#44](https://github.com/novkostya/quince/issues/44))
+
+- 2026-07-27: **"The Operator approves canon" became a file instead of a sentence — and the deadlock
+  everyone predicted turned out to rest on a premise nobody had checked.**
+  [quince#138](https://github.com/novkostya/quince/pull/138) closes
+  [quince#47](https://github.com/novkostya/quince/issues/47) with `.github/CODEOWNERS`, owning
+  `CLAUDE.md`, the four canon docs, and itself. **It works only because a GitHub App cannot be a code
+  owner** — owners must be users or teams with write permission — so after
+  [quince#134](https://github.com/novkostya/quince/pull/134) an architect verdict *structurally cannot*
+  satisfy the requirement and only the human account can. A day earlier, naming `@novkostya` would have
+  distinguished nothing. **The refusal is the mechanism, not the obstacle.** Landed **inert**: CODEOWNERS
+  alone only auto-*requests* review, the enforcing toggle is admin-only, and the file's own header says
+  so — [quince#113](https://github.com/novkostya/quince/issues/113)'s built-and-unwired shape, with the
+  wiring filed as [quince#137](https://github.com/novkostya/quince/issues/137).
+  **Three seats each published a conclusion resting on something unmeasured, within one hour.** The
+  implementer filed the toggle as creating an *unavoidable* deadlock and separately recommended "flip
+  it, accept admin override" — reasoning about branch protection from a `404` it had correctly recorded
+  as a limit on its own permissions. The architect refuted the second with `enforce_admins: true` (so
+  that option was really *two* flips, the second stripping admin enforcement from `gates`/`image`/`e2e`
+  and linear history repo-wide) — while itself having told devlog#51 that only the App could approve,
+  reasoning from the shared login. **The Operator's ruling found the move none of them had costed:**
+  the premise that the architect can only author as the Operator is false — the App holds `contents:
+  write`, and devlog#53 was authored by `app/quince-review` while the question was open. So the fix was
+  a **missing instruction, not a missing capability**, and the toggle is *sequenced*: architect authors
+  canon through the App → `@novkostya` approves as code owner, a different principal → then the flip.
+  The exception is recorded as narrow in three places: it licenses nothing for a class the App also
+  approves ([quince#136](https://github.com/novkostya/quince/issues/136)).
+  **A false canon row was caught before it landed.** The architect measured that both of its identities
+  are refused `run rerun` and was filing "no identity can re-run CI"; the implementer had already
+  re-run the workflow (`run_attempt: 2`, attempt 1 preserved as `failure`). The true row is asymmetric
+  and runs **opposite to every other row in that table** — `quince-bot` can, the App and the architect
+  PAT cannot — and neither seat could have measured it alone.
+  **Third red `gates` on a docs-only diff in one afternoon**, filed as
+  [quince#140](https://github.com/novkostya/quince/issues/140) at the threshold the architect had set in
+  advance. Not a flake: [quince#59](https://github.com/novkostya/quince/issues/59)'s test is correct and
+  detecting a real defect, and *"docs PR cannot cause a Go failure, therefore flake"* is the exact
+  inference [quince#129](https://github.com/novkostya/quince/issues/129) records as having filed a real
+  defect as noise. The cost the issue names is that the **correct** response to a red gate is a
+  classification, so the project pays a review cycle for CI rather than for its diffs.
+  ([quince#138](https://github.com/novkostya/quince/pull/138),
+  [quince#47](https://github.com/novkostya/quince/issues/47),
+  [quince#137](https://github.com/novkostya/quince/issues/137),
+  [quince#136](https://github.com/novkostya/quince/issues/136),
+  [quince#140](https://github.com/novkostya/quince/issues/140),
+  [quince#59](https://github.com/novkostya/quince/issues/59))
