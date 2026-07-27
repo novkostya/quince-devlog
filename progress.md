@@ -3443,9 +3443,17 @@ on real traction).
   part worth keeping — **the feature woke the session that was building it**, delivering
   `issue-comment issue=62 count=1` through the exact code path under review. **What is owed:** half
   two of the ruling (issues referenced by open PRs) is a separate PR, and measurement done while
-  waiting inverts its obvious design — `closingIssuesReferences` alone covers only **10 of 25** PRs
-  here and would have missed **quince#87 itself**, whose body says *"Closes half one of #80"*, a
-  phrase GitHub does not parse as a closing keyword. No `"kind": "loop"` fixture exercises the issue
+  waiting inverts its obvious design — `closingIssuesReferences` alone covers only **9 of 25** PRs
+  here, against **22 of 25** for the `#N`-in-title convention and **23 of 25** for their union
+  (`gh pr list -R novkostya/quince --state all --limit 25`, run 2026-07-27T09:57Z; the two covered by
+  neither are quince#34 and quince#30). **The command and the window are stated because the first
+  version of this line said *10*, and review could not reproduce it** — a figure I counted by eye,
+  inside an entry partly about claims made without checking. Recomputed in `jq` rather than
+  recounted; the same wrong number had already propagated into a source comment in the half-two
+  branch and was caught there before it landed. The load-bearing half was never in doubt and
+  survives intact: link data alone would have missed **quince#87 itself**, whose body says *"Closes
+  half one of #80"* — a phrase GitHub does not parse, because the keyword and the reference are not
+  adjacent. No `"kind": "loop"` fixture exercises the issue
   path, `issue-reopened` has no fixture, and the fresh-session property of quince#62 remains
   unproven — one session throughout.
   ([quince#87](https://github.com/novkostya/quince/pull/87),
