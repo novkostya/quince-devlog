@@ -3513,3 +3513,110 @@ on real traction).
   [#80](https://github.com/novkostya/quince/issues/80),
   [#87](https://github.com/novkostya/quince/pull/87),
   [devlog#18](https://github.com/novkostya/quince-devlog/issues/18))
+- 2026-07-27: **An empty queue is not a legitimate finish for the reviewer, and the tool that said
+  otherwise was faithful to the prose that was wrong.**
+  [quince#71](https://github.com/novkostya/quince/issues/71) closed by
+  [quince#96](https://github.com/novkostya/quince/pull/96) (`6372c8a`). `/architect` §7 named an
+  empty queue as a finish, and `owed --all` derived its answer from that — the issue's own title is
+  *"`owed --all` says yes because §7 does"*, which is why the tool moved with the prose rather than
+  after it. **The asymmetry is the whole of it:** an implementer's set is what it AUTHORED and cannot
+  change without it; a reviewer's set is what ARRIVES, so its work is done not when the queue is
+  empty but when nothing further is coming — **and that is not knowable from inside the session.**
+  So `owed --all` now returns the whole declared set unconditionally, with no queue query at all;
+  `owed --author` is untouched. **Measured on both sides before it was ruled:** twice an architect
+  overrode the gate, armed against its *"nothing owed"*, and a PR arrived within ~15 minutes
+  (quince#69, quince#73); once an architect **obeyed** it, stopped on an empty queue, and went dark
+  with the gate silent throughout because by its own definition nothing was owed. Two overrides that
+  were right and one obedience that was wrong is a gate wrong in one direction only. The two halves
+  now state different REASONS — `declared` versus `open PRs` — and that is not cosmetic: **a true
+  verdict with a false justification is harder to catch than either error alone**, because the
+  verdict looks right so nobody re-reads the reason. Review found exactly that surviving in the
+  hook's headline, the single most-read sentence the tool emits, and a second copy one line further
+  on in the escalation that reaches the **Operator** — where a reviewer blocked under this ruling may
+  have no PR at all. Both are now neutral about *why*, and that is structural rather than a
+  preference: **the defect existed because the reason lived in two places and only one was updated**,
+  so switching the headline on mode too would have recreated the condition that produced it. A
+  consequence worth having: `--all` no longer touches the forge, so the hook's reviewer path cannot
+  be wedged by an unreachable one. **Its first production firing caught its own reviewer ninety
+  seconds after it landed** — both queues empty, both watches dead, the state the change was written
+  for, on its first opportunity. Also caught by running rather than by fixture: the new `owed`
+  fixtures passed while the runtime wiring threaded the wrong mode, so the live answer still read
+  *"open PRs"* — quince#62 and quince#65's shape, inside the tool built for it.
+  ([quince#96](https://github.com/novkostya/quince/pull/96),
+  [#71](https://github.com/novkostya/quince/issues/71),
+  [#69](https://github.com/novkostya/quince/issues/69),
+  [#73](https://github.com/novkostya/quince/pull/73))
+
+- 2026-07-27: **A gate named in three skills could not be run in half the forge set, and had been
+  complied with in words for as long as nobody tried it.**
+  [quince#78](https://github.com/novkostya/quince/issues/78) closed by
+  [quince#97](https://github.com/novkostya/quince/pull/97) (`3526539`). `report`, `land` and
+  `review-pr` all named only `make privacy-check`, and **`quince-devlog` has no Makefile**. No
+  Makefile was added there, per the ruling: it would exist to wrap one script, in a repository with
+  no build, and be a second place for the invocation to drift from the tool. The devlog form is the
+  product checkout's script run **from the devlog clone**, and two things about it were learned by
+  getting them wrong in the same session: **do not pass `--patterns`** — it defaults to `./local`,
+  relative to the *current directory*, and handing it a file rather than the directory produces a
+  `2`, which is DID NOT RUN; and **`cd` to the repository being swept**, not the one holding the
+  script, because `--ref` resolves against the current directory's git repo. **Which copy was chosen
+  rather than defaulted**, since the ruling asked: the **work clone's**, because a stale
+  privacy-check is precisely the one that exits `0` having checked nothing — the defect quince#41
+  fixed — and the launchpad has been measured stale at a commit predating a file entirely
+  (quince#33). The failure modes differ and that is the argument: a work clone's copy fails by *not
+  existing*, which is loud; the launchpad's fails by *being old*, which is silent and looks like a
+  pass. **A contradiction next door was fixed with it**, ruled in scope by review rather than assumed:
+  `/kickoff` §6 said the gate *"prints `skipped` and exits 0 having checked nothing"* — the behaviour
+  quince#41 removed — forty lines from §3 saying it exits `2`. Measured on a layer-less clone before
+  correcting it: **exit 2**. One skill asserting both the pre- and post-fix behaviour of a tool is
+  devlog#54's drift inside a single file, and landing a fix for *"the gate is unreachable"* beside
+  *"the gate passes silently"* would have been the reported symptom left standing next to its cause.
+  **And a reading habit became canon:** a clean sweep ends `swept branch-diff commit-message
+  branch-name text`, and **that list is an assertion about coverage, not a formality** — `0` answers
+  *did anything match*, only the list answers *was anything looked at*. Found because a failed rebase
+  short-circuited an `&&` chain, the commit never ran, and the sweep reported clean, truthfully, over
+  an empty branch; the reviewer had quoted the full list four times that day without reading it as a
+  claim. That is quince#41's distinction one level up.
+  ([quince#97](https://github.com/novkostya/quince/pull/97),
+  [#78](https://github.com/novkostya/quince/issues/78),
+  [#41](https://github.com/novkostya/quince/issues/41),
+  [#33](https://github.com/novkostya/quince/issues/33))
+
+- 2026-07-27: **Two boxes measured the same property of the forge and disagreed by 4×, and one of the
+  numbers moved while it was being reviewed.**
+  [quince#72](https://github.com/novkostya/quince/issues/72) closed by
+  [quince#98](https://github.com/novkostya/quince/pull/98) (`d9b42ec`). The typed event and the
+  `updated` backstop describe the **same act**, and the help text — where a consumer looks — said
+  nothing about how they arrive. Ruled with a sharpening: *may* is too weak, so it says a consumer
+  **must not rely on either ordering**, recorded as a property of **the forge** rather than of this
+  tool — *GitHub's PR fields do not move atomically, and anything reading two of them and inferring
+  an order is reading a race.* **What the unit added was the measurement, and then the measurement
+  taught the lesson twice.** The runner counted 11-of-12 same-tick; that went into canon as *the*
+  rate, and review supplied the other box's figure by the same method: **8-of-12, a 4× different
+  split rate**. A consumer would have read ~8%, planned for it, and been wrong by four times on the
+  box where a reviewer's own code runs. **That is quince#69's lesson — a measurement carries the box
+  it was taken on — committed by the session that had written that sentence into a journal entry
+  hours earlier, in an entry citing quince#69, which exists because the same mistake was made on the
+  same pair of boxes.** Knowing a failure mode by name did not protect against it; what did was
+  structural — the other box had the missing number and this one did not, so it could only have been
+  caught there. Then it happened again in the other direction: the architect figure **moved from
+  8-of-12 to 9-of-13 while the paragraph about it was under review**, because reviewing the change
+  was itself a review delivery and landed same-tick. Canon nearly shipped a figure its own source had
+  publicly withdrawn forty-five seconds before the push. So both figures are now **timestamped to the
+  minute rather than dated** — `2026-07-27` is a day and this moved inside one — and **the spread is
+  stated as the finding rather than either ratio**, with *do not average these*. A **bias present in
+  both and in neither's favour** is recorded too: these count deliveries a watcher was **alive to
+  observe**, and both boxes had unwatched windows, so both denominators are of observed acts rather
+  than of acts — a caveat that does not shrink with more samples, because it is a property of how the
+  sample is drawn. **The candidate mechanism was deliberately kept out of canon** and recorded on the
+  issue with its falsifiable prediction: the reviewer's hypothesis is that the split rate tracks *the
+  observer's temporal relationship to the act*, since on their box the observer is the actor. Canon
+  asserting an unconfirmed mechanism is what this same session declined on quince#62 item 5, and
+  doing the opposite the same day in the same tool would have made both decisions arbitrary. **No
+  fixture, and none is possible:** the ordering is observed across watcher *generations*, which the
+  pure fixtures cannot express, and a loop fixture staging two payloads would assert the stub's
+  script rather than the forge's behaviour — declared as debt rather than dressed in a test that
+  proves nothing.
+  ([quince#98](https://github.com/novkostya/quince/pull/98),
+  [#72](https://github.com/novkostya/quince/issues/72),
+  [#69](https://github.com/novkostya/quince/issues/69),
+  [#62](https://github.com/novkostya/quince/issues/62))
