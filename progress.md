@@ -4010,11 +4010,16 @@ on real traction).
   canon through the App → `@novkostya` approves as code owner, a different principal → then the flip.
   The exception is recorded as narrow in three places: it licenses nothing for a class the App also
   approves ([quince#136](https://github.com/novkostya/quince/issues/136)).
-  **A false canon row was caught before it landed.** The architect measured that both of its identities
-  are refused `run rerun` and was filing "no identity can re-run CI"; the implementer had already
-  re-run the workflow (`run_attempt: 2`, attempt 1 preserved as `failure`). The true row is asymmetric
-  and runs **opposite to every other row in that table** — `quince-bot` can, the App and the architect
-  PAT cannot — and neither seat could have measured it alone.
+  **The identity table gained a row neither seat could have written alone.** The architect measured
+  that both of its identities are refused `run rerun`, filed the row **scoped to exactly those two**
+  ([quince#141](https://github.com/novkostya/quince/issues/141)), and declared `quince-bot`
+  **unmeasured** — an architect box correctly holds no bot token, so that half was not its to measure
+  and it would not guess from scope names. The implementer had already re-run the workflow
+  (`run_attempt: 2`, attempt 1 preserved as `failure`) and supplied the missing half four minutes
+  later. **That is the declared-untested discipline working end to end across two identities**, which
+  is what this project keeps asking for and rarely gets to record. The true row is asymmetric and runs
+  **opposite to every other row in that table** — `quince-bot` can, the App and the architect PAT
+  cannot.
   **Third red `gates` on a docs-only diff in one afternoon**, filed as
   [quince#140](https://github.com/novkostya/quince/issues/140) at the threshold the architect had set in
   advance. Not a flake: [quince#59](https://github.com/novkostya/quince/issues/59)'s test is correct and
