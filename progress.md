@@ -3287,7 +3287,12 @@ on real traction).
   was all that remained**, and `privacy-check` refused an EMPTY list while accepting a SHORTENED one.
   A trimmed list was silently as good as a full one, by the identity the list constrains. The fix
   puts the minimum count in **`quince`, which IS protected**: `deploy/privacy/patterns.floor`. A trim
-  now fails the gate on every box and in CI until the floor is lowered, and lowering it is a reviewed
+  now fails the gate **on the boxes** until the floor is lowered — via the commit-time sweep a session
+  runs, and via `preflight`, which delegates to `privacy-check` against the real layer. **Not in CI,
+  which never sees the real pattern list:** every suite in the ladder runs against synthetic layers,
+  and the `privacy-check` target that reads the real one is standalone rather than part of `gates`.
+  A real control, then, but not an always-on independent one — which is the distinction a reader needs
+  when weighing the residual risk. Lowering the floor is a reviewed
   change approved by somebody who is not the author — **the review model restored to the one artifact
   that cannot have it, without moving the artifact.** A count rather than a checksum, because a
   checksum fails on every legitimate edit until updated, which trains people to update it without
