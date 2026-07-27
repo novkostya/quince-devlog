@@ -3708,10 +3708,20 @@ on real traction).
   architect's token returns `403` on that path, so the escalation `CLAUDE.md` documents has nobody at
   the end of it ([quince#113](https://github.com/novkostya/quince/issues/113)). Only the Operator can
   wire it. What *is* enforced from this merge is the `gates-sh` tooth banning a reintroduced
-  `$(TITLE)`, since it rides the existing gate; the title lint itself fires for nobody, and #114
-  closes on a check being **observed running**, not on the file being pushed.
+  `$(TITLE)`, since it rides the existing gate; the title lint itself fires for nobody, and
+  quince#114 closes on a check being **observed running**, not on the file being pushed.
+  **And the entry earned its own footnote in review:** the citation below read `#19` linked to
+  *quince*#19 — a merged PR about `/report` — when it means
+  [devlog#19](https://github.com/novkostya/quince-devlog/issues/19), whose title is *"six bare
+  cross-repo references resolve against the wrong repo."* This was the seventh, committed in the
+  entry about the check written to stop them, by the session that had built and run that check
+  hours earlier. **It is also the worse failure mode:** a reference resolving to nothing gets
+  noticed, a reference resolving to a real *wrong* issue is silent forever — and this one was a
+  full URL, so it would have rendered as a working link for as long as this file exists. Nothing
+  catches it: `pr-title-refs` checks **titles**, and prose citations are uncovered. That is the
+  argument for the devlog#18/#19 line, made better by an accident than by any case for it.
   ([quince#112](https://github.com/novkostya/quince/pull/112),
-  [#94](https://github.com/novkostya/quince/issues/94),
-  [#113](https://github.com/novkostya/quince/issues/113),
-  [#114](https://github.com/novkostya/quince/issues/114),
-  [#19](https://github.com/novkostya/quince/issues/19))
+  [quince#94](https://github.com/novkostya/quince/issues/94),
+  [quince#113](https://github.com/novkostya/quince/issues/113),
+  [quince#114](https://github.com/novkostya/quince/issues/114),
+  [devlog#19](https://github.com/novkostya/quince-devlog/issues/19))
