@@ -3773,9 +3773,13 @@ on real traction).
   lists, not to match anything"* and that with no case-sensitive list *"every pattern runs under `-i`"*.
   Both disclaimers were correct, and both were about missing **private-layer content**, not missing
   code: the tool has supported a canary and a case-sensitive list all along, fully fixtured, with
-  nothing populating either. `quince-local@dd2d1e1` populates both, and the gate now reports `lists 8
-  case-insensitive + 1 case-sensitive` and `canary ok — the matcher matches known-positive input (10
-  probe(s))`.
+  nothing populating either. `quince-local@dd2d1e1` populates both, and **on the runner box** the gate
+  now reports `lists 8 case-insensitive + 1 case-sensitive` and `canary ok — the matcher matches
+  known-positive input (10 probe(s))`. **On the architect box it still reports neither**, and that is
+  not a lag: that box is on the pre-`dd2d1e1` layer and **cannot pull** — HTTPS remote, no credential
+  helper, `fatal: could not read Username`
+  ([quince#121](https://github.com/novkostya/quince/issues/121)). So the control described here is live
+  on one of the two boxes, and the one it is absent from is the one that performs merges.
   **The design choice that outruns the issue is one probe PER PATTERN rather than one overall**, which
   closes the weakening mode `deploy/privacy/patterns.floor` documents as open and unclosable by a count:
   a **same-count substitution**. Measured both ways — one pattern replaced by junk, count unchanged at
@@ -3797,10 +3801,21 @@ on real traction).
   ~8 and ~15 seconds before each was declared blocked-on-the-Operator — and the record was corrected on
   both issues rather than left standing. Owed and named: the enforcement half (an absent canary should
   **refuse**, ruled from the architect seat since it is a failure-direction question rather than a
-  private-content one) is gated on the architect box pulling the layer first, or the flip is the flag
-  day the ruling exists to avoid. Also owed: a **known-negative** list — nothing proves a pattern
-  *stopped* matching, which is exactly what the case split turns on, and it was verified by hand.
+  private-content one) is **blocked on [quince#121](https://github.com/novkostya/quince/issues/121)**,
+  a credential-widening question that is the Operator's — not on a pull, and not on a date. The
+  prerequisite was first framed as a grace window while both boxes became known-good; that framing
+  assumed the architect box could *become* good by pulling, and it cannot, so the flip must not be
+  built behind it or it sits finished and unlandable. **The refusal to infer that box's state from this
+  one is what surfaced it**, a day before it would have surfaced as an unmergeable PR. Also owed: a
+  **known-negative** list — nothing proves a pattern *stopped* matching, which is exactly what the case
+  split turns on, and it was verified by hand.
+  The commissioning PR's own claim, stated rather than only cited: **`TEXT=` takes a PATH to a file
+  holding the PR body, not the body** — passing the prose word-splits it and the gate refuses naming
+  the first word of the PR as an unreadable filename. The placeholder mis-taught it in `CLAUDE.md` and
+  in **both** `.claude/skills/review-pr/SKILL.md` sites, the latter unnamed by the issue and where a
+  reviewer actually reads the command.
   ([quince#119](https://github.com/novkostya/quince/pull/119),
+  [quince#121](https://github.com/novkostya/quince/issues/121),
   [quince#108](https://github.com/novkostya/quince/issues/108),
   [quince#109](https://github.com/novkostya/quince/issues/109),
   [quince#105](https://github.com/novkostya/quince/issues/105),
