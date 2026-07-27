@@ -3821,3 +3821,82 @@ on real traction).
   [quince#105](https://github.com/novkostya/quince/issues/105),
   [quince#41](https://github.com/novkostya/quince/issues/41),
   [quince#44](https://github.com/novkostya/quince/issues/44))
+
+- 2026-07-27: **A `Stop` hook told a session to kill a healthy watcher, and the fix is a fifth
+  liveness class — but the record keeps the two instances nobody could explain.**
+  `.watch` was written only at the END of a tick, so between arming and the first tick landing the
+  state still named the PREVIOUS, dead watcher. `status` said `dead`, `owed` said OWED, and the
+  hook's remedy for `dead` is *arm another one* — handing a session
+  [quince#50](https://github.com/novkostya/quince/issues/50)'s race **by obeying a guard rather than
+  ignoring one**. [quince#126](https://github.com/novkostya/quince/pull/126) makes `starting` a class
+  with its own exit (**9**), written at arm time, and
+  [quince#120](https://github.com/novkostya/quince/pull/120) fixes the rule the refusal sends you to.
+  **Three consumers, not two, and the third is the guard everyone trusted.** `status`,
+  `owed_classify` **and `watch_preflight`** read the identical `.watch.pid`, so during the window the
+  tool's own refusal — the check quince#88's ruling calls *"the only one atomic with the act it
+  guards"* — is atomically reading a stale fact and would let a second watcher onto one state file.
+  One arm-time write corrects all three.
+  **The ordering inside the fix is the whole of its safety, and it is measured rather than asserted.**
+  `wedged` is `alive AND (age > STALE_TICKS×interval **OR** last_watcher_tick == null)` — the null arm
+  needs no elapsed time, and `watch_arm` writes exactly that record on purpose. Against the
+  pre-change classifier it yields `watch=wedged … note: … Run \`forge-watch stop\``: **every
+  freshly-armed watcher instructing its session to kill it**, the issue's destructive face shipped as
+  its fix, prevented only by evaluating `starting` first. Pinned by a fixture named for the arm that
+  was actually the hazard.
+  **The measured record, from the implementer box:** eight `Stop`-hook blocks in one session, **eight
+  false positives, zero true**, caught by reading `status` and the process table rather than by the
+  hook being right. Six reported `dead` (remedy: arm a duplicate); **two reported `wedged`** (remedy:
+  `forge-watch stop` — destructive, not duplicative). **Those two remain UNEXPLAINED and the entry
+  says so**: no write path on `main` sets `pid` without `last_watcher_tick`, the staleness arithmetic
+  fit neither candidate state, and pid reuse was refuted by measurement (`pid_max` 4194304 against
+  current pids ~717831, so ~3.5 M allocations to wrap). The fix removes the window; it does not
+  explain those two, and *a fix that removes a window may land without a full account of every past
+  instance — what is not allowed is the account quietly disappearing because the fix arrived.*
+  A choice was reversed by building it: refusing a too-small `--interval` was proposed and weakly
+  preferred, and its first casualty was **this repo's own fixture suite**, which drives `watch` at
+  `--interval 2` so fixtures need not sleep. The bound became `max(interval, 5 + declared_count)` —
+  correct where the refusal was merely safe. Sizing measured on the runner: ≈ 4 s + 0.65 s per
+  declared issue, 16–18 s at twenty.
+  ([quince#126](https://github.com/novkostya/quince/pull/126),
+  [quince#120](https://github.com/novkostya/quince/pull/120),
+  [quince#95](https://github.com/novkostya/quince/issues/95),
+  [quince#88](https://github.com/novkostya/quince/issues/88),
+  [quince#50](https://github.com/novkostya/quince/issues/50),
+  [quince#111](https://github.com/novkostya/quince/issues/111))
+
+- 2026-07-27: **`git -c` does not persist, so no box could ever pull the private layer — and the box
+  that quietly worked was the one hiding it.**
+  `deploy/runner/provision` cloned with `git -c credential.helper=…`, which applies to that
+  invocation and is **never written to `.git/config`**. Every clone authenticated once and then
+  carried no helper: present, readable, and unable to advance.
+  [quince#124](https://github.com/novkostya/quince/pull/124) persists it with `git config` on every
+  path — including the already-cloned branch, which is what **repairs boxes in the field**.
+  **The issue was filed as arch-box-specific and was not.** The runner was equally unwired; it worked
+  only because a session hand-configured the helper in order to push and **did not register that it
+  was patching a bug rather than doing setup**. A hand-fix that works is indistinguishable from a
+  system that works, from inside the session that made it — and volunteering that turned a one-box
+  mystery into a one-line root cause. The issue was retitled rather than corrected in a comment,
+  because a comment eight deep does not reach a reader who meets it in a list.
+  **It was found because somebody refused to infer.** The implementer asked for a one-line
+  confirmation that the architect box reported `canary ok` and declined to assume it; the architect
+  went to get it, and the answer was *no, and unobtainable*. The same refusal recurred twice more:
+  a hollow *"arch confirmed"* was declined because the box was wired by hand rather than by the code
+  under test — **and that decision caught a defect in the follow-up `preflight` check that would have
+  refused to START that box**, because it read the unscoped `credential.helper` while the box was
+  wired URL-scoped. `--get-urlmatch` is the query git itself performs; the narrow one encoded one of
+  two correct wirings as the only one.
+  **The confirmation was made meaningful by removing the hand-fix first** (`git config --unset
+  credential.helper`) so the run exercised the repair path rather than finding the work already done —
+  a control the acceptance criteria had not asked for.
+  Owed and named: the arch box holds an implementer-role service installed by a `provision` run that
+  defaulted its `--role` (**`QUINCE_RUNNER_ROLE` is not read as input** — the published step-2
+  sequence omitted the flag, and *a procedure carries the box it was written on* exactly as a
+  measurement does). [quince#125](https://github.com/novkostya/quince/pull/125) makes that refuse
+  **before touching anything**; the artifact itself needs removing by hand, and one
+  `provision --role arch` still gates both the `preflight` refusal and
+  [quince#108](https://github.com/novkostya/quince/issues/108)'s canary flip.
+  ([quince#124](https://github.com/novkostya/quince/pull/124),
+  [quince#125](https://github.com/novkostya/quince/pull/125),
+  [quince#121](https://github.com/novkostya/quince/issues/121),
+  [quince#108](https://github.com/novkostya/quince/issues/108),
+  [quince#123](https://github.com/novkostya/quince/pull/123))
