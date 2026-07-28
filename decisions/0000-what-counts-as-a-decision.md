@@ -144,9 +144,24 @@ So a live rule that binds behaviour must not have `decisions/NNNN` as its *only*
 or this work will have relocated governance from an owned file to an unowned one and called
 it tidying. The rule:
 
-- **STATED** → the decision file records the reasoning and **points at canon** for the rule.
 - **ABSENT / PARTIAL** → the decision file records the reasoning **and names the canon gap
   as owed**, with an issue. It does not quietly become the enforcement.
+- **STATED** → the decision file keeps the reasoning and the alternatives, and **points at canon**
+  for the rule — it must stop restating it.
+
+**These are a lifecycle, not a fork, and the first version of this passage got that wrong.** It
+listed the two arms as a choice made when a file is created — where the STATED arm is
+**unreachable by construction**, since criterion (C) admits only homeless rulings and all 13
+survivors are ABSENT or PARTIAL. A clause governing a case that cannot occur, inside the file that
+establishes the criteria, is the defect §6 convicts `(bu)` of. Caught in review of
+[devlog#67](https://github.com/novkostya/quince-devlog/pull/67).
+
+The arm is reachable **over time**, and that is where it does its work. Every file here names a
+canon gap as owed, and closing that gap **is the point of naming it** — at which moment the ruling
+becomes STATED and the file must stop restating the rule. Without that transition `decisions/`
+becomes a second copy of canon one gap-closure at a time, arriving by exactly the drift these
+criteria exist to prevent. So a decision file's relationship to canon is *expected to change*, and
+its header records which state it is in.
 
 ### 4a. Two live canon contradictions, found by looking
 
