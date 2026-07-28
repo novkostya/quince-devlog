@@ -25,7 +25,7 @@ being mistaken for a fix by the next person who finds it effective.
 
 ## Where it is enforced
 
-**Half of it.** `roadmap.md:440-444` states the protocol floor as canon, in the ruling's own
+**Half of it.** `roadmap.md` states the protocol floor as canon, in the ruling's own
 terms, and names roaming as the root cause. **The workaround's status is stated nowhere** —
 searched for `workaround`, `network-level`, `SSID`, `band`, `roam` across canon; the only
 `workaround` hit is about the ZFS symlink dance.

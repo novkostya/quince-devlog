@@ -25,7 +25,7 @@ addition a two-file edit, and a control people route around is worse than a coar
 ## Where it is enforced
 
 `deploy/privacy/patterns.floor` exists and the gate reads it. **The principle is stated in no
-canon file** — `CLAUDE.md:355-359` mentions the floor only as a consequence of branch protection
+canon file** — `CLAUDE.md` mentions the floor only as a consequence of branch protection
 being unavailable, never says it is a count, and states no consequence of its failing.
 
 **Owed:** the principle itself, in `CLAUDE.md`, since it is the reasoning that would be needed to
