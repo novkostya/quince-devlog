@@ -2,7 +2,7 @@
 
 > The forward plan: milestones made of reasonably-sized rungs (`qn.N`), each independently
 > buildable, testable, and reviewable. The live state is
-> [`quince.progress.md`](quince.progress.md); the build loop is
+> [`progress.md`](progress.md); the build loop is
 > [`program/quince.program.md`](program/quince.program.md). Rungs get a spec in
 > `specs/qn.N/` before implementation (the first two exist; later specs are authored when
 > their turn approaches, from the outlines here).

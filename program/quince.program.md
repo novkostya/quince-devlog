@@ -1,9 +1,15 @@
 # quince — the build program
 
-> How an implementing agent (Opus) works this repo. Read order for a fresh session:
-> [`../quince.progress.md`](../quince.progress.md) →
-> [`../quince.stack.md`](../quince.stack.md) → [`../quince.design.md`](../quince.design.md) →
-> [`../contracts.md`](../contracts.md) → the rung's spec in [`../specs/`](../specs/).
+> How an implementing agent (Opus) works this repo. Read order for a fresh session —
+> **this doc lives in `quince-devlog` and product canon lives in `quince`**, so the two
+> halves are linked differently and deliberately:
+>
+> [`progress.md`](../progress.md) *(here)* →
+> [`quince.stack.md`](https://github.com/novkostya/quince/blob/main/docs/quince.stack.md) →
+> [`quince.design.md`](https://github.com/novkostya/quince/blob/main/docs/quince.design.md) →
+> [`contracts.md`](https://github.com/novkostya/quince/blob/main/docs/contracts.md) →
+> the rung's spec in [`docs/specs/`](https://github.com/novkostya/quince/tree/main/docs/specs/).
+>
 > Never start from "build the app"; always start from one rung.
 
 ## The loop
@@ -134,7 +140,7 @@ intact:
    Operator ruling accepts it.
 2. **Rung-end only.** Ideas noticed mid-build go on a private scratch list; at most
    **one** proposal (your best) is filed with the rung report, as an entry in
-   [`../quince.proposals.md`](../quince.proposals.md).
+   [`proposals.md`](../proposals.md).
 3. **Quality bar.** Proposable only if it materially improves correctness, reliability,
    security, UX, or maintenance cost. Explicitly NOT proposals: style preferences,
    speculative generality, "more idiomatic," and anything whose honest justification is
