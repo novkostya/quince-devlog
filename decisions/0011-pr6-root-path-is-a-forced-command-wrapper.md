@@ -22,7 +22,7 @@ Operator's Mac being **exempt**. So the one place canon says this is a place who
 exception to it. Canon does not name the runner as a covered host, and never states the contrast
 the rule turns on: *never a general root key*.
 
-**Canon itself flags the gap:** `CLAUDE.md:355` says `pr.6`'s credential-concentration boundary
+**Canon itself flags the gap:** `CLAUDE.md` says `pr.6`'s credential-concentration boundary
 *"is owed a line saying so"*.
 
 **A caveat this file must carry:** `pr.6`'s numbered constraint list **exists in neither public

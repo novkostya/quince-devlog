@@ -17,7 +17,7 @@ wrong, because the correction destroys the evidence that anyone was ever misled.
 
 ## Where it is enforced
 
-**Partially, and by accident.** `CLAUDE.md:249` protects the retired lettered ids *as citations*
+**Partially, and by accident.** `CLAUDE.md` protects the retired lettered ids *as citations*
 — *"they stay forever as citations from docs and git history"* — but that is about identifiers,
 not about the text. The words *annotate* and *never rewritten* appear in no canon file.
 

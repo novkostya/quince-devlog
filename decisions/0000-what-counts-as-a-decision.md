@@ -461,6 +461,14 @@ All 61 candidate rulings that survived cuts (A) and (B), with the canon verdict 
 (C). `STATED` = canon says it, cited. `PARTIAL` = canon says something weaker or narrower,
 with the gap named. `ABSENT` = no canon file states it.
 
+**The `file:line` references below are a dated measurement, not durable pointers — they were
+accurate on 2026-07-28 and will decay.** `CLAUDE.md` alone moved by +25 lines the same day
+(quince#161). They are kept as numbers here, and dropped in favour of quoted anchors in the
+decision files, because the two are different artifacts: a decision file makes a *durable* claim
+about canon and must survive canon moving, while this appendix records *where the evidence was
+found* and is only reproducible if it says where. Read a stale line here as "search near this",
+not as a broken citation — every row names the ruling in full, which is what `grep` needs.
+
 ### Product — storage, transports, contracts, UI, vault (30)
 
 | ruling | verdict | canon |

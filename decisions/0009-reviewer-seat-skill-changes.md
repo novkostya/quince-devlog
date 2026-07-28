@@ -23,7 +23,7 @@ fails if the tool drifts.
 
 ## PROPOSED (gap): this appeared to conflict with `CODEOWNERS`, and the conflict dissolves
 
-The devlog#30 inventory flagged an apparent conflict: `.github/CODEOWNERS:76-77` rules that
+The devlog#30 inventory flagged an apparent conflict: `.github/CODEOWNERS` rules that
 **no** skill change is code-owned — broader and blunter than this decision — which reads as
 routing *every* skill change to the ordinary architect approval.
 
@@ -35,7 +35,7 @@ routing *every* skill change to the ordinary architect approval.
 > anyway. One can say "an architect approval suffices" while the other says "do not use it here"
 > without either being wrong.
 
-And they converge once `CODEOWNERS`' own reasoning is followed through. `CODEOWNERS:78-86` says
+And they converge once `CODEOWNERS`' own reasoning is followed through. `CODEOWNERS` says
 the skills exemption is safe **only because canon restates anything load-bearing** they contain.
 A skill change that alters what the reviewer may *decide* is load-bearing by definition — so
 under `CODEOWNERS`' own clause it must be mirrored into canon, and **canon is owned**. The
