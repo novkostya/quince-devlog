@@ -4082,11 +4082,12 @@ on real traction).
   [#106](https://github.com/novkostya/quince/issues/106),
   [#131](https://github.com/novkostya/quince/issues/131) and
   [#101](https://github.com/novkostya/quince/issues/101) at depth 1 — one PR in flight, cheapest
-  first — with the Operator asleep and nothing in the list needing a ruling. Eight PRs, **seven
-  merged, and quince#155 approved with its checks still running as this was written**; two
-  changes-requested rounds, and **four new gates** in `gates-sh`. (The eighth is recorded as it
-  stood rather than as it was about to be — an entry written a merge ahead of the forge is the same
-  claim-about-a-past-moment defect this unit spent the night clearing.)
+  first — with the Operator asleep and nothing in the list needing a ruling. **Eight PRs, eight
+  merges, all eight issues closed**; two changes-requested rounds, and **four new gates** in
+  `gates-sh`. (Written first as *"seven merged, one approved with checks running"*, which was true
+  at the time and stale twenty minutes later. Corrected before this entry landed rather than after —
+  the eighth merge is a fact the journal can now assert, and a permanent record that under-reports
+  its own outcome to preserve a drafting moment serves nobody.)
   **The through-line was not planned and is worth naming**, because it is the class this project
   keeps paying for: a tool that reports something it never checked, or reports it about the wrong
   moment. `preflight` printed a pattern count it computed *itself* from one of two lists, beside a
