@@ -60,3 +60,35 @@ likely to look wrong at a glance. The decisions log holds the rulings with nowhe
 
 **Superseded rulings.** Six of the seven rulings in the clone-strategy chain are dead; history's
 home is the Journal, not this directory. See `0000` §2.
+
+## Why these files cite canon by quote, never by line
+
+**Because the alternative was measured failing, in eleven minutes.**
+
+The first version of these files cited `CLAUDE.md` by line. While they sat in review,
+[quince#161](https://github.com/novkostya/quince/pull/161) merged at `9909604` — a change to
+`CLAUDE.md` that nobody in the review thread authored, needing no action from anyone in it:
+
+```
+                                          cited   after #161   what is now at the cited line
+0006  "they stay forever as citations…"     249  →     274     (blank line)
+0007  the patterns.floor sentence        355-359 →   380-384   "## The private layer"
+0011  "…boundary is owed a line saying so"  355  →     380     "## The private layer"
+```
+
+**`CLAUDE.md:355` now lands on a section heading**, which is the worst form of the failure: a
+reader who follows it gets a plausible-looking location and no reason to doubt it — the same
+shape [`0002`](0002-pr-title-refs-resolve-in-repo.md) rules against for bare `#N` references.
+**Nothing detected it.** It is written down only because two PRs happened to be open at once and
+the reviewer checked the arithmetic before either landed.
+
+So: **cite the quoted text, not the line.** A quote survives the file moving, and `grep` finds it
+afterwards; a line number is a decay term with no retrieval value. This matters more here than
+elsewhere because [`0006`](0006-a-journal-entry-is-annotated-never-rewritten.md) rules that a
+citation is only worth anything if the text it points at is the text that was there — a directory
+that cited by line would be arguing against its own contents.
+
+**The one exception is deliberate.** [`0000`](0000-what-counts-as-a-decision.md)'s Appendix B
+keeps `file:line` references and labels them as a **dated measurement**: it records *where the
+evidence was found* on 2026-07-28 and is reproducible only if it says where, as against a decision
+file's durable claim about canon. Different job, different decay tolerance.
