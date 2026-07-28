@@ -4083,11 +4083,16 @@ on real traction).
   [#131](https://github.com/novkostya/quince/issues/131) and
   [#101](https://github.com/novkostya/quince/issues/101) at depth 1 — one PR in flight, cheapest
   first — with the Operator asleep and nothing in the list needing a ruling. **Eight PRs, eight
-  merges, all eight issues closed**; two changes-requested rounds, and **four new gates** in
-  `gates-sh`. (Written first as *"seven merged, one approved with checks running"*, which was true
-  at the time and stale twenty minutes later. Corrected before this entry landed rather than after —
-  the eighth merge is a fact the journal can now assert, and a permanent record that under-reports
-  its own outcome to preserve a drafting moment serves nobody.)
+  merges, all eight issues closed**; two changes-requested rounds, and **three new gates** in
+  `gates-sh` — `forge-watch-stop-test`, `forge-watch-fixtures-doc-test` and
+  `quince-runner-status-test`, taking its sub-suites from five to eight — plus two new cases in the
+  existing `preflight-test`. (Two corrections to this paragraph before it landed, both mine. It said
+  *"seven merged, one approved with checks running"*, true when written and stale twenty minutes
+  later. And it said **four** new gates, counting quince#147's added `preflight-test` cases as a
+  suite of their own: five sub-suites before this unit, eight after, so the number was three and a
+  reader who counted would have found it. The smallest possible instance of *a claim whose evidence
+  cannot falsify it* — in the entry whose subject is that defect, which is where it is least
+  affordable and, on the evidence, easiest to commit.)
   **The through-line was not planned and is worth naming**, because it is the class this project
   keeps paying for: a tool that reports something it never checked, or reports it about the wrong
   moment. `preflight` printed a pattern count it computed *itself* from one of two lists, beside a
