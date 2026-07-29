@@ -27,9 +27,36 @@ Three machines, three roles. The whole design exists to keep one property true:
 | `arch` | the reviewer App key + the Operator's PAT | review, approve, merge | author — it must not hold the coder key |
 | `supervisor` | **nothing** | coordinate, measure, prepare | author *or* approve |
 
-Enforced twice, deliberately: `deploy/runner/preflight` refuses to **start** a box holding the wrong
-credential, and the `bin/gh-*` wrappers refuse to **run** on one. A hand-run command should not be
-able to cross a boundary the service refuses to cross.
+**The design is to enforce it twice**: `deploy/runner/preflight` refuses to **start** a box holding
+the wrong credential, and the `bin/gh-*` wrappers refuse to **run** on one. A hand-run command
+should not be able to cross a boundary the service refuses to cross.
+
+**Today it is enforced once, and only at start.** Stated rather than implied, because a runbook that
+describes the design as though it were the state is the defect this project files most often:
+
+- **`preflight`** learns the App key in quince#203. Until that lands, even the start-time half checks
+  only for a retired bot token.
+- **The wrappers do not enforce it at all** for the credential this document is about.
+  `bin/gh-arch` and `bin/gh-review` check for a bot token and nothing else, so an `arch` box holding
+  `quince-coder.pem` can author with `gh-coder` and approve with `gh-review` and **no wrapper
+  objects**. That is quince#204, open. `bin/gh-coder` refuses the *approving* credentials from its
+  side, which closes one direction of three.
+
+So the table below is the rule, not a description of what any tool currently checks. Until quince#203
+and quince#204 land, **the boundary is carried by whoever provisions the box.**
+
+**A naming collision, flagged because this project's docs are its interface.** `supervisor` already
+means something else here: `docs/quince.design.md` has a **`muxer supervisor`** and a **`backup
+supervisor`**, both Go subprocess managers, and `roadmap.md` and `progress.md` use the term the same
+way. **In this document `supervisor` is a seat — a machine — and never the product's process
+manager.** A reader moving between here and `quince.design.md` gets no other signal that the referent
+changed.
+
+**Canon does not yet describe this seat.** `CLAUDE.md`'s "How work runs" names implementer,
+architect and Operator. A third seat with a stated security property belongs there too, and that is
+**owed** — it goes in the same batch as `decisions/0014`'s canon rewrite rather than being discovered
+separately. Until then, canon and this file disagree about how many seats exist, and canon is the one
+a session reads first.
 
 **The supervisor is the seat the Operator talks to.** Holding no forge credential, it cannot be the
 author of record — it cannot muddy the property even by accident. Stated honestly: it *does* hold ssh
