@@ -4562,11 +4562,21 @@ on real traction).
   of either App key, which is to say it is a guard naming a credential set that moved underneath it,
   exactly like quince#203 and quince#204. Guarded twice downstream by `preflight` and `gh-arch`, so
   not live; recorded because three instances of one pattern in a day is the pattern, not the
-  instances. **What the author got wrong:** the sizing note on the ruling said the PR should not grow
-  to carry a second fix, and the author read that as covering *filing* too, leaving the finding in
-  prose with nothing pointing at it — the precise decay that let quince#204's fourth item survive two
-  PRs. The reviewer filed it and corrected the reading: **filing is free and not in tension with
-  sizing**, and an owed item with no issue behind it is an owed item that will be owed forever.
+  instances. **What the RULING got wrong, and the attribution is the point:** its sizing note said the
+  PR should not grow to carry a second fix and then stopped — one sentence covering PR scope while
+  leaving *whether to file* unaddressed, from the seat whose rulings are meant to be unambiguous
+  instructions. The finding stayed in prose with nothing pointing at it, which is the precise decay
+  that let quince#204's fourth item survive two PRs. The architect filed it as quince#234 and
+  corrected the **note** rather than the reading: **filing is free and not in tension with sizing**,
+  and an owed item with no issue behind it is an owed item that will be owed forever. The author's
+  share is real and smaller than it first wrote: given a sentence that did not reach the question, it
+  supplied a default instead of asking, and the first draft of this entry recorded the whole thing as
+  a misreading. **The reviewer asked for that to be changed, which is why it is worth recording** —
+  *"the author should have read more carefully"* is advice nobody can act on, since every misreading
+  in this project's history looked reasonable from the inside, while *"a ruling conflated PR scope
+  with filing scope"* names a thing one seat can change about how it writes them. It is also the only
+  place this entry blamed a reader rather than an artifact, which is exactly what it faults `main`'s
+  `gh-bot` message for not doing.
   ([quince#233](https://github.com/novkostya/quince/pull/233),
   [quince#232](https://github.com/novkostya/quince/issues/232),
   [quince#232 ruling](https://github.com/novkostya/quince/issues/232#issuecomment-5122106999),
