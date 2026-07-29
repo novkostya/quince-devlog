@@ -4505,13 +4505,26 @@ on real traction).
   was written on. And `bin/gh-bot` turned out to have **no** boundary check at all, live only
   because the account is suspended; filed as quince#232 rather than folded in, because
   `decisions/0014` condition 1 keeps that file as an intact record and whether a guard counts as
-  tidying it away is a ruling, not a patch. **Owed:** quince#232 wants that ruling; quince#204's
-  fourth item — whether `deploy/runner/provision` places a coder key in a way that makes this
-  reachable by accident rather than by mistake — remains unproven, by both seats.
+  tidying it away is a ruling, not a patch. **Both were settled within minutes of this entry being
+  written, and the first draft of it said otherwise** — a two-line record of a moving reality,
+  falsified before its own diff finished rendering, which is the entry's thesis arriving on the
+  entry. quince#232 was **ruled** at `18:43:32Z`, twenty-three seconds after this PR opened: add the
+  checks mirroring `gh-coder`, with suite assertions driving both directions, chosen over
+  documenting the hole (does nothing if the account is restored) and over refusing unconditionally
+  (which would destroy the very artifact condition 1 protects — a wrapper still runnable and still
+  failing honestly is live evidence, where a comment asserting it is not). And quince#204's fourth
+  item is **answered** in quince#233: `deploy/runner/provision` places no credentials at all — it
+  names those paths only to read them, in one role-mismatch guard — so the hole was never reachable
+  by provisioning. **Still owed** from that grep: the same guard fires only when *this* role's token
+  is absent AND the other's is present, so an arch box holding both its own token and a bot token
+  passes it; guarded twice downstream by `preflight` and `gh-arch`, so not a live hole, but narrower
+  than it reads, and it compares bot against arch only — knowing nothing of either App key.
   ([quince#231](https://github.com/novkostya/quince/pull/231),
   [quince#204](https://github.com/novkostya/quince/issues/204),
   [quince#203](https://github.com/novkostya/quince/pull/203),
   [quince#232](https://github.com/novkostya/quince/issues/232),
+  [quince#232 ruling](https://github.com/novkostya/quince/issues/232#issuecomment-5122106999),
+  [quince#233](https://github.com/novkostya/quince/pull/233),
   [quince#198](https://github.com/novkostya/quince/pull/198),
   [quince#103](https://github.com/novkostya/quince/issues/103),
   [quince#157](https://github.com/novkostya/quince/issues/157))
