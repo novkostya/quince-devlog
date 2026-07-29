@@ -31,19 +31,25 @@ Three machines, three roles. The whole design exists to keep one property true:
 the wrong credential, and the `bin/gh-*` wrappers refuse to **run** on one. A hand-run command
 should not be able to cross a boundary the service refuses to cross.
 
-**Today it is enforced once, and only at start.** Stated rather than implied, because a runbook that
-describes the design as though it were the state is the defect this project files most often:
+**It is enforced once, at start.** Stated rather than implied, because a runbook that describes the
+design as though it were the state is the defect this project files most often:
 
-- **`preflight`** learns the App key in quince#203. Until that lands, even the start-time half checks
-  only for a retired bot token.
-- **The wrappers do not enforce it at all** for the credential this document is about.
-  `bin/gh-arch` and `bin/gh-review` check for a bot token and nothing else, so an `arch` box holding
+- **`preflight` enforces it** — it refuses an `arch` box holding either implementer credential, and
+  requires one on an `implementer` box. That half is live (quince#203).
+- **The wrappers do not**, for the credential this document is about. `bin/gh-arch` and
+  `bin/gh-review` check for a bot token and nothing else, so an `arch` box holding
   `quince-coder.pem` can author with `gh-coder` and approve with `gh-review` and **no wrapper
-  objects**. That is quince#204, open. `bin/gh-coder` refuses the *approving* credentials from its
-  side, which closes one direction of three.
+  objects**. `bin/gh-coder` refuses the *approving* credentials from its side, which closes one
+  direction of three. Tracked as quince#204.
 
-So the table below is the rule, not a description of what any tool currently checks. Until quince#203
-and quince#204 land, **the boundary is carried by whoever provisions the box.**
+**The table below is the rule. Whenever it and the tools disagree, this section is the record of
+which — check quince#204.** Phrased that way deliberately: the first version of this paragraph said
+*"until quince#203 lands"* and was false four minutes after it was written, because the issue merged
+while the document sat in review. A sentence with a fuse in it is a sentence that will be wrong and
+will look right.
+
+Until the tools agree with the table, **the part they do not cover is carried by whoever provisions
+the box.**
 
 **A naming collision, flagged because this project's docs are its interface.** `supervisor` already
 means something else here: `docs/quince.design.md` has a **`muxer supervisor`** and a **`backup
