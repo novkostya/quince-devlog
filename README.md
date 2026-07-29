@@ -10,6 +10,8 @@ Start here to pick the project up:
 - [roadmap.md](roadmap.md) — milestones and rungs (`qn.N`).
 - [program/quince.program.md](program/quince.program.md) — the build loop implementing
   agents follow.
+- [program/seats.md](program/seats.md) — how to stand up the three agent seats from nothing;
+  written so someone with this repo and three Linux machines can rebuild them.
 - [proposals.md](proposals.md) — the improvement-proposals ledger (accepted and declined,
   with reasons — the project's accumulated taste).
 
