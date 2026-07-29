@@ -4616,12 +4616,26 @@ on real traction).
   the sentence. **Four of the eleven assertions test a PASS, and that is the half that mattered**: the
   bug being fixed *was* a pass, so a suite of refusals could not have detected it and a guard that
   refused everything would have satisfied every refusal row. Making the non-refusing rows observable
-  is the entire reason the dry-run flag exists. **One canon correction fell out of it.** `CLAUDE.md`
-  says a rebase is verified pure *"by identical patch hashes, not assumed"*. This branch was rebased
-  by the merging seat and its patch-ids **differed** while the rebase was provably pure — a
-  neighbouring `Makefile` line had moved the hunk's context, and both script files were byte-identical.
-  Patch-id equality is sufficient there and not necessary; on this rebase it would have raised a false
-  alarm, and comparing file content is the check that survives a context change. **Owed:** quince#236,
+  is the entire reason the dry-run flag exists. **The author proposed a canon correction on the
+  strength of a measurement error, and the reviewer caught it by re-measuring rather than deferring.**
+  The draft of this entry claimed `CLAUDE.md`'s *"a rebase is verified pure by identical patch hashes"*
+  was too strong, on the evidence that this branch's patch-ids differed across a provably pure rebase.
+  **They do not differ.** `git show 2896e9c | git patch-id --stable` and the same on `a7bf20a` both
+  give `eff8da78…`. The error was the *base*: the comparison used `origin/main...<branch>` after a
+  `git fetch origin <branch>`, which updates that branch ref and **not** `origin/main` — so the
+  rebased side was diffed against a base three commits stale, and the `fa6bd18e…` reported as "the
+  rebased patch-id" was the id of quince#248's and quince#235's changes plus this one. Reproduced
+  exactly: `git diff <stale-base>...a7bf20a` returns `fa6bd18e…`, `git diff <true-base>...a7bf20a`
+  returns `eff8da78…`. The stated *mechanism* was wrong too — `patch-id` normalises hunk headers and
+  line numbers away, so the neighbouring `Makefile` line blamed for it was a hunk-header annotation
+  patch-id never reads. **Canon was right and is unchanged; quince#251 was filed against it and
+  closed as invalid.** Two things survive. The real trap is that `a...b` silently means something
+  different when one endpoint is stale, and it fails as a *plausible answer* rather than an error —
+  the same shape as reading a pipeline's exit code instead of the command's, which this session also
+  did once. And the two-seat pattern held from the other side for the first time: every earlier
+  instance had the approving box supplying evidence the author could not reach, where here it supplied
+  a **refutation** of the author's own claim, by measuring instead of accepting a plausible sentence
+  from a session that had been right all afternoon. **Owed:** quince#236,
   filed and unruled, which also inherits a rename — `_role_token` kept its name while the seat
   question moved to `_own_creds`/`_other_creds`, and whoever touches that line should collapse the
   ambiguity then rather than in a diff nobody wants to bisect.
@@ -4631,4 +4645,5 @@ on real traction).
   [quince#204](https://github.com/novkostya/quince/issues/204),
   [quince#203](https://github.com/novkostya/quince/pull/203),
   [quince#103](https://github.com/novkostya/quince/issues/103),
-  [quince#41](https://github.com/novkostya/quince/issues/41))
+  [quince#41](https://github.com/novkostya/quince/issues/41),
+  [quince#251](https://github.com/novkostya/quince/issues/251))
