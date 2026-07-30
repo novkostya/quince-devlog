@@ -5144,3 +5144,94 @@ on real traction).
   making the sweep a gate rather than a paragraph.
   ([quince#282](https://github.com/novkostya/quince/issues/282),
   [quince#293](https://github.com/novkostya/quince/pull/293))
+
+- 2026-07-30: **Branch-ownership suppression is role-dependent, and the fix for one direction opened
+  its exact inverse.** quince#265 found the filter INERT on the architect seat — `other_runner_names`
+  returned empty — and populating it from `.claude/seats` made it work. Working, on that seat, is
+  **silence**: quince#174 built it so two implementer runners would not wake each other, where
+  "another declared runner owns that branch" means *not my business*; on the architect seat it means
+  the opposite, because reviewing other runners' branches is the entire job and every implementer PR
+  is on an `r<N>/` branch by canon. Measured on that box: four events in, one survived, and the
+  suppressed ones included `event=review`. **The proposal that fixed it was one token wrong** — it
+  said `arch` where `owed_role` emits `architect`, so implemented literally the arm never matches,
+  `theirs` stays populated and the seat stays deaf: a fix that ships, passes review and changes
+  nothing. Caught in review. **`none` fails OPEN and says so**, because `owed_role` has already
+  returned `none` wrongly on a live box across two sessions, and suppressing on an unidentifiable role
+  would restore the deafness through a cleanup nobody connected to the watch. Three existing suites
+  broke on the change and each had to pin its own role — a suite that reads the box's real credentials
+  is a suite whose result is about the box.
+  ([quince#292](https://github.com/novkostya/quince/issues/292),
+  [quince#295](https://github.com/novkostya/quince/pull/295))
+
+- 2026-07-30: **Three designs for self-caused suppression each died on the backstop, and none of them
+  was wrong — each was one arm of a two-arm mechanism, tested against the whole problem.** An act
+  emits TWO lines: `event=updated`, which carries `actor=`, and a typed `event=review`/`merged`,
+  which cannot, because both are computed by DIFFING two observations and a diff knows what changed
+  but not who. Suppressing either alone leaves the other to wake the session. Every attempt tried to
+  cancel one **act**, which forces state across ticks because the two lines can arrive a tick apart —
+  and `forge-watch:284` had already ruled against exactly that. **The way through was to stop pairing
+  them:** attribute each LINE independently where it lands, one arm each, no lifetime rule, no
+  de-duplication, `:284` untouched. **Three PRs, and the first is the enabling half of the guard:**
+  `event=review` fires once per tick however many verdicts landed and reported only the last, so a
+  consumer could not tell *my verdict* from *mine plus another seat's* — `count=` supplies that
+  cardinality, and suppression on presence alone would have swallowed somebody else's verdict, which
+  is the MISSED-wake direction. `event=merged` deliberately gets no count, with the reason at the
+  line: a PR merges once, and the asymmetry is why only one channel needs a guard.
+  ([quince#242](https://github.com/novkostya/quince/issues/242),
+  [quince#297](https://github.com/novkostya/quince/pull/297),
+  [quince#298](https://github.com/novkostya/quince/pull/298),
+  [quince#300](https://github.com/novkostya/quince/pull/300))
+
+- 2026-07-30: **The identity had three spellings, the round trip silently discarded the field that
+  mattered, and both were found by measuring rather than reading.** (1) The same App appears as
+  `quince-coder` (review or comment author), `quince-coder[bot]` (commit committer) and
+  `app/quince-review` (`mergedBy`, in `gh`'s rendering). `actor == "quince-coder"` — the obvious
+  comparison, and the literal form of the ruling — matches reviews and comments and **misses every
+  push**, the implementer's commonest self-caused update: an arm that would have shipped, passed
+  review and suppressed almost nothing. Third time in two days a mechanism was described from memory
+  one token off, and each time the wrong token was the load-bearing one. (2) Suppressing on `actor`
+  makes a WRONG actor a wrong WAKE — the promotion quince#222 predicted for itself in its own last
+  line — and a rebase replays the original authorship, so the merging seat's `update-branch` wears the
+  branch author's login. **The discriminator was already in the observation**: GitHub stamps whoever
+  ran it as the COMMITTER. So the arm reads `committer == actor` and quince#222 stops being a
+  dependency rather than being waited on. (3) **`gh-array-to-graphql.jq` dropped `committer`
+  entirely**, so every stub and every recorded fixture reached the shaping with `committer: ""` —
+  indistinguishable from an unresolvable one, and invisible to the equivalence suite whose whole
+  subject is that the conversion is exact. `review-answered` already depended on that field. **The
+  shape is the finding: a field the forward path reads and the round trip silently discards, where
+  the discarded value is indistinguishable from a legitimate one.** Then the forge produced the proof
+  unprompted — the architect's rebase of the PR that adds the arm emitted `actor=quince-coder[bot]
+  committer=quince-review[bot]` on that very branch, converting a declared-unproven item into a live
+  capture.
+  ([quince#222](https://github.com/novkostya/quince/issues/222),
+  [quince#300](https://github.com/novkostya/quince/pull/300))
+
+- 2026-07-30: **The wake reduction was measured and the answer is that one of the two arms cannot fire
+  on the seat that built it.** The ledger arm records exactly `pr review` and `pr merge`, and **an
+  implementer performs neither** — `approver ≠ author` means it never casts a verdict and merges go
+  through the architect, so those two events on that seat are always somebody else's doing. Zero rows,
+  ever, and not a bug: the value is real and lands entirely on the arch box. Over the recorded
+  activity on this runner's 18 PRs the actor arm would suppress 32 of 88 acts, and **that 36% is
+  explicitly refused as the headline**: the backstop emits at most one `event=updated` per PR per
+  tick, a suppressed event prevents a WAKE only when it was the tick's only wake-worthy line, and the
+  set is biased toward merged PRs whose last act is always the merge. The counters record `arms` and
+  `wakes` and **not prevented wakes**, which is the only number that answers the question — so the
+  honest report is an upper bound with no lower bound, plus the small instrument that would close it.
+  Publishing a ratio derived from a state file would have been the *"suppressed=1 beside a watch that
+  woke anyway"* failure in a different costume.
+  ([quince#242](https://github.com/novkostya/quince/issues/242))
+
+- 2026-07-30: **The architect box's seat identity rested entirely on a credential its own code
+  comment called luck, and the comment had been read and left standing.** `owed_role` decides which
+  seat a box is from which credential file it holds, and it branched on the coder App key, the legacy
+  architect PAT and the suspended bot token — but **not the review App key**, which is that box's live
+  credential the way the coder key is the implementer's. The function already said *"the architect arm
+  survived only because the legacy PAT happens to still be on that box — that is luck, not coverage,
+  and it is worth knowing when the arch box is next cleaned up"*, and then the luck was banked on
+  rather than recorded: retiring that PAT resolves the seat to `none`, which disarms the `Stop` hook's
+  assertion exactly as quince#238 did on the implementer seat, and turns both suppression arms'
+  fail-open into that box's steady state. **Found by a suite case that placed the review key and got
+  `none`** — not by anyone reading the function, including whoever wrote the paragraph about luck. The
+  suite that covers the seat had declared a `$REVIEW` path and never placed it, proving the architect
+  behaviour with the PAT instead.
+  ([quince#299](https://github.com/novkostya/quince/pull/299))
