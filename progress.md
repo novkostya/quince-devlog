@@ -5073,3 +5073,69 @@ on real traction).
   failing line** rather than by anything measured.
   ([quince#282](https://github.com/novkostya/quince/issues/282),
   [quince#287](https://github.com/novkostya/quince/pull/287))
+
+- 2026-07-30: **The one condition that flips whose turn it is with no event of its own — a PR you
+  BLOCKED and the author has since answered.** `/architect` §6 covers a PR you PARKED pending someone
+  else; this one waits on the AUTHOR, and the instant they answer it silently becomes yours with
+  nothing marking the transition. The push produces one wake, and a reviewer mid-task when it lands
+  never sees it again: quince-devlog#140 sat `CHANGES_REQUESTED` for **1h45m** past its fix while five
+  other PRs merged. **The design decision is `committer == author`, and a date test alone is actively
+  wrong here.** A rebase REWRITES `committedDate` — measured on quince#287, where a commit authored
+  seventeen minutes BEFORE the verdict carried a date after it — and `strict: true` makes a rebase the
+  routine answer to every merge, so a date test would announce *"the author answered you"* on every
+  one. GitHub stamps whoever ran `update-branch` as the committer, so the two differing IS a rebase.
+  **The ruling was withdrawn and re-specified twice before anything was built**, both times because a
+  measurement contradicted it: the first mechanism named two fields (`reviewDecision`, `headRefOid`)
+  that are **not fetched at all**, and the substitute the implementer proposed had the rebase
+  false-positive above — which the architect then measured, and in checking it found the committer
+  discriminator neither seat had thought of. **Then the shipped version had two defects of its own,
+  both found by running rather than reading.** It fired on EVERY TICK rather than on the transition —
+  a wake a minute, indefinitely, noise amplification in the feature built to reduce missed signals —
+  and the PR body had asserted it behaved *"like `mergeability`"*, which diffs stored state and fires
+  only on a transition. Fixing that over-narrowed it: keying on null-vs-non-null means two DIFFERENT
+  blocks both read "answered", so a verdict and its answer inside one interval fire nothing at all,
+  which is a MISSED wake — and the only two-verdicts-in-one-interval case in this project was **79
+  seconds** apart, well inside a 90 s tick. The key is the BLOCK, not the boolean. **Three fixtures,
+  none redundant:** the pre-fix code passed the first, the null-vs-non-null fix passed the first two.
+  ([quince#282](https://github.com/novkostya/quince/issues/282),
+  [quince#288](https://github.com/novkostya/quince/pull/288),
+  [quince#290](https://github.com/novkostya/quince/issues/290),
+  [quince#291](https://github.com/novkostya/quince/pull/291))
+
+- 2026-07-30: **The loop counted nothing about itself, and the counter's first version was erased by
+  the very next tick.** `status` answered *"is the watch live"*; nothing answered *"what has this loop
+  cost"* — the architect seat armed **63 times and exited 53** in one session and found out only
+  because it was asked to reflect. The counters are per-runner by construction (`state_dir` is already
+  `…/forge-watch/<name>/`), never auto-reset, report the number and pass no judgement, and **say what
+  they do not count**: wakes, not WHOSE wakes, until the self-caused arm exists. **The bug is the
+  instructive half.** `watch_arm` incremented correctly and `step` threw it away, because `step` writes
+  the OBSERVATION as the new state and an observation has no counter — which is quince#103 exactly,
+  one field over, with the comment explaining it three lines from where the work was happening. It was
+  found by arming a live watch and reading the state back — `arms=unset` — **not by reading the code,
+  which was right and simply did not survive.** The suite exists because the loop-fixture harness
+  greps `^event=` before comparing, so a `loop:` report is invisible to all fifty of them: a counter
+  with no coverage in a directory full of coverage. And one invariant is now written down with its own
+  exception — `arms >= wakes`, violated exactly once and harmlessly on any state file spanning the
+  build that added the carry-forward, because the two began surviving at different moments.
+  ([quince#282](https://github.com/novkostya/quince/issues/282),
+  [quince#289](https://github.com/novkostya/quince/pull/289),
+  [quince#103](https://github.com/novkostya/quince/issues/103))
+
+- 2026-07-30: **A closing keyword beside a bare reference auto-closes on merge, the parser is not
+  negation-aware, and FOUR instances in one night were each written by someone who knew.** (1) a PR
+  body disclaiming the close, closing it; (2) the body of the PR *fixing* that, by the author of the
+  diagnosis, two hours later; (3) the **commit message of the commit that removed it from that body**;
+  (4) a claim to the reviewer that a PR would not auto-close its issue, made after reading one surface.
+  **The escalation is the finding: each time the knowledge was aimed at the surface that had bitten
+  last**, and the trap is not the keyword list — it is that reproducing the offending text is itself an
+  instance. **`closingIssuesReferences` is necessary and NOT sufficient**, and both seats concluded
+  otherwise from it: it reflects the PR BODY only, while a commit message landing on the default branch
+  closes issues too, and with `--rebase` every message is in scope. Confirmed end to end when
+  quince#291 merged and closed quince#290 from a bare reference in its message while the field read
+  `[]` throughout. **What is measured safe:** backticked or fenced references do not link, and a
+  repo-qualified one does not either — so this project's own citation convention is inherently safe,
+  and a PR written that way must close its issue by hand. **Only instance 4 was caught before it did
+  damage, and only that one was found by a command rather than by care** — which is the argument for
+  making the sweep a gate rather than a paragraph.
+  ([quince#282](https://github.com/novkostya/quince/issues/282),
+  [quince#293](https://github.com/novkostya/quince/pull/293))
