@@ -1,0 +1,106 @@
+#!/bin/sh
+# journal-migrate — split progress.md's decisions log into per-entry files for the `journal`
+# branch, and PROVE the split lossless by reassembling it back into the source region.
+#
+# The tool exists because the deletion it licenses is 5,092 lines long. A reviewer cannot read
+# that diff and conclude "nothing was lost"; they can read this, run `verify`, and conclude it.
+#
+#   journal-migrate split  --source progress.md --out <dir>
+#   journal-migrate verify --source progress.md --tree <dir>
+#
+# Exit 0 clean · 1 a mismatch or a malformed source · 2 bad usage.
+#
+# WHAT IS AND IS NOT PRESERVED, stated because "lossless" is a claim:
+#   preserved byte for byte — every character of every entry, and every line break.
+#   removed mechanically  — the `- ` list marker, the 2-space continuation indent, and the
+#                           `<date>: ` prefix on the 165 entries that carry it bare. All three
+#                           are re-derivable, which is what `verify` demonstrates.
+#   normalized            — blank lines BETWEEN entries. There are 40 in the source and all 40
+#                           are separators; zero occur inside an entry (asserted below, not
+#                           assumed). Between files the concept does not exist.
+#
+# The claim is hoisted into an H1 and ALSO stays in the body as the entry's own bold lead. That
+# redundancy is deliberate: it is what lets the body stay verbatim, and in a migration of the
+# record of record, "the tool rewrote nothing" is worth more than a tidy first screen.
+
+set -eu
+
+usage() {
+	cat >&2 <<'USAGE'
+usage: journal-migrate split  --source <progress.md> --out  <dir>
+       journal-migrate verify --source <progress.md> --tree <dir>
+USAGE
+	exit 2
+}
+
+[ $# -ge 1 ] || usage
+mode=$1
+shift
+case $mode in
+split | verify) ;;
+*) usage ;;
+esac
+
+source_file=
+tree=
+while [ $# -gt 0 ]; do
+	case $1 in
+	--source)
+		[ $# -ge 2 ] || usage
+		source_file=$2
+		shift 2
+		;;
+	--out | --tree)
+		[ $# -ge 2 ] || usage
+		tree=$2
+		shift 2
+		;;
+	*) usage ;;
+	esac
+done
+[ -n "$source_file" ] && [ -n "$tree" ] || usage
+[ -r "$source_file" ] || {
+	echo "journal-migrate: cannot read $source_file" >&2
+	exit 1
+}
+
+here=$(dirname "$0")
+prog=$here/journal-migrate.awk
+[ -r "$prog" ] || {
+	echo "journal-migrate: missing $prog" >&2
+	exit 1
+}
+
+if [ "$mode" = split ]; then
+	[ -d "$tree" ] || {
+		echo "journal-migrate: --out $tree is not a directory" >&2
+		exit 1
+	}
+	# awk cannot mkdir, so the month directories are created first from the source itself.
+	awk -v mode=months -f "$prog" "$source_file" | while IFS= read -r m; do
+		mkdir -p "$tree/$m"
+	done
+	awk -v mode=split -v tree="$tree" -f "$prog" "$source_file"
+	exit $?
+fi
+
+awk -v mode=verify -v tree="$tree" -f "$prog" "$source_file" || exit 1
+
+# `verify` above proves every SOURCE entry is present and exact. This accounts for everything ELSE
+# in the tree, which the per-entry walk cannot see.
+#
+# Extras are REPORTED, not failed. At migration time there should be none, and a leftover from an
+# earlier run is worth naming. But the whole point of the branch is that entries get appended to it
+# afterwards, so a check that failed on extras would start failing on the first real append — a
+# gate whose first true positive is its own obsolescence.
+want=$(awk -v mode=count -f "$prog" "$source_file")
+got=$(find "$tree" -name '*.md' -type f | grep -c '/[0-9][0-9][0-9][0-9]-[0-9][0-9]/' || true)
+if [ "$got" -lt "$want" ]; then
+	echo "journal-migrate: tree holds $got entry file(s) but the source has $want" >&2
+	exit 1
+fi
+if [ "$got" -gt "$want" ]; then
+	echo "journal-migrate: $want source entries present and exact; $((got - want)) further entry file(s) in the tree did not come from the source"
+else
+	echo "journal-migrate: tree holds exactly the $want entry file(s) the source accounts for"
+fi
