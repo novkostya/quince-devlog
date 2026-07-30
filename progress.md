@@ -44,15 +44,57 @@ that they were landable — a relay by another name, and one the loop should hav
 after the landability fix landed. One clean merge, with a before and an after, is the honest result.
 And the implementer half was **one long-lived session**, not a fresh one per event, so the rung's
 founding property — *auto-resume wakes a FRESH session against the PR thread* — is still **unproven**.
-**Owed before unfreeze:** [quince#32](https://github.com/novkostya/quince/issues/32) (the arch
-service cannot start from a clean conf.d — a temporary export sits on that box),
-[quince#33](https://github.com/novkostya/quince/issues/33) (three undocumented ceremony gates, now
-also owning the pull-before-arm ordering), `pr.6` (every remaining root path becomes a forced-command
-wrapper), and the loop's own **G2/G3** — a real session killed mid-watch, and the two-box coroutine end
-to end. G3's *"nobody types review posted"* leg is now **observed** across four PRs — its **merge** leg
-on exactly one (quince#68, after the landability fix; the other three were prompted, one by a human and
-two by the implementer), and its **fresh-session leg not at all**; G2 is untouched. Declared unproven
-rather than assumed, and narrowed rather than quietly upgraded. **Then unfreeze.**
+**Unfreeze criteria — REWRITTEN 2026-07-30, because the old list could not be used** (quince-devlog#141).
+Three of its four items were defects in the criteria rather than in the work. What the gate ladder
+(`docs/specs/rung-loop/rung-loop.md:843-889`) actually says, assessed for the first time:
+**G1 (fixtures) — MET**, 47 fixtures under `make forge-watch-test`, invoked by `gates-sh`, green in CI.
+**G3 (the coroutine, end to end) — MET, repeatedly, on production PRs rather than a scratch one.**
+quince-devlog#133, quince-devlog#135, quince#255, quince#271 and quince#272 each ran review posted →
+implementer woke cold → fix pushed → reviewer woke on the push → approved, with **nobody typing "review
+posted"**; its merge leg is ~24 observations across 2026-07-29/30, not one, and its fresh-session leg is
+proven further than asked — a cold session given only `/onboard` reconstructed a dead session's work from
+the forge alone, declined to act unauthorized, then finished and merged without touching the scratch clone
+(`revamp.md` U4). The old line calling that leg unproven was **understated, not wrong-in-caution**
+(quince-devlog#41, which closes with this).
+**G2 — MET IN SUBSTANCE, and its name was the bug.** The old line called G2 *"a real session killed
+mid-watch"*; the ladder says *"arm on a real PR, push a commit, observe the `checks` event; post a review,
+observe the `review` event."* The killed-session run was a `revamp.md` U4 experiment named after an
+existing gate, and **an unfreeze criterion was held open by a naming collision**; it stays on the record as
+a **risk**, not a gate — the ladder never asked for respawn. The review half is met many times over. The
+checks half was observed 2026-07-30 `06:44Z`: `event=checks pr=275 conclusion=FAILURE name=gates`, on a PR
+whose `gates` genuinely went red. **Observed via foreground `tick`, not by an armed watcher, and that is
+structural**: across a full architect session the armed watcher emitted `tick-overdue`, `updated`,
+`opened`, `mergeability`, `issue-*`, `watch-idle` and `merged` — and **zero `review`, zero `checks`**,
+because `/architect` §6 prescribes draining with a foreground tick *before* arming, so the transition is
+consumed by the tick. The protocol that keeps the watch alive is what stops the watcher witnessing G2's two
+events. Same code path, real PR, real transition — counted as met, and recorded as `tick` rather than
+misattributed to the watch.
+**G4 (stop, don't guess) — MET IN SUBSTANCE, not in the specified trigger shape.** quince#232, quince#260
+and quince#268 each show the implementer stopping, naming the question, and making no commit; the spec's
+trigger is a *review comment* and these were the implementer's own judgement. The property being gated is
+"does not guess", and it is proven.
+**G5 (watchdog) — CANNOT BE MET; the mechanism is not implemented.** `bin/forge-watch:278`: *"`stalled` is
+specified … and NOT implemented — it needs a wall clock, which the pure half deliberately does not have …
+a tool that lists an event it cannot emit is making the same kind of claim this tool exists to stop."*
+Deferred with its reason. **A gate that cannot be run cannot hold a door.**
+**The two remaining named blockers were unreadable to every identity.** quince#32 and quince#33 return
+`Not Found` — to `novkostya` and to both Apps — because `quince-bot` authored them and a suspended
+account's issues are hidden (quince#173). A criterion nobody can open is not a criterion. **#32's
+substance, restated so it survives**: the arch service could not start from a clean `conf.d` because a
+temporary export sat on that box; its proof leg — start the service from a clean `conf.d` and assert it
+comes up — **cannot be run from a session hosted by the service `provision` restarts**, so it is owed to an
+**Operator re-provision window**, structurally, rather than blocked on anyone's work. **#33** (three
+undocumented ceremony gates, plus the pull-before-arm ordering) is likewise unreadable and wants
+re-filing before it can gate anything.
+**`pr.6` is reduced to its identity half, and that half is discharged.** `revamp.md` prices it as two items
+under one name; the credential-concentration half is *"substantially achieved by `pr.0`–`pr.5`"*, and the
+identity half's two named blockers — quince#47 (architect and Operator share a login) and quince#136 (the
+architect can only author as the Operator) — are **both CLOSED**, resolved by moving each seat to its own
+GitHub App (`decisions/0014`, quince#134).
+**So nothing on the ladder blocks the unfreeze.** What remains is a risk list carried *into* it rather than
+gating it: the killed-session behaviour above; G5 unbuilt; #32's proof owed to a re-provision window; and
+#33 needing a re-file. **The unfreeze decision is the Operator's, and it is now a decision about risks
+rather than about gates.**
 [quince#9](https://github.com/novkostya/quince/issues/9)'s reservation as the first post-freeze
 item was **discharged on the Operator's instruction** (confirmed on the issue, 2026-07-26
 11:16:25Z) and the dress rehearsal has been run — #9 and
