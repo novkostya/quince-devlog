@@ -5277,6 +5277,15 @@ on real traction).
   emission instead of trusting it; the likelier half-fix would have left the body internally consistent
   and wrong, and a change to the loop's exit condition approved without being reviewed as one. **Twice
   on one branch the reviewable artifact and the built thing disagreed, and both were caught by a
-  mismatch rather than by a check.**
+  mismatch rather than by a check.** **And the reviewer did not recognise the suppression as its OWN
+  ruling** — seven hours old, assessed as a fresh design choice, arriving at the same answer
+  independently. Corroboration by luck rather than by reference, and the bad outcome was fully
+  available: a *different* conclusion would have been changes requested against their own ruling, with
+  the author who missed it and the reviewer who forgot it arguing from two halves of one decision and
+  neither able to say which was current. **The author read an issue without its comments; the reviewer
+  read a PR without the ruling history of the issue it closes.** Neither is a memory failure — both are
+  the same missing step, *fetch the decision record before acting on the artifact*, and nothing on this
+  forge performs it: nothing compares a PR body against a rebuilt diff, and nothing compares an
+  implementation against the ruling it was built from.
   ([quince#83](https://github.com/novkostya/quince/issues/83),
   [quince#302](https://github.com/novkostya/quince/pull/302))
