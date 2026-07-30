@@ -1,7 +1,13 @@
 # quince — progress dashboard
 
-**One-line state.** ⚑ **The product is FROZEN and soaking; the PROCESS REVAMP is complete through
-`pr.5`, and only `pr.6` (the lockout) remains.** quince itself is unchanged since `qn.6b` landed and
+**One-line state.** ⚑ **The product is UNFROZEN as of 2026-07-30 — Operator ruling — and `qn.7`
+(Wi-Fi reliability hardening) resumes the product chain; the PROCESS REVAMP is complete through
+`pr.5`, with `pr.6` reduced to its identity half and that half discharged.** The freeze is lifted on
+**risks, not on gates**: the ladder was assessed grade by grade on 2026-07-30 (quince-devlog#141,
+quince-devlog#146) and nothing on it blocked the decision. The risk list below rides *into* the
+unfreeze rather than gating it, and **quince#202 is the largest** — `forge-watch` is structurally
+blind to the trunk, so `main` can be red with a healthy watch running, which costs more once product
+merges resume. quince itself is unchanged since `qn.6b` landed and
 its lab legs passed — hardware-proven over USB and Wi-Fi, running under real daily use on staging.
 What changed is how the project is built: PRs are how agents communicate, an approval is a literal
 PR approval, issues are the tracker, and branch protection is the authority model. **`pr.0`–`pr.5`
@@ -44,7 +50,11 @@ that they were landable — a relay by another name, and one the loop should hav
 after the landability fix landed. One clean merge, with a before and an after, is the honest result.
 And the implementer half was **one long-lived session**, not a fresh one per event, so the rung's
 founding property — *auto-resume wakes a FRESH session against the PR thread* — is still **unproven**.
-**Unfreeze criteria — REWRITTEN 2026-07-30, because the old list could not be used** (quince-devlog#141).
+**Unfreeze criteria — DISCHARGED 2026-07-30 by Operator ruling; kept below as the record of what was
+assessed and what was accepted.** Nothing here gates anything now. It is retained rather than deleted
+because the risk list is live and the grades are the provenance of the decision — a criteria section
+removed on the day it is satisfied leaves a ruling with no stated basis.
+**Originally REWRITTEN 2026-07-30, because the old list could not be used** (quince-devlog#141).
 Three of its four items were defects in the criteria rather than in the work. Grades below are **MET**,
 **MET — DEVIATION: …**, **GAP: …**, **NOT MET**, or **CANNOT BE MET**, so a qualifier always carries its
 reason. Assessed against the ladder itself (`docs/specs/rung-loop/rung-loop.md:843-889`) for the first
@@ -4730,6 +4740,30 @@ on real traction).
   [quince#103](https://github.com/novkostya/quince/issues/103),
   [quince#41](https://github.com/novkostya/quince/issues/41),
   [quince#251](https://github.com/novkostya/quince/issues/251))
+- 2026-07-30: **The product is UNFROZEN — Operator ruling, taken on risks rather than on gates.** The
+  freeze had stood since `qn.6b`, and what lifted it was not a gate closing: the ladder was assessed
+  grade by grade earlier the same day and **nothing on it blocked the decision** (quince-devlog#141,
+  quince-devlog#146). G4 was the last gap and closed on evidence gathered hours before, G5
+  **cannot be met** and is deferred with its reason, `pr.6` is reduced to its identity half and that
+  half is discharged, and the two remaining named blockers are unreadable rather than pending. **So the
+  criteria section stops gating and becomes provenance** — retained rather than deleted, because a
+  ruling whose basis is removed on the day it is satisfied has no stated basis. **The risks ride in
+  rather than being cleared:** quince#202 (`forge-watch` is blind to the trunk — `main` was red 4h40m
+  with a healthy watch, and the merge that broke it went through this loop), quince-devlog#56, the
+  killed-session behaviour, G5 unbuilt, #32's proof owed to an Operator re-provision window, #33
+  needing a re-file, and quince#54 now carrying two claim-level drift instances. **quince#202 is named
+  largest because it grows at the unfreeze** — an unobserved red trunk costs more once product merges
+  resume than it did while only tooling landed. **`qn.7` (Wi-Fi reliability hardening) resumes the
+  product chain, and its first deliverable is a SPEC**: `docs/specs/qn.7/` does not exist, and `CLAUDE.md`
+  is explicit that where the frontier rung has none the spec is the first PR, reviewed before any code.
+  **One dissent is on the record and was overruled**: the architect found G4's evidence to be
+  issue-mediated where the ladder's text says *a review comment … a PR comment*, and the Operator ruled
+  the grade stands on substance — so a later session grading against the verbatim sentence will reach a
+  different answer, and quince-devlog#146's thread is why.
+  ([quince-devlog#141](https://github.com/novkostya/quince-devlog/issues/141),
+  [quince-devlog#146](https://github.com/novkostya/quince-devlog/pull/146),
+  [quince#202](https://github.com/novkostya/quince/issues/202))
+
 - 2026-07-30: **Ten fixes in one overnight run, and the three that recur are all one shape: a check
   that reports on a scope narrower than the word it prints.** Runner `r4`, unattended, closing
   quince#224, #199, #221, #200, #238, #237, #240, #243, #196, #149 and #245 across ten PRs
