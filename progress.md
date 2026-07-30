@@ -75,14 +75,26 @@ alone, declined to act unauthorized, then finished and merged without touching t
 nine stands for its own window and is the number in the record**; this is a later, wider window, and the
 loop-delivered subset of the 55 is not separately measured. The old line's *"exactly one"* was the
 understatement #41 filed, and #41 closes with this.
-**G4 (stop, don't guess) — GAP: the reviewer-triggered half is unproven.** quince#232, quince#260 and
-quince#268 each show the implementer stopping, naming the question, and making no commit — so
-**"does not guess" is proven**. But the ladder's trigger is *a review comment requiring a ruling*, and
-every instance above was the implementer's **own** judgement. So **"hears the reviewer" is not proven**,
-and that is not a technicality: quince#273 (a newly filed issue enters no watch) and quince-devlog#56 (a
-watch event names the last commenter and counts the rest) are live evidence that the reviewer→implementer
-channel drops signal. Recorded as a gap rather than a deviation, because the untested half is the half
-those two issues say is broken.
+**G4 (stop, don't guess) — MET, both halves, on evidence gathered AFTER this section was first written.**
+quince#232, quince#260 and quince#268 proved *"does not guess"*, and the earlier grade correctly refused
+the gate, because the ladder's trigger is *a review comment requiring a ruling* and every instance was the
+implementer's **own** judgement. **That half is now proven repeatedly, and the trigger in each case was a
+reviewer artifact rather than self-initiative.** On quince#242 the implementer measured the architect's
+ruled design, found it collided with quince#222, **stopped, named the question, made no commit**, and
+asked whether the design may depend on that misattribution being wrong; on the same issue it found the
+ruled count guard unimplementable from where it has to run and stopped rather than substituting one; and
+on quince#294, quince#297 and quince#301 it took blocking review findings, on the last **improving the
+finding** rather than merely applying it. **Three ruled designs declined, each with a measurement, each
+correct** — which is the gate's harder direction, since refusing a superior's design costs the refuser
+something.
+**One of the two issues cited as evidence of a broken channel is CLOSED, and something worse was found and
+fixed the same day.** quince#273 (a newly filed issue enters no watch) is closed; quince-devlog#56 (a
+watch event names the last commenter and counts the rest) remains open and rides as a risk. Against that,
+**quince#292**: `wake_filter` silenced *every* implementer PR event on the architect seat, so the reviewer
+could not be woken by the work it exists to review — invisible because issue events still woke it. Fixed
+in quince#295 and proven end to end on the architect box. And `review-answered`, the turn-flip this gate
+is about — *a PR you blocked that the author has since answered* — was built (quince#288), shipped with
+two defects found by running rather than reading, fixed (quince#291), and has since **fired live**.
 **G5 (watchdog) — CANNOT BE MET; the mechanism is not implemented.** `bin/forge-watch:278`: *"`stalled` is
 specified … and NOT implemented — it needs a wall clock, which the pure half deliberately does not have …
 a tool that lists an event it cannot emit is making the same kind of claim this tool exists to stop."*
@@ -101,10 +113,17 @@ items under one name and finds the credential-concentration half substantially a
 the identity half's two named blockers — quince#47 (architect and Operator share a login) and quince#136
 (the architect can only author as the Operator) — are **both CLOSED**, resolved by moving each seat to its
 own GitHub App (`decisions/0014`, quince#134).
-**So nothing on the ladder blocks the unfreeze, and one gap rides with it.** The risk list carried *into*
-the unfreeze rather than gating it: G4's unproven reviewer-triggered half (quince#273, quince-devlog#56);
-the killed-session behaviour above; G5 unbuilt; #32's proof owed to a re-provision window; #33 needing a
-re-file. **The unfreeze decision is the Operator's, and it is now a decision about risks rather than
+**So nothing on the ladder blocks the unfreeze, and the one gap that rode with it has closed.** The risk
+list carried *into* the unfreeze rather than gating it: quince-devlog#56, the surviving half of what G4's
+gap cited; the killed-session behaviour above; G5 unbuilt; #32's proof owed to a re-provision window; #33
+needing a re-file; and quince#303, where the Stop hook's arm hint now names the uncached App wrapper.
+**None is a gate. Each is something a session meets and works around, named here so that meeting one is
+recognised rather than rediscovered.**
+**The first post-unfreeze deliverable is a SPEC, not code.** `docs/specs/qn.7/` does not exist, and
+`CLAUDE.md` is explicit that a rung starts from one: if the frontier rung has none, the spec is the first
+PR, reviewed before any code exists. qn.7 is M4 (Wi-Fi reliability hardening), whose scope was already
+sharpened by the qn.6b lab session's banked hardware evidence.
+**The unfreeze decision is the Operator's, and it is now a decision about risks rather than
 about gates.**
 [quince#9](https://github.com/novkostya/quince/issues/9)'s reservation as the first post-freeze
 item was **discharged on the Operator's instruction** (confirmed on the issue, 2026-07-26
