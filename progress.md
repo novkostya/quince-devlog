@@ -4926,3 +4926,65 @@ on real traction).
   [quince#276](https://github.com/novkostya/quince/pull/276),
   [quince#227](https://github.com/novkostya/quince/issues/227),
   [quince#88](https://github.com/novkostya/quince/issues/88))
+
+- 2026-07-30: **A skill can carry its own fix and be unable to apply it: `/architect` §1 said "declare
+  first, before anything reads or writes state", and §0 ran first and read state.** Declaring a runner
+  name **relocates** the state directory, so `status` read before it answers about the undeclared
+  top-level path — and for a session resuming a name that has state, that reports **`absent`** where the
+  truth is **`dead`**. Those are the two answers §0 spends twenty lines insisting must never be confused:
+  `dead` carries an accrued observation to re-arm from, `absent` says nothing was ever armed. Measured
+  2026-07-29 on the architect box: `absent (exit 4) … Cold start; nothing inherited` at 15:03:58Z, and at
+  15:08:24Z the session found that declaring had moved the directory out from under that answer. It was a
+  genuine cold start, so nothing was lost — **the defect is that the report could not have told the two
+  apart.** `/kickoff` had the same split across §0 and §3. Same shape as quince#100: a rule that says
+  *what* and not *when*, where the natural order is the broken one. **The declaration moved INTO §0
+  rather than the sections being swapped**, because renumbering would ripple into `loop-protocol.md`,
+  which both skills share — and drift between those two files is what quince#54 is about. **One claim was
+  measured rather than asserted on the way**: re-declaring a runner name is a clean no-op from the SAME
+  session, but from a different session a name whose holder is provably gone is **reclaimed** rather than
+  refused (quince#211) — so "a taken name is refused" holds only while the holder is live, and reclaim is
+  the path a resuming session actually takes.
+  ([quince#241](https://github.com/novkostya/quince/issues/241),
+  [quince#278](https://github.com/novkostya/quince/pull/278),
+  [quince#100](https://github.com/novkostya/quince/issues/100))
+
+- 2026-07-30: **`2>/dev/null` on a command does not cover the SHELL's own redirection error, and the
+  liveness probe leaked one into every `Stop`.** `_rs_alive()` reads each `/proc/<pid>/environ` as
+  `$(tr '\0' '\n' <"$f" 2>/dev/null || true)` — but `tr` never runs: the shell performs the `<`
+  redirection before exec, so a failed open is reported on the *shell's* stderr, which a redirection
+  attached to `tr` cannot reach, and `|| true` catches the status rather than the text. Seen in the wild
+  as `can't open /proc/<pid>/environ: Permission denied` printed above a correct reclaim; `owed --hook`
+  runs on every `Stop`, so it can surface at the end of any turn, attributed to nothing, exactly where a
+  session is deciding whether it owes a watch. **The trigger is a TOCTOU no guard closes** — the process
+  is alive at glob time and at `[ -r ]` time and a **zombie** by the time we open, and a zombie's environ
+  returns EPERM rather than ENOENT. **Root cannot synthesise that**, which is the durable half: three
+  fixtures were tried and rejected — a directory named `environ` (open(2) SUCCEEDS on a directory, so the
+  error is `tr`'s and the old redirect already covered it), a unix socket (uncreatable without a helper
+  the boxes lack), a nonexistent path (leaks correctly, but `-r` skips it). A `FORGE_PROC_ROOT` seam was
+  built and then **reverted**: an injection point with no injector is worse than none. So the suite proves
+  the idiom against a genuinely unopenable path and then asserts the SHIPPED LINE uses the fixed form —
+  the second is what makes the first a regression guard rather than a true statement about POSIX shell.
+  ([quince#279](https://github.com/novkostya/quince/issues/279),
+  [quince#280](https://github.com/novkostya/quince/pull/280))
+
+- 2026-07-30: **The privacy banner said how MANY patterns and never WHICH list, so two boxes swept with
+  materially different matchers for hours and both printed `clean`.** Both banners were internally
+  consistent and both canaries passed — a canary proves *a* matcher, never the **same** one. It was
+  caught by a human comparing two banners quoted in two PR bodies, which is not a control. The gate now
+  names the list's commit and whether it is behind its tracking ref. **Local-only, and the wording is the
+  careful part:** `@{upstream}` is the LAST-FETCHED ref, so the claim is *"as of this box's last fetch"*
+  and says so, while `no upstream` and `not a git worktree` report **cannot tell** rather than collapsing
+  to a reassuring `0 behind` — because a freshness claim that overstates what it knows converts *unknown*
+  into *verified current*, which is this defect wearing a fix's clothes. **Option 1 —
+  `preflight` asserting a LIVE fetch — was deliberately NOT taken**: it makes whether a box may *start*
+  depend on network reachability, on a pair of hosts whose only recovery seat is the Operator's Mac, and
+  that is a ruling rather than an implementer's call. **This was also the first thing quince#275's fixed
+  exit code caught in anger**: `gates-sh` returned 2 and named `preflight-test` at 43→41, because the new
+  line was first called `lists provenance …` and `preflight` quotes the first line beginning `lists` — so
+  it reported provenance where a count belongs. Before that morning the ladder would have said `clean`.
+  **And the assertion written to pin the anchoring does not pin it**, checked rather than assumed: after
+  the rename no banner line begins with `lists` except the count, so reverting the anchor leaves the
+  suite green either way. Recorded as untested, with the reason, rather than left to read as coverage.
+  ([quince#220](https://github.com/novkostya/quince/issues/220),
+  [quince#281](https://github.com/novkostya/quince/pull/281),
+  [quince#275](https://github.com/novkostya/quince/pull/275))
