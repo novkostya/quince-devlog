@@ -5300,9 +5300,12 @@ on real traction).
   So a **watch loop** landed on a wrapper that mints a fresh installation token per call and caches
   nothing, exactly as that wrapper's own comment warns: *"if that ever bites, cache it."* **It bites,
   and measurement made the case stronger than the filing did**: the issue was careful to say its cost
-  was arithmetic, and the measured figure is `5 calls → 9.222 s ≈ 1.84 s per call`, so a tick of ~39
-  wrapper invocations spends most of a 90 s interval minting one-hour tokens it discards — not overhead
-  on a tick but a tick that barely fits between its own ticks. **The first timing attempt reported
+  was arithmetic, and the figure — **measured as a PROXY, and the qualification is part of it: the
+  implementer's App wrapper on the implementer box rather than the reviewer's on the architect's, with
+  the mint not separated from the API call** — is `5 calls → 9.222 s ≈ 1.84 s per call`, so a tick of
+  ~39 wrapper invocations spends most of a 90 s interval minting one-hour tokens it discards. **Not
+  overhead on a tick but a tick that barely fits between its own ticks**, and that consequence inherits
+  every one of the three caveats above. **The first timing attempt reported
   `0 ms` and was nearly posted as evidence the concern was unfounded**: BusyBox `date` has no `%N`, so
   the nanosecond arithmetic produced zeros. *A timing harness that reports zero is reporting that it
   did not work.* The fix redefines the single field as the **read** wrapper rather than adding a
