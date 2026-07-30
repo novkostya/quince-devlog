@@ -5235,3 +5235,48 @@ on real traction).
   suite that covers the seat had declared a `$REVIEW` path and never placed it, proving the architect
   behaviour with the PAT instead.
   ([quince#299](https://github.com/novkostya/quince/pull/299))
+
+- 2026-07-30: **A counter answered two different questions in identical words, and it fooled the seat
+  that had read the declaration and approved it — within the hour.** `--repo` reads ONE state file and
+  `--all` SUMS the forge set, and both printed *"for this runner"*: a summed `2/2` and a per-repo
+  `2/1`, read forty minutes apart, looked like a counter going **backwards**, which is impossible by
+  design. Both numbers were correct, and a cycle went into hunting a regression that did not exist.
+  **The worst-shaped ambiguity available** — the sum and the slice are both small integers that look
+  like the same quantity, so the reader gets a *plausible* wrong number rather than an obviously broken
+  one. It was DECLARED: quince#289's own "what I did NOT prove" said the line does not say which
+  question it answers and *"arguably it should"*. **This is that `arguably` converted into a `did`.**
+  The sweep the issue explicitly did not claim came back with a result that changed the suite rather
+  than only the report — `status --all` never sums, so the `watch --all` exit is the tool's only
+  summing path, which makes it the one assertion that could not be skipped. **And the caveat became
+  the number**: the line had been apologising for a figure it did not have, that apology went false the
+  hour quince#242 landed, so `prevented` now counts TICKS WHERE SUPPRESSION CHANGED THE DECISION — a
+  counterfactual with ownership filtering held constant on both sides — and a zero prints as a result,
+  because a figure withheld until it flatters is unfalsifiable. The suite's constraint-4 assertion
+  forced that wording to move **twice in one branch**, both times by failing on prose rather than on
+  behaviour, which is the mechanism this project has least of.
+  ([quince#296](https://github.com/novkostya/quince/issues/296),
+  [quince#301](https://github.com/novkostya/quince/pull/301))
+
+- 2026-07-30: **A ruling seven hours old went unread because only the issue BODY was fetched, and the
+  tool caught it rather than the care.** `/kickoff` §1 says in as many words to read the comments and
+  not only the body, *"a correction comment can invert a requirement"*; `issue view --json title,body`
+  was run and `--comments` never was. The ruling required label **and suppress**, a count, and a
+  lost-signal fixture; what shipped first was the label alone — *"labelling alone leaves the cost"* was
+  the ruling's own sentence and the half that costs nothing was the half implemented. **It surfaced
+  because arming a watch with `--issue 83` woke the session on the ruling's own comment.** The rebuilt
+  change suppresses `kind=post-merge` from the wake decision on three clauses or none — `MERGED` at the
+  previous observation, `updatedAt` moved, nothing newer in activity — which is conservative by
+  construction, because a post-merge comment lands in activity and is newer. **`headRef` was measured
+  available and declined**: it goes null exactly on branch deletion, but `gh pr list --json` has no
+  field for it, so using it would make the two fetch paths inequivalent — the `committer` trap from the
+  same day seen from the other side, where the field existed on both paths and the round trip dropped
+  it. Same suite, opposite failure, four hours apart. **Then the PR body was left describing the first
+  commit** while the diff described the ruling, so it claimed *"no wake reduction"* about a change that
+  suppresses events — in the section that exists to catch exactly that, as its opposite. The reviewer
+  found it only because a **cosmetic** mismatch (an invented token in the examples) made them read the
+  emission instead of trusting it; the likelier half-fix would have left the body internally consistent
+  and wrong, and a change to the loop's exit condition approved without being reviewed as one. **Twice
+  on one branch the reviewable artifact and the built thing disagreed, and both were caught by a
+  mismatch rather than by a check.**
+  ([quince#83](https://github.com/novkostya/quince/issues/83),
+  [quince#302](https://github.com/novkostya/quince/pull/302))
