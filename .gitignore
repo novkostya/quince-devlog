@@ -1,0 +1,5 @@
+# `local` is a symlink to the private layer — the privacy pattern list, lab topology, personal
+# transcripts. Every clone that runs a privacy sweep creates it, and it must never be committed.
+# This branch needs the entry more than `main` does: entries are pushed here with no pull request,
+# so nothing but the gate and this line stands between the private layer and public history.
+/local

@@ -1,0 +1,166 @@
+#!/bin/sh
+# journal-index — regenerate README.md from the entry files on the `journal` branch.
+#
+# The index is DERIVED, never hand-maintained: an index someone has to remember to update is an
+# index that is wrong the first time somebody forgets, and this branch is appended to by several
+# runners a day with no review between them.
+#
+#   journal-index            rewrite README.md
+#   journal-index --check    regenerate to a temp file and diff; exit 1 if README.md is stale
+#
+# `--check` is what makes "regenerable" a fact rather than an intention. It is cheap enough to run
+# on every append and is wired into the pre-push hook.
+#
+# Exit 0 clean · 1 stale (--check) or a malformed entry · 2 bad usage.
+
+set -eu
+
+check=0
+root=$(cd "$(dirname "$0")/.." && pwd)
+while [ $# -gt 0 ]; do
+	case $1 in
+	--check) check=1 ;;
+	--root)
+		[ $# -ge 2 ] || {
+			echo "journal-index: --root needs a path" >&2
+			exit 2
+		}
+		root=$2
+		shift
+		;;
+	*)
+		echo "usage: journal-index [--check] [--root <dir>]" >&2
+		exit 2
+		;;
+	esac
+	shift
+done
+
+cd "$root"
+[ -d 2026-07 ] || {
+	echo "journal-index: no month directory under $root — is this the journal branch?" >&2
+	exit 1
+}
+
+tmp=${TMPDIR:-/tmp}/journal-index.$$
+trap 'rm -f "$tmp" "$tmp.rows" "$tmp.list"' EXIT
+
+# The file list is materialised BEFORE the loop rather than piped into it. A `while read` on the
+# right of a pipe runs in a subshell, where the `exit 1` below would end the subshell and let the
+# script carry on reporting success — the shape of bug this repository files most often.
+find . -type d -name '.git' -prune -o -type f -name '*.md' -print |
+	sed 's|^\./||' |
+	grep -E '^[0-9]{4}-[0-9]{2}/[0-9]{4}-[0-9]{2}-[0-9]{2}-.*\.md$' |
+	sort >"$tmp.list"
+
+# One row per entry: <date>|<path>|<claim>. The H1 is the only thing read, so an entry whose H1 is
+# missing or malformed is a hard error rather than a row quietly absent from the index.
+: >"$tmp.rows"
+while IFS= read -r f; do
+	h1=$(head -1 "$f")
+	case $h1 in
+	'# '*) ;;
+	*)
+		echo "journal-index: $f does not open with an H1: $h1" >&2
+		exit 1
+		;;
+	esac
+	title=${h1#\# }
+	date=$(printf '%s' "$title" | cut -c1-10)
+	case $date in
+	[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]) ;;
+	*)
+		echo "journal-index: $f: H1 does not start with a date: $h1" >&2
+		exit 1
+		;;
+	esac
+	# The date is already the row key; the title keeps only the claim.
+	claim=${title#"$date"}
+	claim=${claim# — }
+	printf '%s|%s|%s\n' "$date" "$f" "$claim" >>"$tmp.rows"
+done <"$tmp.list"
+
+rows=$(wc -l <"$tmp.rows" | tr -d ' ')
+[ "$rows" -gt 0 ] || {
+	echo "journal-index: found no entries under $root" >&2
+	exit 1
+}
+newest=$(cut -d'|' -f1 "$tmp.rows" | sort | tail -1)
+oldest=$(cut -d'|' -f1 "$tmp.rows" | sort | head -1)
+
+{
+	cat <<'HEADER'
+# quince journal
+
+The development journal for [quince](https://github.com/novkostya/quince) — one file per entry,
+newest first. **This branch is never merged into `main` and is never protected.** Entries are
+pushed straight to it.
+
+That shape is deliberate. A journal is append-only immutable events with no shared mutable state,
+so a pull request per entry charges git's full coordination cost for a data structure that needs
+none — which is what produced four collisions in three hours on the single-file journal, and two
+entries still stranded in open PRs. Disjoint filenames make every concurrent append rebase cleanly.
+
+Current state lives on `main`, not here: the one-line state and the per-rung dashboard in
+[progress.md](https://github.com/novkostya/quince-devlog/blob/main/progress.md), and the decisions
+log under [decisions/](https://github.com/novkostya/quince-devlog/tree/main/decisions).
+
+## Appending an entry
+
+```sh
+git checkout journal && git pull --rebase        # always; several runners append the same day
+$EDITOR 2026-07/2026-07-30-a-short-slug.md       # <YYYY-MM>/<YYYY-MM-DD>-<short-slug>.md
+bin/journal-index                                # regenerate this file
+git add -A && git commit -m "journal: <the claim>"
+
+# THE SWEEP IS NOT OPTIONAL. Nothing else stands between this branch and public history.
+<your-quince-clone>/deploy/privacy/privacy-check --ref origin/journal...HEAD
+
+git push origin journal                          # on rejection: pull --rebase, push again
+```
+
+**The privacy gate is now the only guard.** On `main` an entry passes a reviewer *and* the gate;
+here there is no pull request, so there is no reviewer. Exit `0` is clean, `1` is a match, and
+**`2` is DID NOT RUN and is never a clean result** — a clone with no `local` symlink cannot sweep
+and must not push. `bin/pre-push-journal` enforces this rather than leaving it remembered; install
+it with `bin/pre-push-journal --install`.
+
+**A rejected push is ordinary, not a conflict.** `git pull --rebase` and push again: entries are
+disjoint files, so the rebase never asks a human anything. Only `README.md` can collide, and it is
+regenerated rather than merged — `bin/journal-index` after the rebase, always.
+
+## The entry shape
+
+An H1 `# <date> — <the claim, one sentence>`, then what changed, what was proven, what is owed,
+with the PR and issue numbers that carry it. The claim appears twice by design — once as the title
+this index reads, once as the entry's own bold lead.
+
+[Retired lettered ids `(a)`–`(do)`](letters.md) — resolved to the entries that mint them, for the
+citations in canon and git history that still use them.
+
+HEADER
+	printf '**%s entries · %s → %s.** This file is generated — run `bin/journal-index` after every\nappend; `bin/journal-index --check` fails when it is stale.\n' "$rows" "$oldest" "$newest"
+
+	month=
+	sort -t'|' -k1,1r -k2,2 "$tmp.rows" | while IFS='|' read -r date path claim; do
+		m=$(printf '%s' "$date" | cut -c1-7)
+		if [ "$m" != "$month" ]; then
+			printf '\n## %s\n\n' "$m"
+			month=$m
+		fi
+		printf -- '- **%s** — [%s](%s)\n' "$date" "$claim" "$path"
+	done
+} >"$tmp"
+
+if [ "$check" -eq 1 ]; then
+	if diff -u README.md "$tmp" >/dev/null 2>&1; then
+		echo "journal-index: README.md is current ($rows entries)"
+		exit 0
+	fi
+	echo "journal-index: README.md is STALE — run bin/journal-index" >&2
+	diff -u README.md "$tmp" >&2 || true
+	exit 1
+fi
+
+cp "$tmp" README.md
+echo "journal-index: README.md regenerated — $rows entries, $oldest → $newest"
