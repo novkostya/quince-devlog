@@ -6,6 +6,22 @@
 # The privacy gate is the only guard left, and devlog#152 states the principle this applies to
 # itself: when correct behaviour depends on someone noticing, move it into a tool.
 #
+# WHAT IT GUARDS IS A ROUTE, NOT THE BRANCH — and devlog#155 shipped it saying otherwise
+# (devlog#159). That PR called this "the only guard, enforced rather than remembered". True of the
+# push path; too broad about the branch, because there is a second way onto `journal` and this hook
+# cannot see it:
+#
+#   the architect box HAS NO GIT CREDENTIAL HELPER, for any repository — measured 2026-07-31. That
+#   seat reads through gh-arch / gh-review and writes through REST, so it appends with the Git Data
+#   API (blobs → tree → commit → PATCH the ref). There is no push, so there is no pre-push hook to
+#   intercept, and on that route the sweep is MANUAL AND NON-OPTIONAL.
+#
+# Recorded here rather than only in the journal README, because this file is what a reader consults
+# to find out what is guaranteed, and a control that overstates its reach is the failure it exists
+# to prevent wearing its own uniform. Closing the gap for real needs something watching the REF
+# rather than the client — CI on this repository, which it deliberately does not have (devlog#156
+# raises that question and does not answer it).
+#
 # WHY IT LIVES ON `main`. `journal` is unprotected by design — anything on it can be rewritten by
 # the same identity the hook is guarding. A control kept there guards nothing. On `main` it is
 # behind branch protection, a required approval and a code owner, which is the whole reason `main`
@@ -101,7 +117,11 @@ case ${1:-} in
 	exit 0
 	;;
 --help | -h)
-	sed -n '2,30p' "$self"
+	# The header ends at the last `#` line before `set -eu`, found rather than hard-coded: the
+	# window was `2,30` and the header grew past it in the very next edit (devlog#159), so `--help`
+	# stopped mid-sentence — a help text that silently truncates is the same class of defect as a
+	# gate that silently narrows.
+	awk 'NR>1 && /^#/ {print; next} NR>1 && !/^#/ {exit}' "$self"
 	exit 0
 	;;
 esac

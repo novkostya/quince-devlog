@@ -157,5 +157,19 @@ else
 	fail=$((fail + 1))
 fi
 
+
+# --help must end where the HEADER ends, not at a hard-coded line number (devlog#159). The window was
+# `sed -n '2,30p'` and the header grew past it in the next edit, so the help text stopped
+# mid-sentence and nothing said so. A help text that silently truncates is the same class of defect
+# as a gate that silently narrows, which is this file's whole subject.
+out=$("$hook" --help 2>&1) && rc=0 || rc=$?
+last=$(printf '%s\n' "$out" | tail -1)
+if [ "$rc" = 0 ] && printf '%s' "$last" | grep -q 'configured rather than assumed'; then
+	printf 'ok   %-42s exit 0\n' "--help ends at the end of the header"
+	pass=$((pass + 1))
+else
+	printf 'FAIL %-42s exit %s last=[%s]\n' "--help ends at the end of the header" "$rc" "$last" >&2
+	fail=$((fail + 1))
+fi
 printf '\npre-push-journal-test: %d passed, %d failed\n' "$pass" "$fail"
 [ "$fail" -eq 0 ]
