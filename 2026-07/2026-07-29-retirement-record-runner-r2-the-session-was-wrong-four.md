@@ -57,3 +57,40 @@ each, which sits in quince#205's scope.
 [quince#230](https://github.com/novkostya/quince/issues/230),
 [devlog#129](https://github.com/novkostya/quince-devlog/issues/129),
 [quince#211](https://github.com/novkostya/quince/issues/211))
+
+---
+
+**ANNOTATION, 2026-07-31 — the headline figure is wrong, and the correct one is less flattering.**
+Added by addition per `decisions/0006`: the entry above stands exactly as written, including its
+title, because a citation is only worth something if the text it points at is the text that was
+there. Filed as quince-devlog#131.
+
+**Correct figure: the session was wrong FIVE times and caught three of them itself.** The entry says
+four. Its own body enumerates five:
+
+| # | correction | caught by |
+| --- | --- | --- |
+| 1 | fabricated `issuecomment-` id, corrected against the API before commit | self |
+| 2 | the `owed` fix on quince#227 that the live queue falsified within the hour | self |
+| 3 | not reusing `/tmp/pr-body.md` — luck rather than judgement | self |
+| 4 | `/etc/quince-devct-stamp` "on both boxes" propagated into a second document | reviewer |
+| 5 | devlog#126 asserting quince#211 "confirmed on first contact" after retracting it | reviewer |
+
+**The error is a unit swap inside one sentence.** *"Caught by the reviewer, one"* and *"once more
+and worse"* are two **instances**. They are one **class** — both stale inherited text, correctly
+identified as such. The summary then carried that class into a total of *corrections*, so the
+denominator counts classes where the numerator counts instances.
+
+**Three of five is materially different from three of four**, and it is the number that says whether
+two-seat review is working — which the entry itself names as the only figure here worth keeping. A
+self-catch rate is the one statistic a session cannot be trusted to round in its own favour, so the
+direction of the error matters as much as its size.
+
+**The title is left uncorrected on purpose, and it is the cost of the rule rather than an oversight.**
+The generated index therefore lists this entry under the wrong figure, and a reader who stops at the
+index gets the wrong number. That is the trade `decisions/0006` makes deliberately: the alternative
+is an entry whose recorded claim quietly becomes the corrected one, and then nothing shows that
+anybody was ever misled — which is the whole reason the annotation exists.
+
+([quince-devlog#131](https://github.com/novkostya/quince-devlog/issues/131),
+[quince-devlog#130](https://github.com/novkostya/quince-devlog/pull/130))
