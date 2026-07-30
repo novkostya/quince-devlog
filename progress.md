@@ -4859,3 +4859,58 @@ on real traction).
   [quince#262](https://github.com/novkostya/quince/pull/262),
   [quince#75](https://github.com/novkostya/quince/issues/75),
   [quince#107](https://github.com/novkostya/quince/issues/107))
+
+- 2026-07-30: **A gate that containerises its work and prints an accounting line reported `clean` over
+  a suite with fifteen failing assertions — and the accounting line was what swallowed the failure.**
+  `make gates-sh` exited **0** while `forge-watch-composition-test` failed 15 of 22. A shell `if` block
+  exits with the status of the **last command it ran**, and the recipe chained the container run and
+  its summary `echo` with `;` — so the gate reported the echo. **Only the container arm was affected,
+  and it is the default: the one CI runs.** The `QUINCE_SH_RUN_HERE` arm was correct *by accident*,
+  because `$(MAKE) …` happens to sit last in it. Scoped to the nineteen suites — `sh-lint-coverage`,
+  `allowlist-coverage`, `suite-coverage`, shellcheck, the `curl -k` ban and the title-interpolation
+  check are separate recipe lines and did still fail correctly — and there is no evidence a suite
+  actually broke unnoticed in the window, which is not the property a gate is for. **The irony is the
+  finding.** Three lines above the bug sits quince#246's own comment saying a gate that containerises
+  *some* of its work and says `clean` cannot be told from one that containerised all of it, citing
+  **quince#41 — the three-exit-code contract, where `0` must mean clean**. The same change wrote the
+  comment and broke the exit code the comment is about. **It was found by reading suite output, not by
+  a gate**: registering a new suite for quince#265 broke the composition test, and the ladder said
+  `clean`. Every totality gate this project has built answers *"is the list complete"*; not one asks
+  *"does a failure still reach the exit code"*. The proof drives the **real** recipe with a stubbed
+  `RUNTIME` that fails only for the suite image — a hermetic mini-Makefile reproducing "the pattern"
+  would pass forever while the recipe rotted — and against the unfixed recipe it fails exactly the
+  three bug-detecting assertions while all three controls hold.
+  ([quince#274](https://github.com/novkostya/quince/issues/274),
+  [quince#275](https://github.com/novkostya/quince/pull/275),
+  [quince#246](https://github.com/novkostya/quince/issues/246),
+  [quince#41](https://github.com/novkostya/quince/issues/41))
+
+- 2026-07-30: **The wake filter has never suppressed anything on the architect seat, because ownership
+  was read from a LOCAL registry while the branch namespace is GLOBAL.** `wake_filter` prefix-matches a
+  branch against declared runner names; `arch1/…` is correctly prefixed under the convention and still
+  unattributable on the implementer box, because `arch1` was declared on the other one — so it fails
+  open and wakes every watch. Measured, and the boxes are **not symmetric**: the implementer box
+  declares `r1`–`r4` and suppresses 5 PRs, while the arch box declares `arch1` alone, so
+  `other_runner_names` returns **empty** and the guard there is a documented no-op. Every PR of one
+  overnight run woke the architect's watch. **The fix is a committed seat list that is authoritative
+  rather than advisory**: `forge-watch runner set` **refuses** a name absent from `.claude/seats`, so a
+  new seat cannot declare itself without appearing in it and the drift becomes a refusal at
+  declaration, one PR wide — the same argument quince#200 and quince#256 make about lists nobody is
+  forced to update. Additive throughout: no list means no refusal, and the refusal is at *declaration*
+  only, so a session already running does not break when the list is briefly behind. An unknown prefix
+  still wakes every watch, deliberately and unchanged (quince#88: five losses of a watch came from not
+  arming, none from arming when nothing needed it). `status` now names **which source** attributed a
+  branch, because a stale registry entry is a dead session the box can clear and a wrong committed name
+  is a PR. **Two existing suites had to become hermetic, and that is the durable half:**
+  `forge-watch-composition-test` declares `ra`/`rb`/`c1`…`c8` and broke at once — fixtures, not seats,
+  and the wrong fix would have been to add them to the real file to make a test pass. The ownership
+  suite would have passed *today* and started failing the day the real list is edited. **`owed` was
+  deliberately not folded in**: it inherits the same locality bug in a different currency — author, not
+  branch prefix — so the fix does not reach it, noted on quince#227 instead. **A bashism was caught
+  before it shipped:** `grep -f <(…)` in a `#!/bin/sh` script that BusyBox `ash` runs, which
+  `gates-sh` now executes *inside* Alpine — a parse-time syntax error on both boxes, and shellcheck
+  then caught the replacement's `A && B || C` too, which was genuinely wrong.
+  ([quince#265](https://github.com/novkostya/quince/issues/265),
+  [quince#276](https://github.com/novkostya/quince/pull/276),
+  [quince#227](https://github.com/novkostya/quince/issues/227),
+  [quince#88](https://github.com/novkostya/quince/issues/88))
