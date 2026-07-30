@@ -85,8 +85,13 @@ rows=$(wc -l <"$tmp.rows" | tr -d ' ')
 	echo "journal-index: found no entries under $root" >&2
 	exit 1
 }
-newest=$(cut -d'|' -f1 "$tmp.rows" | sort | tail -1)
-oldest=$(cut -d'|' -f1 "$tmp.rows" | sort | head -1)
+# One awk pass rather than `sort | head -1` and `sort | tail -1`. `head` exits after its first
+# line, `sort` then gets EPIPE writing the rest, and busybox reports it — so every push printed
+# `sort: standard output: Broken pipe` from inside a hook whose whole job is to be believed when
+# it says something. Noise on a control's output is not cosmetic: it teaches the reader to skim.
+span=$(awk -F'|' 'NR==1{mn=$1;mx=$1} $1<mn{mn=$1} $1>mx{mx=$1} END{print mn" "mx}' "$tmp.rows")
+oldest=${span% *}
+newest=${span#* }
 
 {
 	cat <<'HEADER'
