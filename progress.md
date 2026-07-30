@@ -5218,8 +5218,21 @@ on real traction).
   `wakes` and **not prevented wakes**, which is the only number that answers the question — so the
   honest report is an upper bound with no lower bound, plus the small instrument that would close it.
   Publishing a ratio derived from a state file would have been the *"suppressed=1 beside a watch that
-  woke anyway"* failure in a different costume.
-  ([quince#242](https://github.com/novkostya/quince/issues/242))
+  woke anyway"* failure in a different costume. **The instrument was ruled to be the same change as
+  the caveat it replaces** — the line had been apologising for a figure it did not have, and that
+  apology went false the hour the arms landed — so `prevented` counts TICKS WHERE SUPPRESSION CHANGED
+  THE DECISION, as a counterfactual rather than an inference: the same events re-judged with both
+  arms skipped, ownership filtering held constant so the only difference is the thing measured. **A
+  zero prints as a result**, because a figure withheld until it flatters is unfalsifiable. **Then the
+  measurement came from the OTHER seat, which is the half this entry could not reach**: an architect
+  review of quince#301 emitted exactly two lines, one suppressed by each arm, and the watch kept
+  ticking for six minutes and three further ticks until genuine events arrived — 379 s apart at a 90 s
+  interval, so not one tick, and the suppression is the only thing that could have kept the loop
+  alive. **Observed, not inferred from a counter.** So the complete answer needed both seats: the seat
+  that built the ledger arm is the seat where it cannot fire.
+  ([quince#242](https://github.com/novkostya/quince/issues/242),
+  [quince#296](https://github.com/novkostya/quince/issues/296),
+  [quince#301](https://github.com/novkostya/quince/pull/301))
 
 - 2026-07-30: **The architect box's seat identity rested entirely on a credential its own code
   comment called luck, and the comment had been read and left standing.** `owed_role` decides which
