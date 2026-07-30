@@ -115,8 +115,19 @@ the identity half's two named blockers — quince#47 (architect and Operator sha
 own GitHub App (`decisions/0014`, quince#134).
 **So nothing on the ladder blocks the unfreeze, and the one gap that rode with it has closed.** The risk
 list carried *into* the unfreeze rather than gating it: quince-devlog#56, the surviving half of what G4's
-gap cited; the killed-session behaviour above; G5 unbuilt; #32's proof owed to a re-provision window; #33
-needing a re-file; and quince#303, where the Stop hook's arm hint now names the uncached App wrapper.
+gap cited; the killed-session behaviour above; G5 unbuilt; #32's proof owed to a re-provision window; and
+#33 needing a re-file.
+**The largest of them is quince#202, and it grows at the unfreeze rather than shrinking.** `forge-watch`
+is structurally blind to the trunk — it observes the PR queue and a declared issue set, and a push to
+`main` is neither — so `main` was red for **4h40m** with a healthy watch re-arming throughout, found by
+accident. The merge that broke it went through this loop and was approved by this seat. Ruled
+2026-07-30 (a `trunk-*` family inside `forge-watch`, wake on `SUCCESS → FAILURE` only, never entering
+`owed`) and **not built**. Named first because product work resuming makes an unobserved red trunk more
+expensive, not less.
+**And quince#54 is now evidenced rather than dormant**: nothing detects drift between the normative
+`loop-protocol.md` and the commands inline, its own 2026-07-29 measurement found no live drift, and two
+instances appeared on 2026-07-30 — both **claim-level**, so the gate that issue proposes would have
+passed both. A re-scope input, not a re-scope.
 **None is a gate. Each is something a session meets and works around, named here so that meeting one is
 recognised rather than rediscovered.**
 **The first post-unfreeze deliverable is a SPEC, not code.** `docs/specs/qn.7/` does not exist, and
