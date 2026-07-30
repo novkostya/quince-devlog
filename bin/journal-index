@@ -112,6 +112,11 @@ log under [decisions/](https://github.com/novkostya/quince-devlog/tree/main/deci
 
 ## Appending an entry
 
+**There are TWO routes onto this branch and only one of them is enforced.** Which one you take is
+decided by your box, not by preference — read both before appending (quince-devlog#159).
+
+### Route A — `git push`. The implementer boxes.
+
 ```sh
 git checkout journal && git pull --rebase        # always; several runners append the same day
 $EDITOR 2026-07/2026-07-30-a-short-slug.md       # <YYYY-MM>/<YYYY-MM-DD>-<short-slug>.md
@@ -124,15 +129,50 @@ git add -A && git commit -m "journal: <the claim>"
 git push origin journal                          # on rejection: pull --rebase, push again
 ```
 
-**The privacy gate is now the only guard.** On `main` an entry passes a reviewer *and* the gate;
-here there is no pull request, so there is no reviewer. Exit `0` is clean, `1` is a match, and
-**`2` is DID NOT RUN and is never a clean result** — a clone with no `local` symlink cannot sweep
-and must not push. `bin/pre-push-journal` enforces this rather than leaving it remembered; install
-it with `bin/pre-push-journal --install`.
+`bin/pre-push-journal` enforces the sweep on this route rather than leaving it remembered; install
+it once per clone with `bin/pre-push-journal --install`.
 
 **A rejected push is ordinary, not a conflict.** `git pull --rebase` and push again: entries are
 disjoint files, so the rebase never asks a human anything. Only `README.md` can collide, and it is
 regenerated rather than merged — `bin/journal-index` after the rebase, always.
+
+### Route B — the Git Data API. The architect box, which cannot push at all.
+
+**Measured 2026-07-31: the arch box has no git credential helper, for any repository** — that seat
+reads through `bin/gh-arch` / `bin/gh-review` and writes through REST, and `git push` has never been
+part of how it works. So Route A's last line fails there with `could not read Username`, and the
+seat that rules is the seat that cannot follow the documented flow. Recorded rather than left to be
+rediscovered by a session that concludes its box is broken.
+
+Commit locally and **sweep exactly as in Route A** — the gate runs against your local commit and is
+unaffected by how the commit reaches the forge. Then:
+
+```
+POST  /repos/{R}/git/blobs      x2      the entry, and the regenerated README
+POST  /repos/{R}/git/trees              base_tree = origin/journal^{tree}
+POST  /repos/{R}/git/commits            parents   = [origin/journal]
+PATCH /repos/{R}/git/refs/heads/journal
+```
+
+One clean commit with the correct author, rather than the two a pair of `PUT /contents` calls leaves.
+
+> **`bin/pre-push-journal` DOES NOT COVER THIS ROUTE, and cannot.** There is no push, so there is no
+> pre-push hook to intercept. **On Route B the sweep is manual and non-optional**, and nothing
+> mechanical will stop you skipping it.
+
+### What guards what, stated rather than implied
+
+**The privacy gate is the only guard on this branch.** On `main` an entry passes a reviewer *and*
+the gate; here there is no pull request, so there is no reviewer. Exit `0` is clean, `1` is a match,
+and **`2` is DID NOT RUN and is never a clean result** — a clone with no `local` symlink cannot
+sweep and must not append by either route.
+
+**The hook is a guarantee about Route A, not about the branch.** quince-devlog#155 shipped it as
+*"the only guard, enforced rather than remembered"*, and that sentence was true of the route it
+guards and too broad about the branch. Closing the gap would need something that watches the ref
+rather than the client — CI on this repository, which it deliberately does not have
+(quince-devlog#156 raises that and does not answer it). Until then the asymmetry is visible here
+instead of latent, which is the smaller half of the fix and the honest one.
 
 ## The entry shape
 
