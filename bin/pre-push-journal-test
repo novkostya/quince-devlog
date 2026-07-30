@@ -1,0 +1,106 @@
+#!/bin/sh
+# pre-push-journal-test — the hook's own failure-path suite.
+#
+# The hook is the only guard on a branch that has no reviewer, so the assertion that matters is not
+# "it lets a clean push through" — it is that it REFUSES on every path where it did not sweep. That
+# is the direction a control fails silently in, and the direction a hand-run smoke test never
+# exercises, because the happy path is the one you are trying when you write it.
+#
+# The gate itself is stubbed here on purpose. Whether `privacy-check` MATCHES correctly is that
+# tool's question and it has 27 fixtures of its own; this suite asks only whether the hook does the
+# right thing with each answer it can get back. Stubbing is what makes exit 2 testable at all.
+#
+# Needs no private layer and no network. Exit 0 all pass · 1 a failure.
+
+set -eu
+
+hook=$(cd "$(dirname "$0")" && pwd)/pre-push-journal
+[ -x "$hook" ] || {
+	echo "pre-push-journal-test: $hook is not executable" >&2
+	exit 1
+}
+
+work=${TMPDIR:-/tmp}/pre-push-journal-test.$$
+trap 'rm -rf "$work"' EXIT
+mkdir -p "$work"
+
+pass=0
+fail=0
+
+stub() { # stub <exit-code>
+	cat >"$work/gate" <<EOF
+#!/bin/sh
+echo "stub gate: called with \$*"
+exit $1
+EOF
+	chmod +x "$work/gate"
+	printf '%s' "$work/gate"
+}
+
+# check <name> <want-exit> <want-substring> <remote-sha> <gate-or-empty>
+check() {
+	name=$1
+	want=$2
+	needle=$3
+	rsha=$4
+	gate=$5
+	out=$(printf 'refs/heads/journal 1111111111111111111111111111111111111111 refs/heads/journal %s\n' "$rsha" |
+		env QUINCE_PRIVACY_CHECK="$gate" "$hook" 2>&1) && rc=0 || rc=$?
+	if [ "$rc" != "$want" ]; then
+		printf 'FAIL %-42s exit %s, wanted %s\n' "$name" "$rc" "$want" >&2
+		printf '     output: %s\n' "$out" >&2
+		fail=$((fail + 1))
+		return
+	fi
+	case $out in
+	*"$needle"*) ;;
+	*)
+		printf 'FAIL %-42s exit %s ok, but output lacked %s\n' "$name" "$rc" "$needle" >&2
+		printf '     output: %s\n' "$out" >&2
+		fail=$((fail + 1))
+		return
+		;;
+	esac
+	printf 'ok   %-42s exit %s\n' "$name" "$rc"
+	pass=$((pass + 1))
+}
+
+zero=0000000000000000000000000000000000000000
+ok=$(stub 0)
+
+# The four answers the gate can give. Only one of them may let a push through.
+check "gate clean -> allow" 0 "clean" 2222222222222222222222222222222222222222 "$(stub 0)"
+check "gate MATCHED -> refuse" 1 "MATCHED" 2222222222222222222222222222222222222222 "$(stub 1)"
+check "gate exit 2 -> refuse as DID NOT RUN" 1 "DID NOT RUN" 2222222222222222222222222222222222222222 "$(stub 2)"
+check "gate exit 127 -> refuse, not treated as clean" 1 "DID NOT RUN" 2222222222222222222222222222222222222222 "$(stub 127)"
+
+# The paths where there is nothing to sweep against, or nothing to sweep with.
+check "no gate configured -> refuse" 1 "no privacy gate configured" 2222222222222222222222222222222222222222 ""
+check "gate not executable -> refuse" 1 "not executable" 2222222222222222222222222222222222222222 "$work/does-not-exist"
+check "first push (zero remote) -> refuse" 1 "FIRST push" "$zero" "$ok"
+
+# A branch deletion carries no content, and a push to any other branch is none of the hook's
+# business. Both must exit 0 WITHOUT the gate being consulted — a hook that refuses ordinary
+# feature-branch pushes gets uninstalled, and then it guards nothing at all.
+out=$(printf 'refs/heads/other 1111111111111111111111111111111111111111 refs/heads/other 2222222222222222222222222222222222222222\n' |
+	env -u QUINCE_PRIVACY_CHECK "$hook" 2>&1) && rc=0 || rc=$?
+if [ "$rc" = 0 ] && [ -z "$out" ]; then
+	printf 'ok   %-42s exit 0\n' "non-journal ref -> ignored, silent"
+	pass=$((pass + 1))
+else
+	printf 'FAIL %-42s exit %s output [%s]\n' "non-journal ref -> ignored, silent" "$rc" "$out" >&2
+	fail=$((fail + 1))
+fi
+
+out=$(printf 'refs/heads/journal %s refs/heads/journal 2222222222222222222222222222222222222222\n' "$zero" |
+	env -u QUINCE_PRIVACY_CHECK "$hook" 2>&1) && rc=0 || rc=$?
+if [ "$rc" = 0 ]; then
+	printf 'ok   %-42s exit 0\n' "branch deletion -> nothing to sweep"
+	pass=$((pass + 1))
+else
+	printf 'FAIL %-42s exit %s output [%s]\n' "branch deletion -> nothing to sweep" "$rc" "$out" >&2
+	fail=$((fail + 1))
+fi
+
+printf '\npre-push-journal-test: %d passed, %d failed\n' "$pass" "$fail"
+[ "$fail" -eq 0 ]
