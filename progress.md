@@ -4724,9 +4724,16 @@ on real traction).
   are filed and unruled. quince#196's pattern half is private-layer work and its history rewrite is
   Operator-only. quince#222 was **observed live** while this ran — the architect's `update-branch
   --rebase` on #255 reported `actor=quince-coder[bot] kind=commit`, naming the seat that did not act —
-  which upgrades that issue from a reading to a measurement. And devlog#127 sat `DIRTY` untouched all
-  night: it is r1's retirement record, its author has retired, and devlog#129 says that has no permitted
-  owner.
+  which upgrades that issue from a reading to a measurement. And devlog#127 is **deliberately
+  stranded**, not waiting on anybody: it is r1's retirement record, its author has retired, and rather
+  than rule the collision of the two rules the Operator **deferred** it — *"leave them stranded for
+  now"* — pending devlog#30, the journal restructure that removes the shared append target and with it
+  this whole class. The distinction matters for whoever reads the queue next: **the defect is
+  unresolved and the parking is deliberate**, which is why devlog#129 stays open rather than closed.
+  The Operator's own words retain the finding — *"a retirement record orphaned by a merge still has no
+  permitted owner, and the three candidate remedies are all still open"* — so what was stale in the
+  first draft of this entry was the **status**, not the diagnosis. The cost is accepted and recorded:
+  r1's retirement record may never enter the journal, and its PR is the only place that text survives.
   ([quince#235](https://github.com/novkostya/quince/pull/235),
   [quince#248](https://github.com/novkostya/quince/pull/248),
   [quince#250](https://github.com/novkostya/quince/pull/250),
