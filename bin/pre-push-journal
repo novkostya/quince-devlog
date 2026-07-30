@@ -1,0 +1,127 @@
+#!/bin/sh
+# pre-push-journal — refuse a push to the `journal` branch that has not been privacy-swept.
+#
+# WHY THIS EXISTS. Journal entries are pushed straight to `journal` with no pull request, so there
+# is no reviewer between an Operator-private string and a public branch that every box replicates.
+# The privacy gate is the only guard left, and devlog#152 states the principle this applies to
+# itself: when correct behaviour depends on someone noticing, move it into a tool.
+#
+# WHY IT LIVES ON `main`. `journal` is unprotected by design — anything on it can be rewritten by
+# the same identity the hook is guarding. A control kept there guards nothing. On `main` it is
+# behind branch protection, a required approval and a code owner, which is the whole reason `main`
+# still exists for this repository.
+#
+#   bin/pre-push-journal --install    copy into .git/hooks/pre-push (run from a `main` checkout;
+#                                     hooks are per-clone, so it stays live across branches)
+#   bin/pre-push-journal --check      run the sweep now, against the same range a push would
+#
+# It REFUSES rather than skips when it cannot sweep — the same discipline the gate itself follows,
+# where exit 2 is DID NOT RUN and is never a clean result. A hook that waves a push through because
+# it could not find its tool is worse than no hook: it reports a guarantee it never checked.
+#
+# Point it at the gate with either of:
+#   git config quince.privacy-check /path/to/quince/deploy/privacy/privacy-check
+#   QUINCE_PRIVACY_CHECK=/path/to/quince/deploy/privacy/privacy-check
+# The script lives in the product repository, which is why this is configured rather than assumed.
+
+set -eu
+
+self=$0
+branch=refs/heads/journal
+
+die() {
+	echo "pre-push-journal: $*" >&2
+	exit 1
+}
+
+install_hook() {
+	top=$(git rev-parse --show-toplevel 2>/dev/null) || die "not inside a git repository"
+	dir=$(git rev-parse --git-path hooks)
+	mkdir -p "$dir"
+	src=$top/bin/pre-push-journal
+	[ -r "$src" ] || die "cannot read $src — run --install from a checkout of \`main\`"
+	cp "$src" "$dir/pre-push"
+	chmod +x "$dir/pre-push"
+	echo "pre-push-journal: installed at $dir/pre-push"
+	if [ -n "${QUINCE_PRIVACY_CHECK:-}" ] || git config --get quince.privacy-check >/dev/null 2>&1; then
+		echo "pre-push-journal: privacy gate configured — the hook can sweep"
+	else
+		echo "pre-push-journal: WARNING — no privacy gate configured yet, so every push to" >&2
+		echo "  \`journal\` will be REFUSED until you set quince.privacy-check. That refusal is" >&2
+		echo "  the intended behaviour, not a broken install." >&2
+	fi
+}
+
+find_gate() {
+	gate=${QUINCE_PRIVACY_CHECK:-}
+	[ -n "$gate" ] || gate=$(git config --get quince.privacy-check 2>/dev/null || true)
+	[ -n "$gate" ] || die "no privacy gate configured.
+  Set one of:
+    git config quince.privacy-check /path/to/quince/deploy/privacy/privacy-check
+    QUINCE_PRIVACY_CHECK=/path/to/quince/deploy/privacy/privacy-check
+  REFUSING the push. Nothing was swept, and an unswept push to a public branch is the one
+  failure this hook exists to prevent."
+	[ -x "$gate" ] || die "configured privacy gate is not executable: $gate"
+	printf '%s' "$gate"
+}
+
+sweep() {
+	range=$1
+	gate=$(find_gate)
+	echo "pre-push-journal: sweeping $range with $gate"
+	set +e
+	"$gate" --ref "$range"
+	rc=$?
+	set -e
+	case $rc in
+	0) ;;
+	1) die "the privacy gate MATCHED. Push refused. Fix the entry; do not override." ;;
+	*) die "the privacy gate exited $rc — DID NOT RUN. Push refused; nothing was swept." ;;
+	esac
+	top=$(git rev-parse --show-toplevel)
+	if [ -x "$top/bin/journal-index" ] && [ -f "$top/README.md" ]; then
+		"$top/bin/journal-index" --check ||
+			die "README.md is stale. Run bin/journal-index, amend, and push again."
+	fi
+}
+
+case ${1:-} in
+--install)
+	install_hook
+	exit 0
+	;;
+--check)
+	sweep "origin/journal...HEAD"
+	echo "pre-push-journal: clean"
+	exit 0
+	;;
+--help | -h)
+	sed -n '2,30p' "$self"
+	exit 0
+	;;
+esac
+
+# git hands a pre-push hook one line per ref: <local ref> <local sha> <remote ref> <remote sha>.
+zero=0000000000000000000000000000000000000000
+swept=0
+while read -r lref lsha rref rsha; do
+	[ "$rref" = "$branch" ] || continue
+	[ "$lsha" != "$zero" ] || continue # a deletion carries nothing to sweep
+	if [ "$rsha" = "$zero" ]; then
+		# "Everything on a branch the remote has never seen" has no range spelling that both
+		# `git diff` and `git log` accept, and the gate needs one string for both. Rather than
+		# sweep half of it and report clean, refuse and name the by-hand command. This fires
+		# once in the branch's life — at its creation — and failing closed there is the point.
+		die "origin/${branch#refs/heads/} does not exist yet, so this is the branch's FIRST push and its
+  range cannot be expressed for the gate. Sweep it by hand and push with --no-verify only
+  after it comes back clean:
+    <your-quince-clone>/deploy/privacy/privacy-check   # staged, or over the working tree
+  Nothing was swept. Push refused."
+	fi
+	range="$rsha...$lsha"
+	sweep "$range"
+	swept=1
+done
+
+[ "$swept" -eq 0 ] || echo "pre-push-journal: clean — push allowed"
+exit 0
