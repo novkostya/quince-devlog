@@ -1,0 +1,75 @@
+#!/bin/sh
+# dashboard-size-test — the size gate's own suite, with the emphasis on the answers that are not 0.
+#
+# A size check is trivial to write and easy to write wrongly in one direction: returning success
+# when it did not measure anything. Every case below that expects exit 2 is guarding that.
+#
+# Needs no private layer and no network. Exit 0 all pass · 1 a failure.
+
+set -eu
+
+gate=$(cd "$(dirname "$0")" && pwd)/dashboard-size
+work=${TMPDIR:-/tmp}/dashboard-size-test.$$
+trap 'rm -rf "$work"' EXIT
+mkdir -p "$work"
+
+pass=0
+fail=0
+
+check() { # check <name> <want-exit> <args...>
+	name=$1
+	want=$2
+	shift 2
+	out=$("$gate" "$@" 2>&1) && rc=0 || rc=$?
+	if [ "$rc" = "$want" ]; then
+		printf 'ok   %-46s exit %s\n' "$name" "$rc"
+		pass=$((pass + 1))
+	else
+		printf 'FAIL %-46s exit %s, wanted %s\n' "$name" "$rc" "$want" >&2
+		printf '     %s\n' "$out" >&2
+		fail=$((fail + 1))
+	fi
+}
+
+# 10 short lines: inside both ceilings.
+i=0
+while [ $i -lt 10 ]; do
+	echo "line $i"
+	i=$((i + 1))
+done >"$work/small.md"
+
+# 400 short lines: over on lines, comfortably under on bytes. Proves the line ceiling alone bites.
+i=0
+while [ $i -lt 400 ]; do
+	echo "x"
+	i=$((i + 1))
+done >"$work/many-lines.md"
+
+# 5 lines, one of them enormous: UNDER on lines, over on bytes. This is the case that justifies
+# measuring bytes at all — the real file has a 6 KB table row, and a line-only gate waves it past.
+{
+	echo "short"
+	i=0
+	while [ $i -lt 900 ]; do
+		printf 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
+		i=$((i + 1))
+	done
+	echo
+	echo "short"
+} >"$work/one-huge-line.md"
+
+check "small file within both ceilings" 0 --file "$work/small.md"
+check "over on LINES only" 1 --file "$work/many-lines.md"
+check "over on BYTES only, under on lines" 1 --file "$work/one-huge-line.md"
+check "missing file is DID NOT RUN, not a pass" 2 --file "$work/absent.md"
+check "unknown argument is DID NOT RUN, not a pass" 2 --max-linez 5
+check "explicit ceilings are honoured" 1 --file "$work/small.md" --max-lines 3
+check "explicit byte ceiling is honoured" 1 --file "$work/small.md" --max-bytes 5
+
+# The line-only blind spot, stated as an assertion rather than as prose in a comment: with the byte
+# ceiling lifted out of the way, the 72 KB file passes. That is exactly what quince-devlog#30's
+# line-only proposal would have shipped.
+check "byte ceiling removed -> the 72 KB file passes" 0 --file "$work/one-huge-line.md" --max-bytes 999999999
+
+printf '\ndashboard-size-test: %d passed, %d failed\n' "$pass" "$fail"
+[ "$fail" -eq 0 ]
