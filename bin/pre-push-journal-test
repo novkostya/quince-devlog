@@ -24,6 +24,36 @@ work=${TMPDIR:-/tmp}/pre-push-journal-test.$$
 trap 'rm -rf "$work"' EXIT
 mkdir -p "$work"
 
+# THE SUITE BUILDS THE ENVIRONMENT IT ASSERTS ABOUT, and the first version did not.
+#
+# It ran the hook in whatever directory it was invoked from, which made two of its nine cases
+# depend on that directory:
+#
+#   - "no gate configured" PASSED only where `quince.privacy-check` happened to be unset. In a
+#     correctly provisioned clone — the box where this hook actually runs — the config fallback
+#     supplies a real gate and the case fails. Green in the empty case, red where it is deployed,
+#     which is the worst polarity a test can have.
+#   - "gate clean -> allow" PASSED only INSIDE a git repository, because the hook reads
+#     `--show-toplevel`. Outside one it exited 128 on a git fatal.
+#
+# So: a throwaway repository per run, and the global and system config files pointed at /dev/null,
+# so `git config --get` sees exactly what this file puts there and nothing the box happens to hold.
+repo=$work/repo
+mkdir -p "$repo"
+GIT_CONFIG_GLOBAL=/dev/null
+GIT_CONFIG_SYSTEM=/dev/null
+export GIT_CONFIG_GLOBAL GIT_CONFIG_SYSTEM
+git -C "$repo" init -q 2>/dev/null || {
+	echo "pre-push-journal-test: cannot git init in $repo — DID NOT RUN" >&2
+	exit 1
+}
+# Prove the neutralisation rather than trusting it: if this ever returns a value, the two cases
+# above are silently testing the box instead of the hook.
+if git -C "$repo" config --get quince.privacy-check >/dev/null 2>&1; then
+	echo "pre-push-journal-test: quince.privacy-check leaked into the throwaway repo — DID NOT RUN" >&2
+	exit 1
+fi
+
 pass=0
 fail=0
 
@@ -45,7 +75,7 @@ check() {
 	rsha=$4
 	gate=$5
 	out=$(printf 'refs/heads/journal 1111111111111111111111111111111111111111 refs/heads/journal %s\n' "$rsha" |
-		env QUINCE_PRIVACY_CHECK="$gate" "$hook" 2>&1) && rc=0 || rc=$?
+		(cd "$repo" && env QUINCE_PRIVACY_CHECK="$gate" "$hook") 2>&1) && rc=0 || rc=$?
 	if [ "$rc" != "$want" ]; then
 		printf 'FAIL %-42s exit %s, wanted %s\n' "$name" "$rc" "$want" >&2
 		printf '     output: %s\n' "$out" >&2
@@ -83,7 +113,7 @@ check "first push (zero remote) -> refuse" 1 "FIRST push" "$zero" "$ok"
 # business. Both must exit 0 WITHOUT the gate being consulted — a hook that refuses ordinary
 # feature-branch pushes gets uninstalled, and then it guards nothing at all.
 out=$(printf 'refs/heads/other 1111111111111111111111111111111111111111 refs/heads/other 2222222222222222222222222222222222222222\n' |
-	env -u QUINCE_PRIVACY_CHECK "$hook" 2>&1) && rc=0 || rc=$?
+	(cd "$repo" && env -u QUINCE_PRIVACY_CHECK "$hook") 2>&1) && rc=0 || rc=$?
 if [ "$rc" = 0 ] && [ -z "$out" ]; then
 	printf 'ok   %-42s exit 0\n' "non-journal ref -> ignored, silent"
 	pass=$((pass + 1))
@@ -93,12 +123,37 @@ else
 fi
 
 out=$(printf 'refs/heads/journal %s refs/heads/journal 2222222222222222222222222222222222222222\n' "$zero" |
-	env -u QUINCE_PRIVACY_CHECK "$hook" 2>&1) && rc=0 || rc=$?
+	(cd "$repo" && env -u QUINCE_PRIVACY_CHECK "$hook") 2>&1) && rc=0 || rc=$?
 if [ "$rc" = 0 ]; then
 	printf 'ok   %-42s exit 0\n' "branch deletion -> nothing to sweep"
 	pass=$((pass + 1))
 else
 	printf 'FAIL %-42s exit %s output [%s]\n' "branch deletion -> nothing to sweep" "$rc" "$out" >&2
+	fail=$((fail + 1))
+fi
+
+
+# Outside a git repository the sweep must still complete. This case exists because the FIX for the
+# suite's environment dependence deleted the coverage that would have caught the bug it was fixing:
+# once every invocation runs inside a throwaway repo, re-introducing the bare `--show-toplevel`
+# passes nine of nine. Verified by mutation — reverting the hook's `2>/dev/null || true` fails this
+# case and nothing else.
+#
+# It is not a hypothetical location. A pre-push hook runs wherever the pusher's shell is, and by
+# this point the gate has ALREADY swept clean, so a crash here refuses a push for a reason that has
+# nothing to do with privacy.
+mkdir -p "$work/notarepo"
+out=$(printf 'refs/heads/journal 1111111111111111111111111111111111111111 refs/heads/journal 2222222222222222222222222222222222222222\n' |
+	(cd "$work/notarepo" && env QUINCE_PRIVACY_CHECK="$(stub 0)" "$hook") 2>&1) && rc=0 || rc=$?
+case $out in
+*clean*) needle_ok=1 ;;
+*) needle_ok=0 ;;
+esac
+if [ "$rc" = 0 ] && [ "$needle_ok" = 1 ]; then
+	printf 'ok   %-42s exit 0\n' "outside a git repo -> sweep still completes"
+	pass=$((pass + 1))
+else
+	printf 'FAIL %-42s exit %s output [%s]\n' "outside a git repo -> sweep still completes" "$rc" "$out" >&2
 	fail=$((fail + 1))
 fi
 

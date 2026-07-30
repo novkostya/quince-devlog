@@ -78,8 +78,13 @@ sweep() {
 	1) die "the privacy gate MATCHED. Push refused. Fix the entry; do not override." ;;
 	*) die "the privacy gate exited $rc — DID NOT RUN. Push refused; nothing was swept." ;;
 	esac
-	top=$(git rev-parse --show-toplevel)
-	if [ -x "$top/bin/journal-index" ] && [ -f "$top/README.md" ]; then
+	# The index check sits beside the sweep and is not part of it, so it must not be able to turn a
+	# clean sweep into a crash. This read used to be bare: outside a git repository it fatalled
+	# under `set -e` and the hook exited 128 with a raw git error, having ALREADY swept clean. It
+	# failed closed, so nothing unsafe got through — but "push refused: fatal: not a git
+	# repository" sends the reader hunting in the wrong place.
+	top=$(git rev-parse --show-toplevel 2>/dev/null || true)
+	if [ -n "$top" ] && [ -x "$top/bin/journal-index" ] && [ -f "$top/README.md" ]; then
 		"$top/bin/journal-index" --check ||
 			die "README.md is stale. Run bin/journal-index, amend, and push again."
 	fi
