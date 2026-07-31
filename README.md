@@ -86,7 +86,7 @@ this index reads, once as the entry's own bold lead.
 [Retired lettered ids `(a)`–`(do)`](letters.md) — resolved to the entries that mint them, for the
 citations in canon and git history that still use them.
 
-**182 entries · 2026-07-18 → 2026-07-31.** This file is generated — run `bin/journal-index` after every
+**183 entries · 2026-07-18 → 2026-07-31.** This file is generated — run `bin/journal-index` after every
 append; `bin/journal-index --check` fails when it is stale.
 
 ## 2026-07
@@ -95,6 +95,7 @@ append; `bin/journal-index --check` fails when it is stale.
 - **2026-07-31** — [Six issues taken after the migration, and every review finding against the session was one shape: a claim scoped wider than what was measured](2026-07/2026-07-31-six-issues-taken-after-the-migration-and-every-finding.md)
 - **2026-07-31** — [The 267-line "one-line state" is relocated here verbatim, because the block's own text says why deleting it would be wrong](2026-07/2026-07-31-the-267-line-one-line-state-relocated-verbatim-when-the.md)
 - **2026-07-31** — [The journal left `progress.md` for a branch, and the first entry written under the new shape is this one](2026-07/2026-07-31-the-journal-left-progress-md-for-a-branch.md)
+- **2026-07-31** — [The rung was rewritten and the rewrite found six items with nowhere to go](2026-07/2026-07-31-the-rung-was-rewritten-and-the-rewrite-found-six.md)
 - **2026-07-30** — [`2>/dev/null` on a command does not cover the SHELL's own redirection error, and the liveness probe leaked one into every `Stop`](2026-07/2026-07-30-2-dev-null-on-a-command-does-not-cover-the-shell-s-own.md)
 - **2026-07-30** — [A classifier outage is a DEGRADED session, not a broken box or a finished one — ruled, after it cost the architect seat six and a half hours of unwatched queue](2026-07/2026-07-30-a-classifier-outage-is-a-degraded-session-not-a-broken.md)
 - **2026-07-30** — [A closing keyword beside a bare reference auto-closes on merge, the parser is not negation-aware, and FOUR instances in one night were each written by someone who knew](2026-07/2026-07-30-a-closing-keyword-beside-a-bare-reference-auto-closes.md)
