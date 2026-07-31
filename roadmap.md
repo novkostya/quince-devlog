@@ -46,9 +46,14 @@ slice of all three languages; `make image` produces a runnable container.*
   *Gate: `compose up` on the lab CT brings USB up with NO host muxer (the D12 Plex-bar
   promise restored); plug/unplug ≤1 s in the UI — **PASSED on hardware 2026-07-20**.*
   As-built: the netmuxd-USB audition was **re-homed to qn.7** at rung close (Operator
-  ruling, decisions log (aw) — named owner, procedure preserved in the qn.2b spec gate 8);
+  ruling, decisions log (aw) — named owner, procedure preserved in the qn.2b spec gate 8),
+  and **split back out of qn.7 to [quince#326](https://github.com/novkostya/quince/issues/326)
+  on 2026-07-31**, because its entire output is a D2 ruling rather than a user-visible change —
+  issue-shaped, not rung-shaped. The procedure is still the qn.2b spec's gate 8.
   FULL muxer work (netmuxd co-supervision, restart policy, muxer health in UI,
-  `compose.hardened.yml`) stays in qn.6/qn.7.
+  `compose.hardened.yml`) stays in qn.6/qn.7 — but see M4's gap block: the 2026-07-31 ruling
+  redefined qn.7 by what it IS, so the half of that sentence pointing at qn.7 now points at
+  nothing.
 
 ### M2 — Device ops (`qn.3`)
 Pair / validate / info subprocess wrappers + **backup-encryption management** (status
@@ -399,8 +404,12 @@ it. Split OUT of `qn.7` (which keeps its name and stays post-freeze). Scope, del
   log, and the wait duration. Whether the sampler fired decides "qn.6b tunes thresholds" vs
   "qn.6b fixes a liveness bug".
 
-**Explicitly NOT here (stays `qn.7`):** chaos suite, netmuxd-USB audition, restart-policy tuning,
-#2 409-race, full #8 classification taxonomy, #9b, #10-percent, UX copy polish.
+**Explicitly NOT here (stayed `qn.7`):** chaos suite, netmuxd-USB audition, restart-policy tuning,
+#2 409-race, full #8 classification taxonomy, #9b, #10-percent, UX copy polish. **Written when
+`qn.7` was the reliability rung, and the 2026-07-31 ruling emptied that home** — the chaos suite is
+dropped, the audition is [quince#326](https://github.com/novkostya/quince/issues/326), and the rest
+are unhomed. M4's gap block is where that is stated; this line records only that qn.6b sent them
+somewhere, not that they are still there.
 
 **The last-insert rule ((de)):** a pre-freeze insert is justified only by a defect that STOPS
 DAILY USE. This is the fourth insert ((by) qn.4c, (cg) qn.5b, (ch) qn.6a, (de) qn.6b) and the
@@ -410,60 +419,117 @@ CI-provable: the patch applies + builds in the pinned pipeline, gate-flag behavi
 logic. Lab-owed: 15-min patience across a real Wi-Fi drop, the gate patch against a real device,
 and the hang case re-run.
 
-### M4 — Wi-Fi reliability hardening (`qn.7`)
-The flakiness-absorption rung, BEFORE the public release because Wi-Fi is primary:
-~~patched-timeout libimobiledevice source build in the image (30 s → 15 min, upstream
-#1413)~~ (**moved to qn.6b with the initial liveness retune**, (de) — qn.7 keeps the
-chaos-suite-driven FINE tuning), ~~netmuxd supervision~~ (**moved to qn.4c**, (by)) + restart-policy tuning,
-**the netmuxd-USB audition on pinned
-v0.4.3** (re-homed here from qn.2b, decisions log (aw); procedure verbatim in the qn.2b
-spec, gate 8 — verdict flips the D2 default to single-muxer or files the upstream issue),
-chaos suite (replay every torn-session
-transcript + injected mid-file disconnects), liveness-stage thresholds tuned against the
-real lab box, honest UX copy for the slow/silent/passcode phases.
+### M4 — Wi-Fi sync from quince (`qn.7`)
+**Enable and disable a device's Wi-Fi-sync flag from inside quince**, so the D12 *"everything in
+quince"* promise stops being broken for the **primary** transport. Today it must be ticked in
+Finder/iTunes ("Show this device when on Wi-Fi"): a user can pair over USB in quince and then needs
+a Mac to actually turn Wi-Fi backups on. **That is the whole rung** — Operator ruling, 2026-07-31
+([quince#325](https://github.com/novkostya/quince/issues/325)), which also dropped the reliability
+work below and split the audition out.
 
-**Hardware evidence banked 2026-07-24 ((ct)):** the qn.5b hardware session reproduced real Wi-Fi
+**It is DEVICE-OPS, not onboarding.** The setting lives *on the device* — already on for anyone who
+ever synced via Finder or a third-party tool — and it is per-device, wanted right after USB pairing.
+That is the qn.3 **backup-encryption** pattern exactly: status read back from the device,
+enable/disable through quince, USB-trusted, on-device steps narrated. So the rung's family is qn.3's
+device ops, with a `wifi_sync: on|off|unknown` property beside `paired` and `encrypted`.
+
+**The mechanism is UNVERIFIED and must stay that way until measured** (the interface-facts-looked-up
+rule). The hypothesis is a lockdown `SetValue` on the `com.apple.mobile.wireless_lockdown` domain
+(an `EnableWifiConnections`-ish key): `lockdownd_set_value` supports the shape, and it would be a
+USB-trusted operation, which fits — pairing is USB-only anyway (stack D2), so the natural moment is
+during the qn.3 USB pair (plug → Trust → quince pairs **and** flips Wi-Fi sync on → unplug → Wi-Fi
+works, no Finder detour). **The spike answers:** the exact domain and key; whether `SetValue` is
+accepted and takes effect without a reboot or respring; whether USB is required; whether the device
+must be unlocked, or a Trust re-confirm fires. **If it is infeasible, onboarding documents the
+Finder step honestly** rather than leaving the promise quietly broken.
+
+*Gate: a device whose Wi-Fi sync is OFF reads back `off` in quince, is turned `on` through quince
+alone with the on-device steps narrated, and then completes a Wi-Fi backup with no Mac ever
+involved — or the spike returns **infeasible** with the measurement that shows it, and onboarding
+gains the honest Finder instruction instead. Both outcomes close the rung; only an unmeasured
+claim does not.*
+
+**Hardware.** Both the spike and the implementation are device-side and an implementer box has no
+device; the Operator coordinates hardware sessions with the implementer directly, raised in the
+issue thread rather than treated as a blocker. The roadmap rewrite and the spec need none.
+
+**The netmuxd-USB audition is no longer part of this rung** — split out to
+[quince#326](https://github.com/novkostya/quince/issues/326) on 2026-07-31 (re-homed here from qn.2b
+at that rung's close, (aw)). It ships no user-visible change and its entire output is a D2 ruling,
+so it is issue-shaped rather than rung-shaped. The procedure stays verbatim in the qn.2b spec,
+gate 8.
+
+**RELIABILITY IS OUT — Operator ruling, 2026-07-31, on a week of real daily use: the product is
+more or less fine.** The remaining failure — any TCP drop fails the backup immediately — is
+**Apple-side**, and the protocol floor below is why: a dropped mobilebackup2 session is unrescuable
+in-flight at any layer. Building around it buys little.
+
+**The remedy is `qn.12` (PWA + Web Push)**, which turns *"your backup dropped, go find the laptop"*
+into **one tap plus a passcode on the phone already in your hand**. Not a workaround for missing
+reliability work — a better answer to the same problem, already on the roadmap (M8, whose gate
+already names *a mid-backup disconnect produces an `action_required` push and a one-tap retry
+works*), and consistent with the ASSISTED model canon states: no unattended mode, no auto-retry, one
+unlock+confirm.
+
+**Dropped, not owed:** the chaos suite (replay every torn-session transcript + injected mid-file
+disconnects), liveness-stage threshold *tuning*, `-4`→`connection_lost` reclassification, and
+retry/resume proving. Two things dissolve with them and neither needs a ruling any more — the
+**chaos-fixture privacy collision** (*every hardware bug becomes a replay fixture* against two
+captures that must never enter git: the suite is gone, the captures stay local), and the
+**auto-retry contradiction** this section's own prose used to carry.
+
+**Auto-retry is impossible, so the honest words are ONE-TAP retry** (2026-07-31). A retry inside
+iOS's recent-unlock window does **not** skip the passcode prompt. `CLAUDE.md`'s flat *"no
+auto-retry"* therefore stands unqualified — **no canon change**. Provenance: the Operator's
+determination, not a banked lab measurement; worth one line of hardware confirmation whenever a
+qn.7 session touches a device, because every other claim in this section says how it was
+established.
+
+**Already shipped — do not re-decide.** Job history already groups a run as *completed after N
+retries*, one chip per attempt, showing which failed and which succeeded. So a resume is **one
+logical backup with per-attempt detail**, and the model is right; the spec records this as
+established rather than re-opening it. It is also why the reliability ruling costs so little: the
+expensive half of retry — presenting it honestly without lying about what happened — is done. What
+is missing is the notification that gets the prompt to the user, and that is `qn.12`.
+
+**The evidence the drop rests on is KEPT, because a ruling with no stated basis is worth less than
+the paragraph it saved.** Banked 2026-07-24 ((ct)): the qn.5b hardware session reproduced real Wi-Fi
 failures on the iPhone (`Could not receive from mobilebackup2 (-4/-256)` / netmuxd
-`Heartbeat(Timeout)`), root-caused via pcap/`ss`/netmuxd-DEBUG to genuine Wi-Fi packet loss + link
-drops (netmuxd exonerated; not a message-size bug) — exactly what the patched timeout absorbs. **Two
-real-world captures are preserved as chaos-suite fixtures** (a genuine Wi-Fi failure + a
-success-with-pause) — **local-only on the lab host, LAN IPs, must never enter git.** **New, load-bearing
-finding for the liveness-threshold tuning:** iOS Wi-Fi backups have long *legitimate* `app_limited`
-idle pauses (the phone doing its own snapshot/file-prep) — quince must NOT treat a multi-minute idle
-window as a stall/deadlock; a real 34 GB backup completed after exactly such a pause.
+`Heartbeat(Timeout)`), root-caused via pcap/`ss`/netmuxd-DEBUG to genuine Wi-Fi packet loss and link
+drops — netmuxd exonerated, not a message-size bug — and found that iOS Wi-Fi backups have long
+*legitimate* `app_limited` idle pauses while the phone does its own snapshot/file-prep: a real 34 GB
+backup completed after exactly such a pause, which is why quince must never read a multi-minute idle
+window as a stall. Banked 2026-07-25 ((dm)): over the qn.6b patched image the raised timeout rides
+those pauses out (48 s → 31 min survival on a marginal link, no false kill through a device
+delta-recompute) but **cannot cure a `-4` from a genuine connection drop** — root-caused live to
+**band roaming**, the phone flapping between 2.4 and 5 GHz at the range boundary, each flap
+resetting the mux TLS session.
 
-**Hardware evidence banked 2026-07-25 ((dm)) — the qn.6b lab session sharpened qn.7's scope to
-AUTO-RESUME.** Real Wi-Fi backups over the qn.6b patched image showed the patched timeout rides out
-`app_limited` and multi-minute *device-side* pauses (extended survival 48 s → 31 min on a marginal
-link, and quince held `active` through a device delta-recompute with no false kill) but CANNOT cure a
-`-4` from a genuine connection drop — root-caused live to **band roaming** (the phone at the 2.4/5 GHz
-range boundary flapping bands, each flap resetting the mux TLS session). **The protocol floor (canon):**
-a dropped mobilebackup2 session is unrescuable in-flight at ANY layer (TLS state bound to the dead
-connection; no session reattach) — recovery is ALWAYS a fresh backup request that resumes the on-disk
-snapshot (kept-dirty-working, no re-transfer) + an iOS per-backup passcode. So qn.7's real Wi-Fi
-resilience is **auto-retry-on-reconnect + resume** (proven manually: fail → resume → 61 % → resume →
-complete) plus **`-4`→`connection_lost` reclassification** (a drop must not read as a hard `failed`).
-Open question that decides seamless-vs-one-tap: does a retry inside iOS's recent-unlock window skip the
-passcode prompt? Phone-sleep (`SleepyTime`) is a secondary drop factor; a netmuxd-DEBUG+pcap of
-roam-vs-signal-vs-sleep is the definitive chaos-suite input (offered in the (dm) session, not taken).
+**The protocol floor (canon).** A dropped mobilebackup2 session is **unrescuable in-flight at ANY
+layer** — the TLS state is bound to the dead connection and there is no session reattach. Recovery
+is always a fresh backup request that resumes the on-disk snapshot (kept-dirty-working, no
+re-transfer) plus an iOS per-backup passcode. **And network-level mitigation — AP or band steering,
+SSID separation, roaming-threshold tuning — is a WORKAROUND, never the primary answer**
+([`decisions/0013`](decisions/0013-network-mitigation-is-a-workaround.md)): it *works*, which is
+exactly what makes it dangerous, because a user whose roaming is tuned away stops seeing the failure
+and the product's real answer never gets built or exercised.
 
-**Spike (feasibility-first, (cn)): enable/disable Wi-Fi discoverability ("Wi-Fi sync") from
-inside quince.** Today a fresh device's Wi-Fi sync must be ticked in **Finder/iTunes** ("Show
-this device when on Wi-Fi") — so the D12 "everything in quince" onboarding promise is **broken
-for the PRIMARY transport** (a user can pair over USB in quince but then needs a Mac to actually
-turn Wi-Fi backups on). **Likely mechanism, to VERIFY not assume** (interface-facts-looked-up
-rule): a lockdown `SetValue` on the `com.apple.mobile.wireless_lockdown` domain
-(`EnableWifiConnections`-ish key) — libimobiledevice's `lockdownd_set_value` supports it, and it
-is a **USB-trusted** operation, which fits perfectly: pairing is USB-only anyway (stack D2), so
-the natural moment is *during the qn.3 USB pair* (plug → Trust → quince pairs **and** flips
-Wi-Fi sync on → unplug → Wi-Fi works, no Finder detour). Read-back gives a `wifi_sync:
-on|off|unknown` device property to display + toggle beside pairing/encryption. **Spike answers:**
-the exact domain/key; whether SetValue is accepted and takes effect (reboot/respring needed?);
-USB-required confirmed; whether the device must be unlocked / a Trust re-confirm fires. Home is
-either here (Wi-Fi) or a small device-ops addition folded into qn.6 onboarding; if infeasible,
-onboarding must document the Finder step honestly. *Gate: injected
-disconnects land in clean `user action required` states with committed versions
-untouched, and a manual retry from dirty `working/` completes and verifies.*
+**PROPOSED (gap): six items were parked in `qn.7` and the 2026-07-31 ruling homed none of them.**
+The ruling defined the rung by what it **is** (*"that is the whole rung"*) and named four things as
+**dropped** — chaos suite, liveness-threshold tuning, `-4`→`connection_lost`, retry/resume proving.
+Everything else `qn.6b` sent here is therefore neither in the rung nor explicitly dropped:
+**muxer restart-policy tuning** · **finding #2, the 409 race** · **the full finding-#8 failure
+classification taxonomy** · **finding #9b** · **finding #10-percent** · **honest UX copy for the
+slow / silent / passcode phases**. The last one is user-visible behaviour, which is what makes this
+a gap block rather than a footnote. Two of them plausibly died with the reliability work (#8's
+taxonomy, and #2 if it is drop-induced) and the other four plausibly belong to `qn.6`'s release
+polish — **plausibly is not a ruling, and this rewrite deliberately does not make one.** Filed as an
+open question, [quince#328](https://github.com/novkostya/quince/issues/328); nothing in `qn.7` is
+built on it either way, so it blocks neither this rewrite nor the spec. Raised by the rewrite
+itself, 2026-07-31
+([quince#325](https://github.com/novkostya/quince/issues/325)) — the old M4 carried the first and
+last of them in its own scope sentence, so they were visible only while this section still existed
+in its previous form.
 
 ### M5 — v0.1 public shape (`qn.6`)
 Devices + Backup button (both transports) + live progress + history + version list, UI
