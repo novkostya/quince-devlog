@@ -74,7 +74,7 @@ A ruling earns a `decisions/NNNN-slug.md` file only if **all three** hold.
 
 **(A) Live.** Not superseded by a later ruling; not discharged by the close of the rung or
 gate it governed. A retired rule is history, and history's home after this issue is the
-Journal.
+`journal` branch (quince-devlog#152; the ruling that chose Discussions was reversed on 2026-07-30).
 
 **(B) Load-bearing.** A session doing *unrelated* work could get it wrong. This is the test
 that separates a decision from a preference: if nothing downstream can violate it, writing
@@ -223,9 +223,9 @@ was ruled once, in a journal entry, and has been unenforceable ever since.
 
 ### What did NOT survive, and why that is most of it
 
-- **Superseded** — the seven-ruling clone chain, `(ah)`→`(ai)` on muxer topology, `(bf)`→`(bh)` on reflink. Dead rules; history's home is the Journal.
+- **Superseded** — the seven-ruling clone chain, `(ah)`→`(ai)` on muxer topology, `(bf)`→`(bh)` on reflink. Dead rules; history's home is the `journal` branch.
 - **Discharged with its rung** — spec approvals, amendments, finding assignments, gate re-homings. They bound a rung that closed.
-- **Already in canon and correct** — 46 of the 61 tested. Canon is the record; the journal entry is the provenance, and the Journal discussion will carry it.
+- **Already in canon and correct** — 46 of the 61 tested. Canon is the record; the journal entry is the provenance, and the `journal` branch is where it now lives.
 - **Ledger-shaped** — proposal acceptances belong in `proposals.md`, which exists; roadmap and epic scope belong in `roadmap.md`, which also exists.
 
 ## 6. Borderlines, named rather than rounded off
