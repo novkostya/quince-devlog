@@ -49,7 +49,7 @@ at a time — arriving by exactly the drift the criteria exist to prevent.
 | [0010](0010-architect-rules-properties-implementer-measures-mechanisms.md) | The architect rules properties; the implementer measures mechanisms | PARTIAL |
 | [0011](0011-pr6-root-path-is-a-forced-command-wrapper.md) | `pr.6`'s root path is a forced-command wrapper, never a general root key | PARTIAL |
 | [0012](0012-repo-naming-policy.md) | `quince-*` for satellites, `ios-backup-*` for standalone libraries | PARTIAL |
-| [0013](0013-network-mitigation-is-a-workaround.md) | Wi-Fi network mitigation is a workaround, never the primary answer | PARTIAL |
+| [0013](0013-network-mitigation-is-a-workaround.md) | Wi-Fi network mitigation is a workaround, never the primary answer | PARTIAL — roadmap half closed 2026-07-31 |
 | [0014](0014-implementer-identity-is-a-github-app.md) | The implementer identity is a GitHub App, never a second personal account | ABSENT |
 
 ## What is deliberately not here
