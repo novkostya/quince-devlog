@@ -42,16 +42,22 @@ reviewed diff it replaced."* **That is an overclaim, and quince#320 corrects the
 record that acquires a different conclusion without showing it.
 
 **Clone replication is EVIDENCE THAT MAY SURVIVE, not an integrity control.** A rewritten `journal`
-branch is contradicted only by a clone that is **current**, and nothing asserts currency.
-`deploy/runner/preflight` asserts a clone **can** fetch and says in as many words why it does not
-assert that it **has**. The measurement is already on the record: quince#220 — two boxes ran
-materially different privacy gates for hours because one clone sat behind, **and neither could
-tell**. A stale clone agrees with a rewrite exactly as readily as a fresh one agrees with the truth.
+branch *can* be contradicted by another copy — but only by one that is **current**, and **nothing
+names which commit a journal clone holds.** `deploy/runner/preflight` asserts the private layer's
+clone **can** fetch, deliberately not that it **has** (quince#121). A stale clone agrees with a
+rewrite exactly as readily as a fresh one agrees with the truth.
 
-So against what it replaced — branch protection, a required approval, linear history, every edit in
-a diff forever — this is **weaker**. The rule now rests on the discipline rather than on the
-substrate, and the honest statement of its backing is *somebody might still have a copy that
-disagrees*.
+**The precedent is the argument, and it runs the other way from what it looks like.** When this
+project actually needed clone freshness to be *detectable* — quince#220, two boxes running materially
+different privacy gates for hours with neither able to tell — replication did not supply it. Somebody
+had to build a mechanism: quince#281 made `privacy-check` print `pattern source <commit> <date>`, so a
+reader can see **which list** a sweep used. Currency became checkable for the pattern list because a
+tool was written to check it, not because clones exist.
+
+So against what it replaced — branch protection, a required approval, linear history, every edit in a
+diff forever — this is **weaker**, and the rule rests on the discipline rather than on the substrate.
+**The journal branch has no equivalent of quince#281**, and until it does, *"somebody might still hold
+a copy that disagrees"* is the honest statement of its backing.
 
 **Why the overclaim is worth more than the correction.** quince#318's own argument for moving the
 journal to a branch was that a branch is the safer home. Leaving an inflated guarantee beside that
