@@ -11,7 +11,9 @@ and Wi-Fi at `qn.6b` and runs under real daily use on staging.
 [quince#325](https://github.com/novkostya/quince/issues/325), each deliverable reviewed before the
 next began: (1) the `roadmap.md` M4 rewrite, because `qn.7` was no longer the rung M4 described
 (quince-devlog#166); (2) the spec, `docs/specs/qn.7/` (quince#332); (3) code against it —
-quince#335 landed the `wifi_sync` property, **the first product change since `qn.6b`**. The rung is
+quince#335 landed the `wifi_sync` property. **The first product change since `qn.6b` was
+quince#314**, four hours earlier — a failed job no longer renders "enter the passcode on the
+device" after it is over (quince#313), a state-honesty defect the product was shipping. The rung is
 **Wi-Fi sync from quince** (device-ops); **reliability is OUT** and the netmuxd-USB audition is
 split to [quince#326](https://github.com/novkostya/quince/issues/326).
 
