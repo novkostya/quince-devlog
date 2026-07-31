@@ -404,12 +404,26 @@ it. Split OUT of `qn.7` (which keeps its name and stays post-freeze). Scope, del
   log, and the wait duration. Whether the sampler fired decides "qn.6b tunes thresholds" vs
   "qn.6b fixes a liveness bug".
 
-**Explicitly NOT here (stayed `qn.7`):** chaos suite, netmuxd-USB audition, restart-policy tuning,
-#2 409-race, full #8 classification taxonomy, #9b, #10-percent, UX copy polish. **Written when
-`qn.7` was the reliability rung, and the 2026-07-31 ruling emptied that home** — the chaos suite is
-dropped, the audition is [quince#326](https://github.com/novkostya/quince/issues/326), and the rest
-are unhomed. M4's gap block is where that is stated; this line records only that qn.6b sent them
-somewhere, not that they are still there.
+**Explicitly NOT here — written when `qn.7` was the reliability rung, and the 2026-07-31 ruling
+emptied that home. All eight are now homed** ([quince#328](https://github.com/novkostya/quince/issues/328),
+architect ruling, 2026-07-31, decided from what each item **is** rather than from its label):
+
+| parked here by qn.6b | what it is | home |
+| --- | --- | --- |
+| chaos suite | replay + injected disconnects | **dropped** with the reliability work |
+| full #8 classification taxonomy | Wi-Fi **drop** classification (qn.5b spec) | **dropped** — its named half, `-4`→`connection_lost`, already was |
+| #10-percent | progress/**liveness** shaping (qn.5b spec) | **dropped** — liveness tuning is explicitly out |
+| netmuxd-USB audition | a D2 ruling, no user-visible change | [quince#326](https://github.com/novkostya/quince/issues/326) |
+| restart-policy tuning | muxer supervision | **`qn.6`** — M1 sends FULL muxer work to qn.6/qn.7, and qn.7 is no longer a muxer rung |
+| #2, the 409 race | the set-password guard / `rescan → 202\|409` | **`qn.6`** — API behaviour, **not** drop-induced |
+| #9b | changing the backup password mid-soak | **`qn.6`** — the **encryption** family, untouched by the drop |
+| UX copy, slow / silent / passcode | user-visible narration | **`qn.6`** polish — the passcode phase exists in *every* backup under the ASSISTED model |
+
+**Two of these would have been homed wrong by their labels, one in each direction**, which is why
+the rewrite that found them refused to guess: `#10-percent` reads like polish and is dropped
+liveness work, while `#9b` reads like reliability and is a live encryption defect. Nothing
+user-visible was cut — the UX copy was *homed*, not dropped, which is what kept this an architect
+ruling rather than an Operator one.
 
 **The last-insert rule ((de)):** a pre-freeze insert is justified only by a defect that STOPS
 DAILY USE. This is the fourth insert ((by) qn.4c, (cg) qn.5b, (ch) qn.6a, (de) qn.6b) and the
@@ -514,22 +528,16 @@ SSID separation, roaming-threshold tuning — is a WORKAROUND, never the primary
 exactly what makes it dangerous, because a user whose roaming is tuned away stops seeing the failure
 and the product's real answer never gets built or exercised.
 
-**PROPOSED (gap): six items were parked in `qn.7` and the 2026-07-31 ruling homed none of them.**
-The ruling defined the rung by what it **is** (*"that is the whole rung"*) and named four things as
-**dropped** — chaos suite, liveness-threshold tuning, `-4`→`connection_lost`, retry/resume proving.
-Everything else `qn.6b` sent here is therefore neither in the rung nor explicitly dropped:
-**muxer restart-policy tuning** · **finding #2, the 409 race** · **the full finding-#8 failure
-classification taxonomy** · **finding #9b** · **finding #10-percent** · **honest UX copy for the
-slow / silent / passcode phases**. The last one is user-visible behaviour, which is what makes this
-a gap block rather than a footnote. Two of them plausibly died with the reliability work (#8's
-taxonomy, and #2 if it is drop-induced) and the other four plausibly belong to `qn.6`'s release
-polish — **plausibly is not a ruling, and this rewrite deliberately does not make one.** Filed as an
-open question, [quince#328](https://github.com/novkostya/quince/issues/328); nothing in `qn.7` is
-built on it either way, so it blocks neither this rewrite nor the spec. Raised by the rewrite
-itself, 2026-07-31
-([quince#325](https://github.com/novkostya/quince/issues/325)) — the old M4 carried the first and
-last of them in its own scope sentence, so they were visible only while this section still existed
-in its previous form.
+**Six items `qn.6b` had parked in this rung were homed by neither the ruling nor the rewrite that
+found them — RULED 2026-07-31** ([quince#328](https://github.com/novkostya/quince/issues/328)).
+Two are dropped with the reliability work and four go to `qn.6`; the table is in M3, beside the
+`qn.6b` line that parked them. **None of them is in `qn.7` under any reading**, which is why the
+gap never blocked this rung or its spec.
+
+Worth one line for the next rewrite rather than only for this one: they were visible **only while
+M4 still existed in its previous form**, since the old scope sentence is what named them. Rewriting
+a scope section is the single moment its parked work can be caught, and nothing greps for it
+afterwards — the text that mentioned it is the text being replaced.
 
 ### M5 — v0.1 public shape (`qn.6`)
 Devices + Backup button (both transports) + live progress + history + version list, UI
