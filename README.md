@@ -86,8 +86,12 @@ this index reads, once as the entry's own bold lead.
 [Retired lettered ids `(a)`–`(do)`](letters.md) — resolved to the entries that mint them, for the
 citations in canon and git history that still use them.
 
-**193 entries · 2026-07-18 → 2026-07-31.** This file is generated — run `bin/journal-index` after every
+**194 entries · 2026-07-18 → 2026-08-01.** This file is generated — run `bin/journal-index` after every
 append; `bin/journal-index --check` fails when it is stale.
+
+## 2026-08
+
+- **2026-08-01** — [The third seat can act under its own name, and every control that should have noticed it still described two](2026-08/2026-08-01-the-third-seat-acts-under-its-own-name.md)
 
 ## 2026-07
 
