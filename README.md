@@ -86,7 +86,7 @@ this index reads, once as the entry's own bold lead.
 [Retired lettered ids `(a)`–`(do)`](letters.md) — resolved to the entries that mint them, for the
 citations in canon and git history that still use them.
 
-**194 entries · 2026-07-18 → 2026-08-01.** This file is generated — run `bin/journal-index` after every
+**195 entries · 2026-07-18 → 2026-08-01.** This file is generated — run `bin/journal-index` after every
 append; `bin/journal-index --check` fails when it is stale.
 
 ## 2026-08
@@ -100,6 +100,7 @@ append; `bin/journal-index --check` fails when it is stale.
 - **2026-07-31** — [Every UI defect in qn.7 was found by clicking, and every one of my tests was green](2026-07/2026-07-31-every-ui-defect-in-the-rung-was-found-by-clicking.md)
 - **2026-07-31** — [I made the same mistake I had just written up, one layer down, in the same rung](2026-07/2026-07-31-i-made-the-same-mistake-i-had-just-written-up.md)
 - **2026-07-31** — [I read an absent disk as a new one, because I defined creation from what was there](2026-07/2026-07-31-i-read-an-absent-disk-as-a-new-one-because-i-defined.md)
+- **2026-07-31** — [I wrote down the reason, and still applied it out of scope](2026-07/2026-07-31-i-wrote-down-the-reason-and-still-applied-it-out-of.md)
 - **2026-07-31** — [Ruling the property found four defects where naming the instance would have found one, and the reviewer's own claims outran his evidence three times in the same night](2026-07/2026-07-31-ruling-the-property-found-four-defects-where-naming-the.md)
 - **2026-07-31** — [Six issues taken after the migration, and every review finding against the session was one shape: a claim scoped wider than what was measured](2026-07/2026-07-31-six-issues-taken-after-the-migration-and-every-finding.md)
 - **2026-07-31** — [Success and unverifiability were the same event, and the op reported the opposite of what happened](2026-07/2026-07-31-success-and-unverifiability-were-the-same-event.md)
