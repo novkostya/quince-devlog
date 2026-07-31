@@ -22,7 +22,7 @@ a real device with no Mac involved.** What remains is the story-8 backup gate an
 design call on quince#352. See the rung's row below.
 
 **The badge that would not move took THREE hardware attempts to diagnose, and the first two fixes
-were the wrong layer.** It is fixed and **CONFIRMED ON HARDWARE** by the Operator (quince#366).
+were the wrong layer.** It is fixed (quince#366). **The Operator reports it working on the staging stand — and that report reached the implementer session directly, NOT the forge**, so the citable record is a RELAY: [quince#325 comment](https://github.com/novkostya/quince/issues/325#issuecomment-5145227056), written by the implementer, not by the Operator. Stated this way because the alternative was a third unbacked measurement claim in the row that exists to correct two (quince-devlog#171 review).
 
 The cause was never quince#357 — that fix is real and was never on this path. `SetWifiSync` verified
 its write by **reading it back over the transport the write had just severed**, so the op FAILED
