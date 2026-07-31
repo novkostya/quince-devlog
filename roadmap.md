@@ -787,6 +787,43 @@ storage-scopeable; `Device.last_backup` derivation should tolerate becoming per-
 Scope this epic into rungs *after* the freeze, under the revamped process — it is exactly the kind of
 large, contract-touching, multi-surface work the revamp should make smoother.
 
+### The rungs — numbered from 2026-07-31
+
+**This epic had no rung numbers for nine days.** *"Scope this epic into rungs after the freeze"*
+sat above as an instruction nobody had carried out, so the epic was citable but not workable.
+The first is now assigned; the rest are named as candidates, deliberately unnumbered until each
+is scoped, because a numbered rung with no spec is the shape this project keeps filing defects
+about.
+
+- **`qn.6c` — the model becomes plural, and a backup can be aimed at a storage.** Operator-scoped
+  2026-07-31, [quince#378](https://github.com/novkostya/quince/issues/378); spec
+  [quince#381](https://github.com/novkostya/quince/pull/381),
+  `docs/specs/qn.6c/qn.6c.md`. Multi-storage in the DB model and `config.yml`; storage identity via
+  `quince-storage.json` (challenge 1, pulled INTO this rung because retrofitting identity onto
+  storages already in the field is the expensive version); reachability as a state; the
+  full-transfer claim stated before the transfer; a selector in the UI.
+
+  **Sequenced BEFORE onboarding, deliberately** — the target model's first bullet reads
+  onboarding-first, and it is the other way round: onboarding needs storage to be an entity
+  before it can create one. There is no onboarding, so building storage first costs nothing and
+  saves building onboarding twice.
+
+  **Lighter than the prose above implies, and this is measured rather than argued.**
+  `core/internal/storage/layout.go` is already parameterised on a root — `latest/` and `working/`
+  are per-`(root, device)` today — so *"the lifecycle becomes per-(device, storage)"* falls out of
+  root **resolution** and needs no rework of what `qn.5b` unified. Recorded because the
+  sentence overstates the cost, and a rung nobody starts because it reads as a redesign is a rung
+  that does not get built.
+
+- **Candidates, unnumbered until scoped:** storage cards on the dashboard (needs *offline* as a
+  first-class dashboard state — a card that errors on an unplugged disk defeats the case removable
+  media exists for); **add / remove a storage** — *a spike before a spec*, because the backend
+  choice is permanent and removal's semantics (detach-and-forget vs delete-the-data) are unruled;
+  external-readonly mode (point 6) and import/migration (point 4); continuous reconciliation
+  (point 7), which `qn.6c` **unblocks** by making *unreachable* and *artifact gone* separately
+  representable, and deliberately does not build; the B2-as-replication fork (point 3);
+  `zfs-native` (point 8).
+
 ## Parallelization map (multi-agent)
 
 Independent tracks after M1 freezes the contracts (`contracts.md`):
