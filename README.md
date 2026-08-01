@@ -86,7 +86,7 @@ this index reads, once as the entry's own bold lead.
 [Retired lettered ids `(a)`–`(do)`](letters.md) — resolved to the entries that mint them, for the
 citations in canon and git history that still use them.
 
-**207 entries · 2026-07-18 → 2026-08-01.** This file is generated — run `bin/journal-index` after every
+**208 entries · 2026-07-18 → 2026-08-01.** This file is generated — run `bin/journal-index` after every
 append; `bin/journal-index --check` fails when it is stale.
 
 ## 2026-08
@@ -104,6 +104,7 @@ append; `bin/journal-index --check` fails when it is stale.
 - **2026-08-01** — [The invariant was defended at one door, and the demo world walked in through the other](2026-08/2026-08-01-the-invariant-was-defended-at-one-door.md)
 - **2026-08-01** — [Nine green assertions were measuring the stub's tolerance, not the forge's behaviour](2026-08/2026-08-01-the-suite-was-measuring-the-stubs-tolerance.md)
 - **2026-08-01** — [The third seat can act under its own name, and every control that should have noticed it still described two](2026-08/2026-08-01-the-third-seat-acts-under-its-own-name.md)
+- **2026-08-01** — [Three tests, one blind spot, three different fixes](2026-08/2026-08-01-three-tests-one-blind-spot-three-different-fixes.md)
 
 ## 2026-07
 
