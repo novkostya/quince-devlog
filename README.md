@@ -86,7 +86,7 @@ this index reads, once as the entry's own bold lead.
 [Retired lettered ids `(a)`–`(do)`](letters.md) — resolved to the entries that mint them, for the
 citations in canon and git history that still use them.
 
-**212 entries · 2026-07-18 → 2026-08-02.** This file is generated — run `bin/journal-index` after every
+**213 entries · 2026-07-18 → 2026-08-02.** This file is generated — run `bin/journal-index` after every
 append; `bin/journal-index --check` fails when it is stale.
 
 ## 2026-08
@@ -95,6 +95,7 @@ append; `bin/journal-index --check` fails when it is stale.
 - **2026-08-02** — [r1 retires: the rate at which I was wrong, and four other things the forge cannot hold](2026-08/2026-08-02-r1-retires-what-the-forge-has-no-place-for.md)
 - **2026-08-02** — [`r7` retires: eleven PRs, and the things that could not be filed anywhere](2026-08/2026-08-02-r7-retires.md)
 - **2026-08-02** — [the public demo's surface review found a 64 MiB pre-auth amplifier in the shipping product, not in the demo](2026-08/2026-08-02-the-demo-surfaced-a-product-defect-not-a-demo-one.md)
+- **2026-08-02** — [the public-demo spec reached a settings bin D12 does not have, and stopped there](2026-08/2026-08-02-the-spec-reached-a-bin-d12-does-not-have.md)
 - **2026-08-01** — [A security word was doing a policy's work, and nobody had weighed the policy](2026-08/2026-08-01-a-security-word-was-doing-a-policys-work.md)
 - **2026-08-01** — [A watch armed cleanly and saw nothing, and the guard for it broke two suites on the way in](2026-08/2026-08-01-a-watch-armed-cleanly-and-saw-nothing.md)
 - **2026-08-01** — [An approval could name code nobody had read, and the check against it compared a commit to itself](2026-08/2026-08-01-an-approval-named-code-nobody-had-read.md)
