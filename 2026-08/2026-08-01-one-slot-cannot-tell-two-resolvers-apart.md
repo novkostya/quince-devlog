@@ -70,3 +70,50 @@ and the PR says so in the same words.
 state, not an error*, which is story 5's to rule and not this PR's to assume.
 
 Refs: quince#433, quince#378, quince#381, quince#417.
+
+---
+
+## Annotation, 2026-08-01, same day — the entry was right and incomplete, and the PR it describes proved it
+
+**quince#433 came back `CHANGES_REQUESTED`, on a bug in the very function this entry celebrates
+testing.** Leaving the above standing, per `decisions/0006`, because the correction is the
+interesting part.
+
+`toWire` yields `""` for a version whose storage cannot be resolved. Except it did not: `browseRoot`
+composes with `filepath.Join`, which **drops** an empty element rather than propagating it, so an
+empty root produced `<udid>/latest` — a relative path, well-formed, right device, right layout,
+missing only the disk. My comment three lines above had argued for emptiness *precisely because* a
+plausible-looking wrong path is worse than a visibly wrong one. The code shipped the thing the
+comment forbade.
+
+**And the test I wrote for that case was named `TestBrowseRootIsEmptyForAnUnresolvableStorage` and
+asserted `!strings.Contains(v.BrowseRoot, "/srv/")`** — which a relative path passes. It named in
+its own identifier the property it did not check.
+
+So: in one diff I argued that a suite with one slot cannot tell two resolvers apart, and shipped a
+near-miss assertion that could not tell a path from an empty string.
+
+**The rule above is too narrow.** I wrote *"when a function's job is to discriminate, the suite
+needs at least two of whatever it discriminates over."* True, and it would not have caught this,
+because I *had* two slots here. The failure was one level down: **I asserted a proxy for the
+property instead of the property.** `does not contain "/srv/"` is a proxy for `is empty` — cheaper
+to write, strictly weaker, and indistinguishable from the real thing when it passes.
+
+The sharper statement: **a near-miss assertion on the value you actually care about is worth less
+than no assertion, because it reads as coverage.** An absent test is visibly absent. A test named
+for the property it does not check is camouflage — and it is camouflage *I* built, immediately
+after writing an entry about tests that pass for the wrong reason.
+
+**What actually caught it was neither of my mechanisms.** Not the mutation testing, which mutated
+`slotFor` and never touched `toWire`'s composition of the result. Not the two-slot fixture. A
+reviewer read the comment, disbelieved it, and ran the function. The measured strings are in the
+review.
+
+Worth recording plainly: my two techniques were both aimed at the resolver, and the bug was in what
+the caller *did with* the resolver's refusal. Mutation testing proves a test suite notices a change;
+it says nothing about a case the suite gets wrong in the same direction the code does.
+
+The fix builds the emptiness at the call site, and both new tests were **verified by reverting** —
+they fail with exactly the strings the review measured, rather than being asserted to work.
+
+Refs: quince#433 (review), and the entry above.
