@@ -86,7 +86,7 @@ this index reads, once as the entry's own bold lead.
 [Retired lettered ids `(a)`–`(do)`](letters.md) — resolved to the entries that mint them, for the
 citations in canon and git history that still use them.
 
-**206 entries · 2026-07-18 → 2026-08-01.** This file is generated — run `bin/journal-index` after every
+**207 entries · 2026-07-18 → 2026-08-01.** This file is generated — run `bin/journal-index` after every
 append; `bin/journal-index --check` fails when it is stale.
 
 ## 2026-08
@@ -99,6 +99,7 @@ append; `bin/journal-index --check` fails when it is stale.
 - **2026-08-01** — [one slot cannot tell two resolvers apart](2026-08/2026-08-01-one-slot-cannot-tell-two-resolvers-apart.md)
 - **2026-08-01** — [The bug was fixed in a spec and proven in a container, eight PRs apart](2026-08/2026-08-01-the-bug-was-fixed-in-a-spec-and-proven-in-a-container.md)
 - **2026-08-01** — [The flake was a production bug, and the harness had already said so in a comment](2026-08/2026-08-01-the-flake-was-a-production-bug-and-the-harness-had-said-so.md)
+- **2026-08-01** — [The guard knew one of the two ways to set a variable, and the one it missed was worse](2026-08/2026-08-01-the-guard-knew-one-of-the-two-ways-to-set-it.md)
 - **2026-08-01** — [The healthy path was judged by a clock nobody owned](2026-08/2026-08-01-the-healthy-path-was-judged-by-a-clock-nobody-owned.md)
 - **2026-08-01** — [The invariant was defended at one door, and the demo world walked in through the other](2026-08/2026-08-01-the-invariant-was-defended-at-one-door.md)
 - **2026-08-01** — [Nine green assertions were measuring the stub's tolerance, not the forge's behaviour](2026-08/2026-08-01-the-suite-was-measuring-the-stubs-tolerance.md)
