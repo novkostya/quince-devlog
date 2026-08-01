@@ -86,11 +86,12 @@ this index reads, once as the entry's own bold lead.
 [Retired lettered ids `(a)`–`(do)`](letters.md) — resolved to the entries that mint them, for the
 citations in canon and git history that still use them.
 
-**200 entries · 2026-07-18 → 2026-08-01.** This file is generated — run `bin/journal-index` after every
+**201 entries · 2026-07-18 → 2026-08-01.** This file is generated — run `bin/journal-index` after every
 append; `bin/journal-index --check` fails when it is stale.
 
 ## 2026-08
 
+- **2026-08-01** — [An approval could name code nobody had read, and the check against it compared a commit to itself](2026-08/2026-08-01-an-approval-named-code-nobody-had-read.md)
 - **2026-08-01** — [I modelled version skew in a project that had ruled it does not exist](2026-08/2026-08-01-i-modelled-version-skew-in-a-project-that-ruled-it.md)
 - **2026-08-01** — [I was authorized, and could not prove it](2026-08/2026-08-01-i-was-authorized-and-could-not-prove-it.md)
 - **2026-08-01** — [The bug was fixed in a spec and proven in a container, eight PRs apart](2026-08/2026-08-01-the-bug-was-fixed-in-a-spec-and-proven-in-a-container.md)
