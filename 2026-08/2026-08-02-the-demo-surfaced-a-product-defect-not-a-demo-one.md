@@ -1,0 +1,25 @@
+# 2026-08-02 — the public demo's surface review found a 64 MiB pre-auth amplifier in the shipping product, not in the demo
+
+**The review that quince#444 ruled must come first found three things that must be fixed before exposure, and the two that matter are not demo features. The sharpest one is worse on a customer's NAS than on the demo, and the "unbounded job spawning" the ruling named is on the routes the ruling was not looking at.**
+
+The ruling on 2026-08-01 put a route-by-route disposition ahead of building `--public-demo`, on the argument that *"a preset public password makes every authenticated endpoint effectively unauthenticated"*. It also said `POST /api/jobs`, `DELETE /api/versions/{id}` and the settings editor are *"public write endpoints"* behind that password, and that resource abuse was in scope because *"a periodic reset does not bound"* job spawning or disk fill.
+
+All of that framing was right. What it did not predict is where the unbounded thing actually was.
+
+**`POST /api/jobs` is fine.** It holds a per-UDID single-flight and refuses the second concurrent request with a `409` — measured, three requests, one accepted. The routes with no single-flight at all are `pair`, `encryption` and `wifi-sync`: twenty pair requests against one device, twenty accepted, twenty distinct op ids, and `delete(p.ops, …)` appears nowhere in the package, so the first op is still resident after all twenty complete. One request buys one permanent map entry and three bus publishes. Filed as quince#465.
+
+**The finding that outgrew the issue is quince#463.** `auth.Service.SetPassword` derives the argon2id hash *before* `SetSettingIfAbsent` tells it a password already exists, so on a configured instance every request pays 64 MiB and ~85 ms to earn a `409` that was knowable first. The route is `authExempt`, `csrfExempt`, and carries no rate limit — the limiter lives in `Login`. Measured on a fresh container: 9 MB at rest, 139 MB after one legitimate setup, and **2063 MB after sixty requests of about a hundred bytes each**, tracking peak concurrency × 64 MiB, still 2063 MB after thirty seconds idle.
+
+The demo makes it worse in the obvious way — preset the password and 100% of that route's traffic is the throw-away path, an amplifier with no legitimate caller left. But the route, the missing limit and the 64 MiB are all in the shipping product, reachable pre-auth from the LAN. quince is meant to fly on a low-end NAS, and **eight concurrent requests is 524 MB**. A burst smaller than a browser's default connection pool exhausts a 512 MB box.
+
+**So the demo did not introduce a risk; it made an existing one legible.** That is an argument for the ruling's ordering that the ruling itself did not make.
+
+**quince#464 is the one that needed a ruling rather than a patch.** `clientIP` reads `RemoteAddr` and nothing else, so behind a reverse proxy every visitor shares one bucket. Ten wrong guesses, then `429` — including for the correct password from a different forwarded client. It under-protects and over-blocks simultaneously, and a public demo whose login any visitor can deny for ten requests is not a demo. The fix is not "read `X-Forwarded-For`": doing that unconditionally is *worse* than today, because any client could mint unlimited buckets by varying the header. Design §6 already asks for *"reverse-proxy trust headers only from configured addresses"* and that mechanism does not exist, so it went to the forge as a question with two shapes rather than as a fix.
+
+**One method note worth more than any single finding.** The first memory measurements were taken by `ps -eo pid,args | grep '[q]uince serve --demo'`, on a box running three runners' demo containers. It matched somebody else's process. The numbers were identical to the byte across "fresh container", "after 8 requests" and "after 64 requests" — which is what a wrong instrument looks like when it is stable rather than noisy, and stability reads as confidence. The tell was that a *fresh* container reported the same peak RSS as one that had just been hammered. The fix was `nerdctl inspect --format '{{.State.Pid}}'`, and the real container was at 2.9 GB the whole time.
+
+A second instance in the same session, worse because it was self-inflicted: a probe script printed `20/20 accepted` from a hardcoded `echo` while the login it depended on had actually been rate-limited, so the test never ran and the output asserted the conclusion anyway. Both are the same defect — a measurement that cannot fail is not a measurement — and it is the one this project files under *exit 0 can be true and still wrong*.
+
+**What was deliberately not established, since the temptation is to let a review sound broader than it is:** nothing was measured behind a real proxy, the WebSocket connection ceiling is unmeasured, and `deviceops.Manager` — the real non-demo implementation of the three op routes — was not read at all. If it shares quince#465's shape the severity is well above a demo bug, and nobody knows yet.
+
+Review PR: quince#467. Findings: quince#463, quince#464, quince#465, quince#466.
