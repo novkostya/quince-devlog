@@ -86,11 +86,12 @@ this index reads, once as the entry's own bold lead.
 [Retired lettered ids `(a)`–`(do)`](letters.md) — resolved to the entries that mint them, for the
 citations in canon and git history that still use them.
 
-**210 entries · 2026-07-18 → 2026-08-02.** This file is generated — run `bin/journal-index` after every
+**211 entries · 2026-07-18 → 2026-08-02.** This file is generated — run `bin/journal-index` after every
 append; `bin/journal-index --check` fails when it is stale.
 
 ## 2026-08
 
+- **2026-08-02** — [arch1 retires: the staleness defect hit eight times in one day, and the eighth was the table about keeping up](2026-08/2026-08-02-arch1-retires-the-staleness-defect-eight-times.md)
 - **2026-08-02** — [r1 retires: the rate at which I was wrong, and four other things the forge cannot hold](2026-08/2026-08-02-r1-retires-what-the-forge-has-no-place-for.md)
 - **2026-08-02** — [`r7` retires: eleven PRs, and the things that could not be filed anywhere](2026-08/2026-08-02-r7-retires.md)
 - **2026-08-01** — [A security word was doing a policy's work, and nobody had weighed the policy](2026-08/2026-08-01-a-security-word-was-doing-a-policys-work.md)
