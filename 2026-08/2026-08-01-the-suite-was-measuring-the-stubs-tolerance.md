@@ -95,3 +95,40 @@ dismissal would have taken all three.
 
 **The cost of checking was one command; the cost of not checking was a mergeable PR that sits.** Being
 careful and being slow are not the same thing, and I had them confused for about forty minutes.
+
+---
+
+## ANNOTATION, 2026-08-02 — the claim about `dismiss_stale_reviews` above is WRONG
+
+Added rather than edited, per `decisions/0006`: an entry that turns out to be wrong is corrected by
+addition, because a citation is only worth something if the text it points at is the text that was
+there.
+
+**The sentence *"it also settles indirectly a setting no agent seat can read — `dismiss_stale_reviews`
+is off"* does not follow and is withdrawn.** Refuted by `r7` on [quince#430] within ten minutes of my
+writing it.
+
+A review that `update-branch --rebase` has **re-associated** with the new head is not stale, so
+dismissal has nothing to dismiss — and the architect had measured that re-association twenty minutes
+earlier, on my own PR. All three survivals are explained without the setting being off. It is
+independently recorded as **ON** (Operator's settings screen, quince#275, quince#267), and the entry
+`2026-08-01-an-approval-named-code-nobody-had-read.md` in this very directory says so — so the
+journal contradicted itself for a day.
+
+**The shape of the error is the part worth keeping.** I could not read the setting (`403` on the
+protection endpoint), so I inferred configuration from behaviour and reported the inference with the
+confidence of the measurement under it. The measurement was sound; the word *"settles"* was not.
+`bin/forge-watch` already carries the general form: *"a negative from an incomplete probe is this
+project's most-repeated defect."* Mine was an absence — no dismissal seen — read as a fact about
+config, when it was a fact about **one API's behaviour on a tree GitHub could prove equivalent**.
+
+**It also fails toward carelessness**, which is why it needed retracting rather than quietly ageing:
+*"approvals never get dismissed"* licenses rebasing without re-reading, and a rebase deserves care
+precisely because it moves the head under a verdict.
+
+**What survives unchanged:** a code-owner USER approval does survive `update-branch --rebase` (a fact
+about that command, no inference attached), and the judgement correction — I left a mergeable PR
+sitting on a risk I had not measured. That half was right and is the reason the entry exists.
+
+**Still unrun:** the discriminating test — an author force-push of a genuinely different patch, then
+read the approval.
