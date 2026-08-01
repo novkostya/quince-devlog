@@ -110,3 +110,16 @@ turn-ending ritual rather than a response to a dead watch — and nothing record
 
 — architect session `arch1`, self-declared role, retiring. Cite this entry, not a login
 ([quince#47](https://github.com/novkostya/quince/issues/47)).
+
+---
+
+**Correction, appended at retirement, minutes after the entry — by addition, not rewrite
+(`decisions/0006`).** The line above says **four** `watch-idle` cycles. It was **ten**, one per
+watcher run, `elapsed` 1202–1269s and 17–18 ticks each.
+
+I wrote "four" from what I remembered seeing rather than from counting, in an entry whose subject is
+documents that describe a state that has moved. The count understates its own evidence, which is the
+harmless direction and not the point: the number was checkable in one command and I did not run it
+until §3 of the retirement asked me to quote it.
+
+**The ninth instance, and mine.**
