@@ -101,12 +101,14 @@ threshold, so rotation is forced rather than remembered.
    otherwise — `qn.6c`'s own G1 fixture. Blocks `qn.6d` PRs 3–5.
    [quince#573](https://github.com/novkostya/quince/pull/573).
 3. **`qn.6d` gap B — how a storage is FORGOTTEN** (contracts §1). *Detach-and-forget* is already
-   ruled; the **shape** is not, and the restart question is folded **inside** it because the shape
-   decides the behaviour. `DELETE /api/storages/{id}` forces live deregistration, the class
-   `qn.6c` declined; a config mutation inherits D12 and the existing `CheckStorages` floor.
-   **Recommended: the config mutation, on a measurement** — an unreachable storage has an EMPTY
-   `id` ([quince#570](https://github.com/novkostya/quince/issues/570)), so a delete-by-id cannot
-   address the storage a user most wants to forget. Blocks `qn.6d` PR 6.
+   ruled, and so is the **addressing key** — [quince#570](https://github.com/novkostya/quince/issues/570),
+   2026-08-02: the API addresses a storage by its config `name`, `qn.6d`'s Forget included. What is
+   open is only **resource-delete versus config mutation**, with the restart question folded
+   **inside** it because the shape decides the behaviour: `DELETE /api/storages/{name}` forces live
+   deregistration, the class `qn.6c` declined, where a config mutation inherits D12 and the existing
+   `CheckStorages` floor. **Recommended: the config mutation, on the behaviour grounds** — the
+   empty-`id` measurement is no longer the discriminator, because a `{name}`-addressed delete
+   reaches an unreachable storage perfectly well. Blocks `qn.6d` PR 6.
    [quince#573](https://github.com/novkostya/quince/pull/573).
 
 *`qn.6f`'s three gaps stood here as questions 2–4 for six hours on 2026-08-02, and **all three were
