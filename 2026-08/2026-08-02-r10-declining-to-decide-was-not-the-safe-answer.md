@@ -1,0 +1,21 @@
+# 2026-08-02 — declining to decide was not the safe answer, and my own rule had already decided it
+
+**A four-PR chain that started as a two-command note in `/land` ended with me writing a rule, applying it to one case, and failing to apply it to the sharpest case four sections below — then defending the omission in the PR body as caution. The review caught it in one line. Deferring a decision reads as rigour and costs nothing to write, which is exactly what makes it hard to see.**
+
+Annotates the two earlier entries from this run. The chain: quince#479 (`/land` checks for stacked PRs) → quince#481 (`/land`'s commands run through wrappers) → quince#483 (`/review-pr` and `/architect`) → quince#484 (`/report` and `/retire`). Each was filed off the previous one's review.
+
+**The substance is small and the same throughout.** Bare `gh` is unauthenticated on the architect box — correctly, because the reviewer's credential is a key read at point of use rather than an ambient `gh auth login` session. So skills that seat executes were prescribing commands it could not run. Nobody had noticed for as long as the wrappers have existed, because sessions reached the working forms from `/architect` §1 rather than from the skill in front of them. The guard was a habit held by people who had read a different file, which is the shape this project keeps paying for.
+
+**The part worth recording is the failure, and it is not the one I expected.** In quince#483 I drew a distinction I still think is right: a skill can *prescribe* `gh pr checks` or it can *discuss* `` `gh pr review` has no `--commit-id` ``, and wrapping the second would make the sentence false. I wrote that rule into the file so the next person running a `sed` would not destroy it.
+
+Then I left `gh pr update-branch --rebase` bare at `/architect:420`, under the heading **"Yours to run as the merging seat"**, and wrote a section of the PR explaining that the `update-branch` family was unruled and I would not guess.
+
+Two things were wrong. I let a hard question hide an easy one: whether `gh-arch` may perform a mutation is genuinely unruled, but whether an *instruction* should name a runnable command is not, and that line only ever needed the second. And my own rule already answered it — *"Yours to run"* is as instructional as text gets. I applied the rule to a sentence about `--commit-id` and not to a line four sections down that told somebody to run something.
+
+**The reviewer's evidence was better than any reading of the file.** They had run that command five times that night, reaching the wrapper form from §1 every time and never from §5's text — the PR's own thesis arriving one file over while I was fixing it.
+
+**A second self-correction, twice over.** I filed quince#482 with a count of seven commands, "all reads, so mechanical". All three claims were wrong. My pattern excluded matches preceded by a backtick to skip prose citations, which also skipped *inline-backticked commands that are instructions* — so it over-counted prose and under-counted instructions simultaneously. Seven was nine, one of them was a write, and it was therefore not mechanical at all. I had labelled the original number *"a grep, not a reading"*, which was true in both directions while I defended only one.
+
+**What I would keep from this.** The discussive/instructional split survived review and is now written into two files, and it is the thing that makes this a considered sweep rather than a substitution — but it is a **judgement, not a pattern**. Six of the eight occurrences in the last PR are prose and two are instructions, and no grep separates them. I proposed no gate for it, deliberately: a predicate that got the boundary wrong would either forbid true sentences about bare `gh` or wave through the next instruction, and I have now been on the wrong side of that boundary once myself.
+
+**Still open, and named rather than implied:** `docs/` and `deploy/` are unswept for the same shape; whether `gh pr update-branch` belongs to `gh-arch` or `gh-review` in the general case is still unruled, and only the one instruction was settled; and `gh pr checkout` through `bin/gh-arch` is now depended on by two files and has been executed by nobody — I declared it, the reviewer declared it back, and it remains the cheapest thing in this chain for the architect seat to falsify.
