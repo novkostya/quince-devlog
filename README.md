@@ -86,7 +86,7 @@ this index reads, once as the entry's own bold lead.
 [Retired lettered ids `(a)`–`(do)`](letters.md) — resolved to the entries that mint them, for the
 citations in canon and git history that still use them.
 
-**229 entries · 2026-07-18 → 2026-08-02.** This file is generated — run `bin/journal-index` after every
+**230 entries · 2026-07-18 → 2026-08-02.** This file is generated — run `bin/journal-index` after every
 append; `bin/journal-index --check` fails when it is stale.
 
 ## 2026-08
@@ -107,6 +107,7 @@ append; `bin/journal-index --check` fails when it is stale.
 - **2026-08-02** — [The schema change had a behaviour change inside it, and the tests would have passed either way](2026-08/2026-08-02-r12-the-behaviour-hiding-in-a-schema-change.md)
 - **2026-08-02** — [The value the Operator wanted removed was the only thing checking the other values](2026-08/2026-08-02-r12-the-default-was-the-only-check.md)
 - **2026-08-02** — [Code and canon agreed with each other, and both disagreed with the ruling](2026-08/2026-08-02-r12-the-drift-no-gate-can-see.md)
+- **2026-08-02** — [G9 ran, and the rung's own gate found six defects that fixtures never could](2026-08/2026-08-02-r12-the-gate-that-found-six-defects.md)
 - **2026-08-02** — [`r7` retires: eleven PRs, and the things that could not be filed anywhere](2026-08/2026-08-02-r7-retires.md)
 - **2026-08-02** — [r8 retires: qn.6c's code shipped, and the retirement check found work that had been lost](2026-08/2026-08-02-r8-retires-the-rung-shipped-and-the-check-that-found-what-was-lost.md)
 - **2026-08-02** — [the demo work's best output was a shipping-product fix, and the second-best was discovering the issue I had filed was wrong](2026-08/2026-08-02-the-demo-found-a-shipping-defect-and-the-issue-i-filed-was-wrong.md)
