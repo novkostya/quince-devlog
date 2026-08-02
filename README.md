@@ -86,7 +86,7 @@ this index reads, once as the entry's own bold lead.
 [Retired lettered ids `(a)`–`(do)`](letters.md) — resolved to the entries that mint them, for the
 citations in canon and git history that still use them.
 
-**224 entries · 2026-07-18 → 2026-08-02.** This file is generated — run `bin/journal-index` after every
+**225 entries · 2026-07-18 → 2026-08-02.** This file is generated — run `bin/journal-index` after every
 append; `bin/journal-index --check` fails when it is stale.
 
 ## 2026-08
@@ -101,6 +101,7 @@ append; `bin/journal-index --check` fails when it is stale.
 - **2026-08-02** — [I built a gate for a defect class, and the gate shipped with that exact defect](2026-08/2026-08-02-r10-the-gate-had-the-defect-it-was-written-to-catch.md)
 - **2026-08-02** — [the obvious place for the TLS check is where it silently downgrades](2026-08/2026-08-02-r11-the-obvious-place-for-the-check-was-the-bug.md)
 - **2026-08-02** — [two of qn.6f's gaps ruled the same morning, and flipping one broke the gate on the other](2026-08/2026-08-02-r11-two-rulings-and-a-gate-that-broke-its-neighbour.md)
+- **2026-08-02** — [The schema change had a behaviour change inside it, and the tests would have passed either way](2026-08/2026-08-02-r12-the-behaviour-hiding-in-a-schema-change.md)
 - **2026-08-02** — [The value the Operator wanted removed was the only thing checking the other values](2026-08/2026-08-02-r12-the-default-was-the-only-check.md)
 - **2026-08-02** — [Code and canon agreed with each other, and both disagreed with the ruling](2026-08/2026-08-02-r12-the-drift-no-gate-can-see.md)
 - **2026-08-02** — [`r7` retires: eleven PRs, and the things that could not be filed anywhere](2026-08/2026-08-02-r7-retires.md)
