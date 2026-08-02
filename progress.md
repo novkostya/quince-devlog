@@ -94,6 +94,20 @@ threshold, so rotation is forced rather than remembered.
 **Open questions for the Operator** (tracked here until resolved):
 1. LAN registry port + creds (address recorded in `local/environment.md`; env-only,
    never committed).
+2. **`qn.6d` gap A — `Storage` gains space and counts** (contracts §2). The object carries no
+   capacity and no counts, so a fill bar is new wire rather than new rendering. Four
+   sub-questions; the sharpest is that `statfs` reports the **filesystem**, so two storages that
+   are two directories on one disk each claim the same free space unless the field names say
+   otherwise — `qn.6c`'s own G1 fixture. Blocks `qn.6d` PRs 3–5.
+   [quince#573](https://github.com/novkostya/quince/pull/573).
+3. **`qn.6d` gap B — how a storage is FORGOTTEN** (contracts §1). *Detach-and-forget* is already
+   ruled; the **shape** is not, and the restart question is folded **inside** it because the shape
+   decides the behaviour. `DELETE /api/storages/{id}` forces live deregistration, the class
+   `qn.6c` declined; a config mutation inherits D12 and the existing `CheckStorages` floor.
+   **Recommended: the config mutation, on a measurement** — an unreachable storage has an EMPTY
+   `id` ([quince#570](https://github.com/novkostya/quince/issues/570)), so a delete-by-id cannot
+   address the storage a user most wants to forget. Blocks `qn.6d` PR 6.
+   [quince#573](https://github.com/novkostya/quince/pull/573).
 
 *`qn.6f`'s three gaps stood here as questions 2–4 for six hours on 2026-08-02, and **all three were
 ruled the same day they were filed** — relayed by architect session `arch1` on
