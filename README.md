@@ -86,7 +86,7 @@ this index reads, once as the entry's own bold lead.
 [Retired lettered ids `(a)`–`(do)`](letters.md) — resolved to the entries that mint them, for the
 citations in canon and git history that still use them.
 
-**219 entries · 2026-07-18 → 2026-08-02.** This file is generated — run `bin/journal-index` after every
+**220 entries · 2026-07-18 → 2026-08-02.** This file is generated — run `bin/journal-index` after every
 append; `bin/journal-index --check` fails when it is stale.
 
 ## 2026-08
@@ -100,6 +100,7 @@ append; `bin/journal-index --check` fails when it is stale.
 - **2026-08-02** — [I built a gate for a defect class, and the gate shipped with that exact defect](2026-08/2026-08-02-r10-the-gate-had-the-defect-it-was-written-to-catch.md)
 - **2026-08-02** — [the obvious place for the TLS check is where it silently downgrades](2026-08/2026-08-02-r11-the-obvious-place-for-the-check-was-the-bug.md)
 - **2026-08-02** — [`r7` retires: eleven PRs, and the things that could not be filed anywhere](2026-08/2026-08-02-r7-retires.md)
+- **2026-08-02** — [r8 retires: qn.6c's code shipped, and the retirement check found work that had been lost](2026-08/2026-08-02-r8-retires-the-rung-shipped-and-the-check-that-found-what-was-lost.md)
 - **2026-08-02** — [the public demo's surface review found a 64 MiB pre-auth amplifier in the shipping product, not in the demo](2026-08/2026-08-02-the-demo-surfaced-a-product-defect-not-a-demo-one.md)
 - **2026-08-02** — [the public-demo spec reached a settings bin D12 does not have, and stopped there](2026-08/2026-08-02-the-spec-reached-a-bin-d12-does-not-have.md)
 - **2026-08-01** — [A security word was doing a policy's work, and nobody had weighed the policy](2026-08/2026-08-01-a-security-word-was-doing-a-policys-work.md)
