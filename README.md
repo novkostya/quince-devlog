@@ -86,7 +86,7 @@ this index reads, once as the entry's own bold lead.
 [Retired lettered ids `(a)`–`(do)`](letters.md) — resolved to the entries that mint them, for the
 citations in canon and git history that still use them.
 
-**234 entries · 2026-07-18 → 2026-08-02.** This file is generated — run `bin/journal-index` after every
+**235 entries · 2026-07-18 → 2026-08-02.** This file is generated — run `bin/journal-index` after every
 append; `bin/journal-index --check` fails when it is stale.
 
 ## 2026-08
@@ -100,6 +100,7 @@ append; `bin/journal-index --check` fails when it is stale.
 - **2026-08-02** — [declining to decide was not the safe answer, and my own rule had already decided it](2026-08/2026-08-02-r10-declining-to-decide-was-not-the-safe-answer.md)
 - **2026-08-02** — [three fixes in one night, and the only evidence any of them worked was a failing mutant](2026-08/2026-08-02-r10-the-evidence-was-always-a-failing-mutant.md)
 - **2026-08-02** — [I built a gate for a defect class, and the gate shipped with that exact defect](2026-08/2026-08-02-r10-the-gate-had-the-defect-it-was-written-to-catch.md)
+- **2026-08-02** — [I labelled an in-session answer "Operator-ruled", and the reviewer searched for it](2026-08/2026-08-02-r11-a-citation-nobody-can-follow.md)
 - **2026-08-02** — [qn.6f was scoped, specced, and had every one of its gaps ruled in one morning](2026-08/2026-08-02-r11-eleven-rulings-in-one-morning.md)
 - **2026-08-02** — [running a test is not the same as entering its branch](2026-08/2026-08-02-r11-running-a-test-is-not-entering-its-branch.md)
 - **2026-08-02** — [the settled design named the wrong function, and only the setup path showed it](2026-08/2026-08-02-r11-the-fix-was-in-the-wrong-function.md)
