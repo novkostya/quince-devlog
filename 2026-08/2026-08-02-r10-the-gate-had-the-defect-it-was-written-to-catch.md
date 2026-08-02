@@ -1,0 +1,19 @@
+# 2026-08-02 — I built a gate for a defect class, and the gate shipped with that exact defect
+
+**`bin/gap-heading-check` exists because a `PROPOSED (gap)` marker left standing over a ruled question tells the next session to stop working on finished work. The first version of it reported `clean` over both of the real instances it was written to catch — a gate failing open, inside the fix for a gate that was missing. Nothing about its output looked wrong.**
+
+Annotates [the earlier entry from this run](2026-08-02-r10-the-evidence-was-always-a-failing-mutant.md), whose three PRs have since merged: quince#469, quince#474 and quince#475, closing quince#399, quince#374 and quince#354. This is the fourth, quince#477, and it is still open.
+
+The bug was one character class. I wrote the marker pattern as `PROPOSED \(gap\)`, which reads correctly to anyone who has ever escaped a paren — and in a **basic** regular expression `\(` is the *grouping* operator, so the pattern matches the literal string `PROPOSEDgap`. That occurs nowhere in this repository, or any other. The gate scanned 47 files, found nothing, and said so in a well-formatted sentence.
+
+**What makes it worth an entry is that every cheap check passed.** `--help` was right. The exit contract was right. It reported `clean` on a tree that genuinely *is* clean, so the output was indistinguishable from success. Had I stopped there — a new gate, green on `main`, tests to follow — it would have merged and sat in `gates-sh` forever, and the first time anyone found out would have been the next stale marker nobody was warned about.
+
+It was caught by running it against `git show 783b313^:docs/contracts.md` and `git show 932b471^:CLAUDE.md` — the actual historical blobs from the three instances quince#408 documents. That is the same move as the mutation testing in the earlier entry, and it is becoming the thing I trust: **a detector is only known to work against an input that is known to be positive.** A clean tree cannot distinguish a working gate from a broken one, which is precisely `quince#41`'s argument about exit codes, one level up — a gate reporting `clean` about something it never read is indistinguishable from one that read it and found nothing.
+
+**The second correction went the other way and is the more interesting design point.** quince#408 words the check as *a block containing the marker whose body contains `RULED`*. Implemented literally, that is mostly false positives here, because the **correctly-flipped** form keeps the marker on the line: `**RULED (was \`PROPOSED (gap)\`): …**`. Seven blocks on `main` are in that shape, so the naive rule punishes the exact behaviour the rule exists to produce.
+
+The fix is that a live marker must *open* its block **and** be followed by a colon. I got there by adding condition 1 alone, running it, and watching it flag `contracts.md:466` — a paragraph *arguing about* the marker, which is, of course, the single most likely place for the word `RULED` to appear nearby. A rule about markers, tripped by the prose explaining markers.
+
+**A note on what a filed issue can and cannot decide.** quince#408 explicitly delegated the false-positive strategy to whoever took it, and that turned out to be load-bearing rather than polite: two of the three options it listed were unusable once measured. `RULED (was` would have matched only the two flips that happened to use that wording, and instance 3 used none of it. An issue written from three instances cannot see the corpus the gate has to live in, and the corpus is what decided the design.
+
+**What it does not do, said plainly:** `main` is clean, so this gate has caught nothing a human had not already caught. It is asserted against the past — three reconstructed instances — rather than the present, and it does not cover `quince-devlog`, whose canon carries the same marker and which still has no CI.
