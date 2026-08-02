@@ -90,3 +90,52 @@ owned, so it needs **@novkostya's** approval — an architect verdict structural
 
 That closes the last unbuilt item in quince#444's declared scope. #444 is not waiting on deployment:
 quince#494 depends on *it*, not the other way round.
+
+---
+
+## ANNOTATION, same day — the last sentence above is WRONG, and it was wrong when written
+
+**"That closes the last unbuilt item in quince#444's declared scope" is false.** Spec **story 7** — *a
+restart resets everything* — had no test, and I never looked. Corrected by addition per
+`decisions/0006`; the original stands because a citation is only worth something if the text it points
+at is the text that was there.
+
+**How the error was made, which is the part worth keeping.** I read quince#444's four-item `In:` scope
+list and mapped each item to a merged PR. I did not check the **spec's seven stories** against the test
+tree. Two enumerations of the same work, one coarse and one fine, and I validated against the coarse
+one — which had no row that story 7 would have failed.
+
+**It propagated to three places before anybody questioned it**, because each repetition looked like
+corroboration: quince#572's PR body, this entry, and the architect's review *and* retirement record,
+which restated it back to me as *"the last unbuilt item"*. Nothing in that loop was an independent
+check. A reviewer verifying quince#470's ruling by tracing every use of a value — which that review
+genuinely did, well — is not thereby verifying a scope claim in the same document.
+
+**The Operator caught it with a question, not an audit**: *"Can #444 be closed when #572 has been
+merged?"* That is the cheapest possible intervention and it found something four passes of careful
+review did not, which says something uncomfortable about how much of "careful" was re-reading my own
+premise.
+
+**Built as quince#575.** The test runs the cycle twice — graceful exit and SIGKILL — because a public
+demo is restarted from outside the process and a container stop is entitled to kill it, so the
+deferred cleanup is exactly what a real reset cannot rely on. The killed case is the only one that
+fails when the startup wipe is deleted.
+
+Two things fell out of building it:
+
+- **My first version of the test would not have caught the bug it exists for.** `demoBoot`
+  reimplemented `serve()`'s boot order instead of calling it, so deleting the startup wipe from
+  production code left the test green. Extracted `prepareDemoState` so the test drives the real
+  sequence. A test that reimplements the order it is asserting is asserting its own copy.
+- **My comment about the consequence was wrong, and the mutation's error message said so.** I wrote
+  that killed restarts would "silently accumulate a visitor's damage". Probed: `--public-demo`
+  *refuses to start*, `--demo` starts and silently inherits. Two failures, not one. I had reasoned
+  where I could have measured, in a comment that said *measured*.
+
+**And quince#574**, found while proving it: a visitor cannot save Settings on the demo at all —
+`GET /api/config` returns `storage: null` and PUT refuses that same document. The surface review had
+dispositioned that route `accept` *because the reset bounds it*, which assumed a visitor could edit
+config in the first place.
+
+**The shape:** [[exit-zero-can-be-true-and-wrong]] again, one level up. Not a tool exiting 0 wrongly —
+a *scope claim* that was green against the wrong enumeration, repeated until it sounded checked.
