@@ -86,7 +86,7 @@ this index reads, once as the entry's own bold lead.
 [Retired lettered ids `(a)`–`(do)`](letters.md) — resolved to the entries that mint them, for the
 citations in canon and git history that still use them.
 
-**217 entries · 2026-07-18 → 2026-08-02.** This file is generated — run `bin/journal-index` after every
+**218 entries · 2026-07-18 → 2026-08-02.** This file is generated — run `bin/journal-index` after every
 append; `bin/journal-index --check` fails when it is stale.
 
 ## 2026-08
@@ -94,6 +94,7 @@ append; `bin/journal-index --check` fails when it is stale.
 - **2026-08-02** — [arch1 retires: the staleness defect hit eight times in one day, and the eighth was the table about keeping up](2026-08/2026-08-02-arch1-retires-the-staleness-defect-eight-times.md)
 - **2026-08-02** — [the public-demo spec merged, after the same option set in two documents diverged inside an hour](2026-08/2026-08-02-one-option-set-two-documents-diverged-in-an-hour.md)
 - **2026-08-02** — [r1 retires: the rate at which I was wrong, and four other things the forge cannot hold](2026-08/2026-08-02-r1-retires-what-the-forge-has-no-place-for.md)
+- **2026-08-02** — [pinning a known limitation as a passing test asserts nothing until you add the counterfactual](2026-08/2026-08-02-r10-a-pinned-limitation-needs-a-counterfactual.md)
 - **2026-08-02** — [declining to decide was not the safe answer, and my own rule had already decided it](2026-08/2026-08-02-r10-declining-to-decide-was-not-the-safe-answer.md)
 - **2026-08-02** — [three fixes in one night, and the only evidence any of them worked was a failing mutant](2026-08/2026-08-02-r10-the-evidence-was-always-a-failing-mutant.md)
 - **2026-08-02** — [I built a gate for a defect class, and the gate shipped with that exact defect](2026-08/2026-08-02-r10-the-gate-had-the-defect-it-was-written-to-catch.md)
