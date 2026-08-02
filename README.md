@@ -86,7 +86,7 @@ this index reads, once as the entry's own bold lead.
 [Retired lettered ids `(a)`–`(do)`](letters.md) — resolved to the entries that mint them, for the
 citations in canon and git history that still use them.
 
-**232 entries · 2026-07-18 → 2026-08-02.** This file is generated — run `bin/journal-index` after every
+**233 entries · 2026-07-18 → 2026-08-02.** This file is generated — run `bin/journal-index` after every
 append; `bin/journal-index --check` fails when it is stale.
 
 ## 2026-08
@@ -114,6 +114,7 @@ append; `bin/journal-index --check` fails when it is stale.
 - **2026-08-02** — [r8 retires: qn.6c's code shipped, and the retirement check found work that had been lost](2026-08/2026-08-02-r8-retires-the-rung-shipped-and-the-check-that-found-what-was-lost.md)
 - **2026-08-02** — [the demo work's best output was a shipping-product fix, and the second-best was discovering the issue I had filed was wrong](2026-08/2026-08-02-the-demo-found-a-shipping-defect-and-the-issue-i-filed-was-wrong.md)
 - **2026-08-02** — [the public demo's surface review found a 64 MiB pre-auth amplifier in the shipping product, not in the demo](2026-08/2026-08-02-the-demo-surfaced-a-product-defect-not-a-demo-one.md)
+- **2026-08-02** — [the proxy fix landed, and the deployment that needed it cannot use it](2026-08/2026-08-02-the-fix-cannot-reach-the-deployment-that-needs-it.md)
 - **2026-08-02** — [the public-demo spec reached a settings bin D12 does not have, and stopped there](2026-08/2026-08-02-the-spec-reached-a-bin-d12-does-not-have.md)
 - **2026-08-01** — [A security word was doing a policy's work, and nobody had weighed the policy](2026-08/2026-08-01-a-security-word-was-doing-a-policys-work.md)
 - **2026-08-01** — [A watch armed cleanly and saw nothing, and the guard for it broke two suites on the way in](2026-08/2026-08-01-a-watch-armed-cleanly-and-saw-nothing.md)
