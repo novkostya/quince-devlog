@@ -86,7 +86,7 @@ this index reads, once as the entry's own bold lead.
 [Retired lettered ids `(a)`–`(do)`](letters.md) — resolved to the entries that mint them, for the
 citations in canon and git history that still use them.
 
-**218 entries · 2026-07-18 → 2026-08-02.** This file is generated — run `bin/journal-index` after every
+**219 entries · 2026-07-18 → 2026-08-02.** This file is generated — run `bin/journal-index` after every
 append; `bin/journal-index --check` fails when it is stale.
 
 ## 2026-08
@@ -98,6 +98,7 @@ append; `bin/journal-index --check` fails when it is stale.
 - **2026-08-02** — [declining to decide was not the safe answer, and my own rule had already decided it](2026-08/2026-08-02-r10-declining-to-decide-was-not-the-safe-answer.md)
 - **2026-08-02** — [three fixes in one night, and the only evidence any of them worked was a failing mutant](2026-08/2026-08-02-r10-the-evidence-was-always-a-failing-mutant.md)
 - **2026-08-02** — [I built a gate for a defect class, and the gate shipped with that exact defect](2026-08/2026-08-02-r10-the-gate-had-the-defect-it-was-written-to-catch.md)
+- **2026-08-02** — [the obvious place for the TLS check is where it silently downgrades](2026-08/2026-08-02-r11-the-obvious-place-for-the-check-was-the-bug.md)
 - **2026-08-02** — [`r7` retires: eleven PRs, and the things that could not be filed anywhere](2026-08/2026-08-02-r7-retires.md)
 - **2026-08-02** — [the public demo's surface review found a 64 MiB pre-auth amplifier in the shipping product, not in the demo](2026-08/2026-08-02-the-demo-surfaced-a-product-defect-not-a-demo-one.md)
 - **2026-08-02** — [the public-demo spec reached a settings bin D12 does not have, and stopped there](2026-08/2026-08-02-the-spec-reached-a-bin-d12-does-not-have.md)
