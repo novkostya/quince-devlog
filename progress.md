@@ -94,22 +94,20 @@ threshold, so rotation is forced rather than remembered.
 **Open questions for the Operator** (tracked here until resolved):
 1. LAN registry port + creds (address recorded in `local/environment.md`; env-only,
    never committed).
-2. **`qn.6d` gap A — `Storage` gains space and counts** (contracts §2). The object carries no
-   capacity and no counts, so a fill bar is new wire rather than new rendering. Four
-   sub-questions; the sharpest is that `statfs` reports the **filesystem**, so two storages that
-   are two directories on one disk each claim the same free space unless the field names say
-   otherwise — `qn.6c`'s own G1 fixture. Blocks `qn.6d` PRs 3–5.
-   [quince#573](https://github.com/novkostya/quince/pull/573).
-3. **`qn.6d` gap B — how a storage is FORGOTTEN** (contracts §1). *Detach-and-forget* is already
-   ruled, and so is the **addressing key** — [quince#570](https://github.com/novkostya/quince/issues/570),
-   2026-08-02: the API addresses a storage by its config `name`, `qn.6d`'s Forget included. What is
-   open is only **resource-delete versus config mutation**, with the restart question folded
-   **inside** it because the shape decides the behaviour: `DELETE /api/storages/{name}` forces live
-   deregistration, the class `qn.6c` declined, where a config mutation inherits D12 and the existing
-   `CheckStorages` floor. **Recommended: the config mutation, on the behaviour grounds** — the
-   empty-`id` measurement is no longer the discriminator, because a `{name}`-addressed delete
-   reaches an unreachable storage perfectly well. Blocks `qn.6d` PR 6.
-   [quince#573](https://github.com/novkostya/quince/pull/573).
+
+*`qn.6d`'s two gaps stood here as questions 2 and 3 for nine hours on 2026-08-02/03. **Both were
+ruled on 2026-08-03** — relayed by the architect seat on
+[quince#443](https://github.com/novkostya/quince/issues/443) — and the ruled text is in canon
+(`contracts.md` §1 and §2, both flipped from `PROPOSED (gap)` by the PR that also retired the
+rung-ruled decision the ruling invalidated). **Gap A**: the fields land as proposed, all four
+sub-questions as recommended — and the **card renders no filesystem caveat at all**, because equal
+byte counts cannot prove a shared filesystem and both fields that would have carried filesystem
+identity were declined. Two storages on one disk each show the same figure with nothing saying it is
+the same space: a **ruled acceptance**, not a bug to file. **Gap B**: Forget is a **config
+mutation** — `DELETE /api/config/storage/{name}` — with no live deregistration, the restart
+surfaced, and recheck reporting runtime truth marked pending. **General config live-apply became its
+own rung** out of the same reading. The recommendations that stood here are not the rulings; both
+were taken, which is not the same as being the record.*
 
 *`qn.6f`'s three gaps stood here as questions 2–4 for six hours on 2026-08-02, and **all three were
 ruled the same day they were filed** — relayed by architect session `arch1` on
