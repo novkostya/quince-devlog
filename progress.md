@@ -94,22 +94,19 @@ threshold, so rotation is forced rather than remembered.
 **Open questions for the Operator** (tracked here until resolved):
 1. LAN registry port + creds (address recorded in `local/environment.md`; env-only,
    never committed).
-2. **`qn.6d` gap A — `Storage` gains space and counts** (contracts §2). The object carries no
-   capacity and no counts, so a fill bar is new wire rather than new rendering. Four
-   sub-questions; the sharpest is that `statfs` reports the **filesystem**, so two storages that
-   are two directories on one disk each claim the same free space unless the field names say
-   otherwise — `qn.6c`'s own G1 fixture. Blocks `qn.6d` PRs 3–5.
-   [quince#573](https://github.com/novkostya/quince/pull/573).
-3. **`qn.6d` gap B — how a storage is FORGOTTEN** (contracts §1). *Detach-and-forget* is already
-   ruled, and so is the **addressing key** — [quince#570](https://github.com/novkostya/quince/issues/570),
-   2026-08-02: the API addresses a storage by its config `name`, `qn.6d`'s Forget included. What is
-   open is only **resource-delete versus config mutation**, with the restart question folded
-   **inside** it because the shape decides the behaviour: `DELETE /api/storages/{name}` forces live
-   deregistration, the class `qn.6c` declined, where a config mutation inherits D12 and the existing
-   `CheckStorages` floor. **Recommended: the config mutation, on the behaviour grounds** — the
-   empty-`id` measurement is no longer the discriminator, because a `{name}`-addressed delete
-   reaches an unreachable storage perfectly well. Blocks `qn.6d` PR 6.
-   [quince#573](https://github.com/novkostya/quince/pull/573).
+
+*`qn.6d`'s two gaps stood here as questions 2–3 for one day and **both were ruled on 2026-08-03** —
+relayed by architect session `arch1` on
+[quince#443](https://github.com/novkostya/quince/issues/443#issuecomment-5162834569), flipped into
+canon by [quince#579](https://github.com/novkostya/quince/pull/579). Gap A's fields land as
+proposed with the **prefixed names kept**, `counts_as_of` always present and capacity `null` rather
+than `0` when unreachable — and the ruling **retired rung-ruled decision 2**, so the card never says
+*"on this filesystem"*: two storages on one disk each show the same figure, an **accepted** cost
+rather than a bug. Gap B is a **config mutation**, `DELETE /api/config/storage/{name}`, `422` on the
+default, restart warnings surfaced, and recheck reports **runtime truth marked pending**. A question
+nobody had written down — **why does no config change apply without a restart, when D12 says it
+should?** — came out of the same conversation and is scoped as its own rung,
+[quince#577](https://github.com/novkostya/quince/issues/577).*
 
 *`qn.6f`'s three gaps stood here as questions 2–4 for six hours on 2026-08-02, and **all three were
 ruled the same day they were filed** — relayed by architect session `arch1` on
