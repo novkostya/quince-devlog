@@ -106,8 +106,10 @@ identity were declined. Two storages on one disk each show the same figure with 
 the same space: a **ruled acceptance**, not a bug to file. **Gap B**: Forget is a **config
 mutation** — `DELETE /api/config/storage/{name}` — with no live deregistration, the restart
 surfaced, and recheck reporting runtime truth marked pending. **General config live-apply became its
-own rung** out of the same reading. The recommendations that stood here are not the rulings; both
-were taken, which is not the same as being the record.*
+own rung** out of the same reading —
+[quince#577](https://github.com/novkostya/quince/issues/577), project-wide config→runtime
+propagation with storage as its first consumer. The recommendations that stood here are not the
+rulings; both were taken, which is not the same as being the record.*
 
 *`qn.6f`'s three gaps stood here as questions 2–4 for six hours on 2026-08-02, and **all three were
 ruled the same day they were filed** — relayed by architect session `arch1` on
