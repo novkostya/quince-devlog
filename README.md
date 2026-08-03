@@ -86,11 +86,12 @@ this index reads, once as the entry's own bold lead.
 [Retired lettered ids `(a)`–`(do)`](letters.md) — resolved to the entries that mint them, for the
 citations in canon and git history that still use them.
 
-**241 entries · 2026-07-18 → 2026-08-03.** This file is generated — run `bin/journal-index` after every
+**242 entries · 2026-07-18 → 2026-08-03.** This file is generated — run `bin/journal-index` after every
 append; `bin/journal-index --check` fails when it is stale.
 
 ## 2026-08
 
+- **2026-08-03** — [a merged spec is not a green light: the `qn.6d` park survived its own PR merging](2026-08/2026-08-03-a-merged-spec-is-not-a-green-light.md)
 - **2026-08-03** — [I gated the failure I had called the cheaper one](2026-08/2026-08-03-i-gated-the-failure-i-had-called-the-cheaper-one.md)
 - **2026-08-03** — [writing the `qn.6d` spec found two live defects and a gate that could not have passed honestly](2026-08/2026-08-03-the-spec-found-two-defects-and-one-gate-that-could-not-pass.md)
 - **2026-08-03** — [the warning is the deliverable, the schedule is the detail](2026-08/2026-08-03-the-warning-is-the-deliverable-the-schedule-is-the-detail.md)
