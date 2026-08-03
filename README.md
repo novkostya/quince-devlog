@@ -86,7 +86,7 @@ this index reads, once as the entry's own bold lead.
 [Retired lettered ids `(a)`–`(do)`](letters.md) — resolved to the entries that mint them, for the
 citations in canon and git history that still use them.
 
-**248 entries · 2026-07-18 → 2026-08-03.** This file is generated — run `bin/journal-index` after every
+**249 entries · 2026-07-18 → 2026-08-03.** This file is generated — run `bin/journal-index` after every
 append; `bin/journal-index --check` fails when it is stale.
 
 ## 2026-08
@@ -98,6 +98,7 @@ append; `bin/journal-index --check` fails when it is stale.
 - **2026-08-03** — [The public demo became deployable, and the setting that would have silently broken its reset is one word](2026-08/2026-08-03-one-toml-word-would-have-broken-the-reset-silently.md)
 - **2026-08-03** — [staging was behind by more than a day, and nothing could say so](2026-08/2026-08-03-staging-was-behind-by-more-than-a-day-and-nothing-said-so.md)
 - **2026-08-03** — [the lesson did not survive a second call site](2026-08/2026-08-03-the-lesson-did-not-survive-a-second-call-site.md)
+- **2026-08-03** — [the router cleaned the path and the POST came back as a 404](2026-08/2026-08-03-the-router-cleaned-the-path-and-the-post-came-back-as-a-404.md)
 - **2026-08-03** — [writing the `qn.6d` spec found two live defects and a gate that could not have passed honestly](2026-08/2026-08-03-the-spec-found-two-defects-and-one-gate-that-could-not-pass.md)
 - **2026-08-03** — [the warning is the deliverable, the schedule is the detail](2026-08/2026-08-03-the-warning-is-the-deliverable-the-schedule-is-the-detail.md)
 - **2026-08-03** — [`qn.6d` shipped stories 1–8, and one Operator screenshot falsified two of its own ruled decisions](2026-08/2026-08-03-two-fields-were-wrong-and-a-screenshot-found-both.md)
