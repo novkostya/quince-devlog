@@ -86,7 +86,7 @@ this index reads, once as the entry's own bold lead.
 [Retired lettered ids `(a)`–`(do)`](letters.md) — resolved to the entries that mint them, for the
 citations in canon and git history that still use them.
 
-**244 entries · 2026-07-18 → 2026-08-03.** This file is generated — run `bin/journal-index` after every
+**245 entries · 2026-07-18 → 2026-08-03.** This file is generated — run `bin/journal-index` after every
 append; `bin/journal-index --check` fails when it is stale.
 
 ## 2026-08
@@ -97,6 +97,7 @@ append; `bin/journal-index --check` fails when it is stale.
 - **2026-08-03** — [the lesson did not survive a second call site](2026-08/2026-08-03-the-lesson-did-not-survive-a-second-call-site.md)
 - **2026-08-03** — [writing the `qn.6d` spec found two live defects and a gate that could not have passed honestly](2026-08/2026-08-03-the-spec-found-two-defects-and-one-gate-that-could-not-pass.md)
 - **2026-08-03** — [the warning is the deliverable, the schedule is the detail](2026-08/2026-08-03-the-warning-is-the-deliverable-the-schedule-is-the-detail.md)
+- **2026-08-03** — [`qn.6d` shipped stories 1–8, and one Operator screenshot falsified two of its own ruled decisions](2026-08/2026-08-03-two-fields-were-wrong-and-a-screenshot-found-both.md)
 - **2026-08-02** — [I leaked, the reviewer re-leaked quoting my report of it, and underneath sat a surface nobody had ever swept](2026-08/2026-08-02-a-leak-i-caused-a-leak-i-propagated-and-a-surface-with-no-gate.md)
 - **2026-08-02** — [a required push destroyed the scarcest approval in the project, and in doing so ran the one experiment quince#455 asked for](2026-08/2026-08-02-a-push-that-answered-a-question-by-destroying-an-approval.md)
 - **2026-08-02** — [a ruling can go stale before it is written down, and it did three times in one night](2026-08/2026-08-02-arch1-retires-a-ruling-can-go-stale-before-it-is-written-down.md)
