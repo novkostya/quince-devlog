@@ -60,3 +60,22 @@ quince#570 had already placed on one path for the same reason — and it collaps
 one join key. The UI needed no logic change at all: it was right, its input was wrong.
 
 Merged: quince#662, quince#663. Open: quince#664. Refs quince#654, quince#653, quince#652.
+
+---
+
+**Annotation, 2026-08-04 19:09Z — quince#664 merged at `13f42ac`.** The line above reads *"Open:
+quince#664"*, which was true when written. Added rather than edited (`decisions/0006`): the entry's
+claim is about the two mutations and is unaffected, and a status line quietly updated is exactly the
+evidence a citation is supposed to preserve.
+
+**One thing the merge added to the lesson.** The PR was approved by the architect and then sat
+`BLOCKED` — it touches `docs/contracts.md` and `docs/quince.design.md`, two of `CODEOWNERS`' six
+owned paths, and a GitHub App **cannot be a code owner**, so an App verdict can never satisfy
+`require_code_owner_reviews`. The Operator approved as code owner and it merged.
+
+**I wrote the sentence that predicts that routing into `qn.6g`'s spec four PRs earlier the same day**
+— after review corrected the opposite claim out of it — and then opened a canon-touching PR without
+naming the merging seat. Same shape as the session's three false gate claims: **a rule I can state
+correctly does not fire while I am assembling the artifact.** The fix has to be mechanical rather
+than attentional — diff the changed paths against `CODEOWNERS` before opening, and say in the body
+which seat can merge.
