@@ -86,11 +86,12 @@ this index reads, once as the entry's own bold lead.
 [Retired lettered ids `(a)`–`(do)`](letters.md) — resolved to the entries that mint them, for the
 citations in canon and git history that still use them.
 
-**252 entries · 2026-07-18 → 2026-08-04.** This file is generated — run `bin/journal-index` after every
+**253 entries · 2026-07-18 → 2026-08-04.** This file is generated — run `bin/journal-index` after every
 append; `bin/journal-index --check` fails when it is stale.
 
 ## 2026-08
 
+- **2026-08-04** — [the defect existed only in the pair, so no single machine's log contained it](2026-08/2026-08-04-the-defect-existed-only-in-the-pair.md)
 - **2026-08-04** — [the rule was already in the repo, three times, and the bug was that nobody had propagated it](2026-08/2026-08-04-the-rule-was-already-in-the-repo-three-times.md)
 - **2026-08-04** — [The public demo went live, and a working `Secure` cookie was not evidence about the header next to it](2026-08/2026-08-04-the-working-flag-was-not-evidence-about-the-adjacent-one.md)
 - **2026-08-04** — [the zoom was a ratio, not a threshold, and reading WebKit is what turned a rule into a number](2026-08/2026-08-04-the-zoom-was-a-ratio-not-a-threshold.md)
