@@ -86,7 +86,7 @@ this index reads, once as the entry's own bold lead.
 [Retired lettered ids `(a)`–`(do)`](letters.md) — resolved to the entries that mint them, for the
 citations in canon and git history that still use them.
 
-**267 entries · 2026-07-18 → 2026-08-07.** This file is generated — run `bin/journal-index` after every
+**268 entries · 2026-07-18 → 2026-08-07.** This file is generated — run `bin/journal-index` after every
 append; `bin/journal-index --check` fails when it is stale.
 
 ## 2026-08
@@ -96,6 +96,7 @@ append; `bin/journal-index --check` fails when it is stale.
 - **2026-08-07** — [the announcement outlived the work](2026-08/2026-08-07-the-announcement-outlived-the-work.md)
 - **2026-08-07** — [the argument against the fix was never measured](2026-08/2026-08-07-the-argument-against-the-fix-was-never-measured.md)
 - **2026-08-07** — [the assertion was absent from a branch that never rendered](2026-08/2026-08-07-the-assertion-was-absent-from-a-branch-that-never-rendered.md)
+- **2026-08-07** — [the gaps I declared were the ones holding the bugs](2026-08/2026-08-07-the-gaps-i-declared-were-the-ones-holding-the-bugs.md)
 - **2026-08-07** — [the gate was true and the behaviour was wrong](2026-08/2026-08-07-the-gate-was-true-and-the-behaviour-was-wrong.md)
 - **2026-08-07** — [the split was the artifact, not the tool](2026-08/2026-08-07-the-split-was-the-artifact-not-the-tool.md)
 - **2026-08-07** — [the table was stale before it was written](2026-08/2026-08-07-the-table-was-stale-before-it-was-written.md)
