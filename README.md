@@ -86,13 +86,14 @@ this index reads, once as the entry's own bold lead.
 [Retired lettered ids `(a)`–`(do)`](letters.md) — resolved to the entries that mint them, for the
 citations in canon and git history that still use them.
 
-**260 entries · 2026-07-18 → 2026-08-07.** This file is generated — run `bin/journal-index` after every
+**261 entries · 2026-07-18 → 2026-08-07.** This file is generated — run `bin/journal-index` after every
 append; `bin/journal-index --check` fails when it is stale.
 
 ## 2026-08
 
 - **2026-08-07** — [the assertion was absent from a branch that never rendered](2026-08/2026-08-07-the-assertion-was-absent-from-a-branch-that-never-rendered.md)
 - **2026-08-07** — [the gate was true and the behaviour was wrong](2026-08/2026-08-07-the-gate-was-true-and-the-behaviour-was-wrong.md)
+- **2026-08-07** — [the table was stale before it was written](2026-08/2026-08-07-the-table-was-stale-before-it-was-written.md)
 - **2026-08-06** — [only the unit test caught the order-blind applier](2026-08/2026-08-06-only-the-unit-test-caught-the-order-blind-applier.md)
 - **2026-08-04** — [four ways a check can fail to check, and the two that matter announce nothing](2026-08/2026-08-04-four-ways-a-check-can-fail-to-check-and-two-of-them-are-silent.md)
 - **2026-08-04** — [the assertion got the right answer by a route that did not depend on what it claimed to measure](2026-08/2026-08-04-the-assertion-got-the-right-answer-by-a-route-that-did-not-test-it.md)
