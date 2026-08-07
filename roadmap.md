@@ -815,6 +815,19 @@ about.
   sentence overstates the cost, and a rung nobody starts because it reads as a redesign is a rung
   that does not get built.
 
+- **`qn.6g` — `config.yml` applies without a restart.** Operator-scoped 2026-08-04,
+  [quince#577](https://github.com/novkostya/quince/issues/577); spec `docs/specs/qn.6g/qn.6g.md`.
+  **Not a storage rung** — it is project-wide config→runtime propagation with **storage as its first
+  consumer**, which is why it sits in this list rather than under M5: the blocker `qn.6d` measured
+  was project-wide, since `config.Service` had no `Apply`, `Reload` or `Subscribe` at all, so
+  restart-to-apply was the status quo for *every* setting and D12 was being deviated from
+  systematically. One mechanism — `Subscribe` plus a post-write notify — rather than per-setting
+  special cases; the interim *"restart required"* UI notice was **declined** at scoping.
+  **File-watch was ruled OUT of this rung and into its own, unallocated one** (2026-08-04, option
+  (a)): a change made through the UI applies immediately, a hand-edit still waits for a restart, and
+  that cost is stated in contracts §6 rather than left to be discovered. The deliverable is the
+  **per-key table** in contracts §6 — three bins, because five keys are read by nothing and calling
+  those *restart-required* would promise that a restart fixes them.
 - **Candidates, unnumbered until scoped:** storage cards on the dashboard (needs *offline* as a
   first-class dashboard state — a card that errors on an unplugged disk defeats the case removable
   media exists for); **add / remove a storage** — *a spike before a spec*, because the backend
