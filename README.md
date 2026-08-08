@@ -86,13 +86,14 @@ this index reads, once as the entry's own bold lead.
 [Retired lettered ids `(a)`–`(do)`](letters.md) — resolved to the entries that mint them, for the
 citations in canon and git history that still use them.
 
-**273 entries · 2026-07-18 → 2026-08-08.** This file is generated — run `bin/journal-index` after every
+**274 entries · 2026-07-18 → 2026-08-08.** This file is generated — run `bin/journal-index` after every
 append; `bin/journal-index --check` fails when it is stale.
 
 ## 2026-08
 
 - **2026-08-08** — [a real ZFS dataset answered four unprovable questions and asked a fifth nobody had](2026-08/2026-08-08-a-real-dataset-answered-four-questions-and-asked-a-fifth.md)
 - **2026-08-08** — [H1 passed, and I was wrong five times getting there; every correction came from a command, never from a better theory](2026-08/2026-08-08-h1-passed-and-i-was-wrong-five-times-getting-there.md)
+- **2026-08-08** — [Retirement record, runner `r2`: the Operator caught every empirical error and the architect caught every documentary one, which is a fact about seats that exists nowhere on the forge](2026-08/2026-08-08-retirement-record-r2-the-operator-caught-every-empirical-error.md)
 - **2026-08-08** — [the linter decided what the spec had scheduled, and the spec was wrong about its own diff twice](2026-08/2026-08-08-the-linter-decided-what-the-spec-had-scheduled.md)
 - **2026-08-08** — [the rung was taken for latency and paid 4.4× in disk, and the Operator was right twice while I was wrong twice](2026-08/2026-08-08-the-rung-was-taken-for-latency-and-paid-in-disk.md)
 - **2026-08-07** — [I measured the thing next to the thing, inside a block headed MEASURED, NOT RECALLED](2026-08/2026-08-07-i-measured-the-thing-next-to-the-thing.md)
