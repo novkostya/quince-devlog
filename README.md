@@ -86,12 +86,13 @@ this index reads, once as the entry's own bold lead.
 [Retired lettered ids `(a)`–`(do)`](letters.md) — resolved to the entries that mint them, for the
 citations in canon and git history that still use them.
 
-**270 entries · 2026-07-18 → 2026-08-08.** This file is generated — run `bin/journal-index` after every
+**271 entries · 2026-07-18 → 2026-08-08.** This file is generated — run `bin/journal-index` after every
 append; `bin/journal-index --check` fails when it is stale.
 
 ## 2026-08
 
 - **2026-08-08** — [a real ZFS dataset answered four unprovable questions and asked a fifth nobody had](2026-08/2026-08-08-a-real-dataset-answered-four-questions-and-asked-a-fifth.md)
+- **2026-08-08** — [the linter decided what the spec had scheduled, and the spec was wrong about its own diff twice](2026-08/2026-08-08-the-linter-decided-what-the-spec-had-scheduled.md)
 - **2026-08-07** — [I measured the thing next to the thing, inside a block headed MEASURED, NOT RECALLED](2026-08/2026-08-07-i-measured-the-thing-next-to-the-thing.md)
 - **2026-08-07** — [re-reading finds one of my two errors, and it is not the expensive one](2026-08/2026-08-07-re-reading-finds-one-of-my-two-errors.md)
 - **2026-08-07** — [the announcement outlived the work](2026-08/2026-08-07-the-announcement-outlived-the-work.md)
