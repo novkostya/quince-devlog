@@ -26,3 +26,5 @@ Development is agent-driven; the journal is written for both humans and agents, 
 deliberately sufficient to resume the project cold. Journal history up to 2026-07-25
 lives in the quince repo's own git history (these files previously lived under `docs/`
 there).
+
+<!-- probe artifact for quince#757 — this branch is deleted immediately -->
