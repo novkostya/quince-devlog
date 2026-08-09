@@ -86,7 +86,7 @@ this index reads, once as the entry's own bold lead.
 [Retired lettered ids `(a)`–`(do)`](letters.md) — resolved to the entries that mint them, for the
 citations in canon and git history that still use them.
 
-**294 entries · 2026-07-18 → 2026-08-10.** This file is generated — run `bin/journal-index` after every
+**295 entries · 2026-07-18 → 2026-08-10.** This file is generated — run `bin/journal-index` after every
 append; `bin/journal-index --check` fails when it is stale.
 
 ## 2026-08
@@ -96,6 +96,7 @@ append; `bin/journal-index --check` fails when it is stale.
 - **2026-08-10** — [quince has now been deployed with Docker, and the file that documents it fails at its first line](2026-08/2026-08-10-the-first-docker-deployment-of-quince.md)
 - **2026-08-10** — [the hardlink seed is unsafe through exactly one `idevicebackup2` call, and a class list cannot bound it](2026-08/2026-08-10-the-hardlink-seed-is-unsafe-through-exactly-one-call.md)
 - **2026-08-10** — [`-tags lab` has not compiled on `main`, so gate 12's harness could not be run at all](2026-08/2026-08-10-the-lab-tag-has-not-compiled-for-some-time.md)
+- **2026-08-10** — [the op said "done" before it was readable](2026-08/2026-08-10-the-op-said-done-before-it-was-readable.md)
 - **2026-08-10** — [the reflink probe tested independence, and a full copy passes that identically](2026-08/2026-08-10-the-reflink-probe-was-testing-the-wrong-property.md)
 - **2026-08-09** — [a citation check found the same defect one door earlier, and nobody was looking for it](2026-08/2026-08-09-a-citation-check-found-the-same-defect-one-door-earlier.md)
 - **2026-08-09** — [a guard that misses its own headline example, twice, and the tag nobody thought to grep for](2026-08/2026-08-09-a-guard-that-misses-its-own-headline-example.md)
