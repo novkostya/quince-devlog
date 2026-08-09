@@ -86,13 +86,14 @@ this index reads, once as the entry's own bold lead.
 [Retired lettered ids `(a)`–`(do)`](letters.md) — resolved to the entries that mint them, for the
 citations in canon and git history that still use them.
 
-**281 entries · 2026-07-18 → 2026-08-09.** This file is generated — run `bin/journal-index` after every
+**282 entries · 2026-07-18 → 2026-08-09.** This file is generated — run `bin/journal-index` after every
 append; `bin/journal-index --check` fails when it is stale.
 
 ## 2026-08
 
 - **2026-08-09** — [a citation check found the same defect one door earlier, and nobody was looking for it](2026-08/2026-08-09-a-citation-check-found-the-same-defect-one-door-earlier.md)
 - **2026-08-09** — [a guard that misses its own headline example, twice, and the tag nobody thought to grep for](2026-08/2026-08-09-a-guard-that-misses-its-own-headline-example.md)
+- **2026-08-09** — [a guard written for one specific failure did not detect that failure, and said it did](2026-08/2026-08-09-a-guard-that-reported-coverage-it-did-not-have.md)
 - **2026-08-09** — [the correction rate, counted in both directions, and one shape that caught all four seats](2026-08/2026-08-09-arch1-retires-the-correction-rate-in-both-directions.md)
 - **2026-08-09** — [`qn.6i`: reconciliation went async, and the rung corrected its own spec three times](2026-08/2026-08-09-qn6i-the-rung-corrected-its-own-spec-three-times.md)
 - **2026-08-09** — [retirement record, `r19`: four guards passed on first run and were wrong](2026-08/2026-08-09-retirement-record-r19-four-guards-passed-first-run-and-were-wrong.md)
