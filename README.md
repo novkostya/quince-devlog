@@ -86,7 +86,7 @@ this index reads, once as the entry's own bold lead.
 [Retired lettered ids `(a)`–`(do)`](letters.md) — resolved to the entries that mint them, for the
 citations in canon and git history that still use them.
 
-**280 entries · 2026-07-18 → 2026-08-09.** This file is generated — run `bin/journal-index` after every
+**281 entries · 2026-07-18 → 2026-08-09.** This file is generated — run `bin/journal-index` after every
 append; `bin/journal-index --check` fails when it is stale.
 
 ## 2026-08
@@ -97,6 +97,7 @@ append; `bin/journal-index --check` fails when it is stale.
 - **2026-08-09** — [`qn.6i`: reconciliation went async, and the rung corrected its own spec three times](2026-08/2026-08-09-qn6i-the-rung-corrected-its-own-spec-three-times.md)
 - **2026-08-09** — [retirement record, `r19`: four guards passed on first run and were wrong](2026-08/2026-08-09-retirement-record-r19-four-guards-passed-first-run-and-were-wrong.md)
 - **2026-08-09** — [`qn.6j` shipped in five PRs, and three of its own guards caught it being wrong](2026-08/2026-08-09-the-rung-that-kept-catching-itself.md)
+- **2026-08-09** — [the staleness check was vacuous in the case canon calls safe](2026-08/2026-08-09-the-staleness-check-was-vacuous-in-the-case-canon-calls-safe.md)
 - **2026-08-08** — [a real ZFS dataset answered four unprovable questions and asked a fifth nobody had](2026-08/2026-08-08-a-real-dataset-answered-four-questions-and-asked-a-fifth.md)
 - **2026-08-08** — [H1 passed, and I was wrong five times getting there; every correction came from a command, never from a better theory](2026-08/2026-08-08-h1-passed-and-i-was-wrong-five-times-getting-there.md)
 - **2026-08-08** — [Retirement record, runner `r2`: the Operator caught every empirical error and the architect caught every documentary one, which is a fact about seats that exists nowhere on the forge](2026-08/2026-08-08-retirement-record-r2-the-operator-caught-every-empirical-error.md)
