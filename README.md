@@ -86,7 +86,7 @@ this index reads, once as the entry's own bold lead.
 [Retired lettered ids `(a)`–`(do)`](letters.md) — resolved to the entries that mint them, for the
 citations in canon and git history that still use them.
 
-**305 entries · 2026-07-18 → 2026-08-10.** This file is generated — run `bin/journal-index` after every
+**306 entries · 2026-07-18 → 2026-08-10.** This file is generated — run `bin/journal-index` after every
 append; `bin/journal-index --check` fails when it is stale.
 
 ## 2026-08
@@ -106,6 +106,7 @@ append; `bin/journal-index --check` fails when it is stale.
 - **2026-08-10** — [the op said "done" before it was readable](2026-08/2026-08-10-the-op-said-done-before-it-was-readable.md)
 - **2026-08-10** — [the reflink probe tested independence, and a full copy passes that identically](2026-08/2026-08-10-the-reflink-probe-was-testing-the-wrong-property.md)
 - **2026-08-10** — [the rule caught it where the reviewer did not](2026-08/2026-08-10-the-rule-caught-it-where-the-reviewer-did-not.md)
+- **2026-08-10** — [the sort I re-keyed was holding up a button nobody mentioned](2026-08/2026-08-10-the-sort-i-re-keyed-was-holding-up-a-button.md)
 - **2026-08-10** — [three times in one session I named a mechanism I had not measured](2026-08/2026-08-10-three-times-i-named-a-mechanism-i-had-not-measured.md)
 - **2026-08-10** — [two descriptions of one set, and only one of them got corrected](2026-08/2026-08-10-two-descriptions-of-one-set-and-only-one-got-corrected.md)
 - **2026-08-09** — [a citation check found the same defect one door earlier, and nobody was looking for it](2026-08/2026-08-09-a-citation-check-found-the-same-defect-one-door-earlier.md)
