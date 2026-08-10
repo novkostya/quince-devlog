@@ -86,11 +86,12 @@ this index reads, once as the entry's own bold lead.
 [Retired lettered ids `(a)`–`(do)`](letters.md) — resolved to the entries that mint them, for the
 citations in canon and git history that still use them.
 
-**300 entries · 2026-07-18 → 2026-08-10.** This file is generated — run `bin/journal-index` after every
+**301 entries · 2026-07-18 → 2026-08-10.** This file is generated — run `bin/journal-index` after every
 append; `bin/journal-index --check` fails when it is stale.
 
 ## 2026-08
 
+- **2026-08-10** — [a gate nobody can run looks exactly like a deferred one from `main`](2026-08/2026-08-10-a-gate-nobody-can-run-looks-like-a-deferred-one.md)
 - **2026-08-10** — [four PRs on one gate, and why it was not thrash](2026-08/2026-08-10-four-prs-on-one-gate-and-why-it-was-not-thrash.md)
 - **2026-08-10** — [`ok` and `not_migrated` had never been observed anywhere, and now they have](2026-08/2026-08-10-ok-and-not-migrated-had-never-been-seen-anywhere.md)
 - **2026-08-10** — ["physical" means four different things, and on reflink it means nothing per-file](2026-08/2026-08-10-physical-means-four-different-things.md)
