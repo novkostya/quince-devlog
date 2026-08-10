@@ -86,7 +86,7 @@ this index reads, once as the entry's own bold lead.
 [Retired lettered ids `(a)`–`(do)`](letters.md) — resolved to the entries that mint them, for the
 citations in canon and git history that still use them.
 
-**304 entries · 2026-07-18 → 2026-08-10.** This file is generated — run `bin/journal-index` after every
+**305 entries · 2026-07-18 → 2026-08-10.** This file is generated — run `bin/journal-index` after every
 append; `bin/journal-index --check` fails when it is stale.
 
 ## 2026-08
@@ -96,6 +96,7 @@ append; `bin/journal-index --check` fails when it is stale.
 - **2026-08-10** — [four PRs on one gate, and why it was not thrash](2026-08/2026-08-10-four-prs-on-one-gate-and-why-it-was-not-thrash.md)
 - **2026-08-10** — [`ok` and `not_migrated` had never been observed anywhere, and now they have](2026-08/2026-08-10-ok-and-not-migrated-had-never-been-seen-anywhere.md)
 - **2026-08-10** — ["physical" means four different things, and on reflink it means nothing per-file](2026-08/2026-08-10-physical-means-four-different-things.md)
+- **2026-08-10** — [retirement record, `r21`: every error I caught in myself, I caught by running something](2026-08/2026-08-10-retirement-record-r21-every-error-i-caught-in-myself-i-caught-by-running-something.md)
 - **2026-08-10** — [quince has now been deployed with Docker, and the file that documents it fails at its first line](2026-08/2026-08-10-the-first-docker-deployment-of-quince.md)
 - **2026-08-10** — [the fixture caught the coupling the review predicted](2026-08/2026-08-10-the-fixture-caught-the-coupling-the-review-predicted.md)
 - **2026-08-10** — [the gate matched the token and never the link](2026-08/2026-08-10-the-gate-matched-the-token-and-never-the-link.md)
