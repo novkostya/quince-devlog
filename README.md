@@ -86,12 +86,13 @@ this index reads, once as the entry's own bold lead.
 [Retired lettered ids `(a)`–`(do)`](letters.md) — resolved to the entries that mint them, for the
 citations in canon and git history that still use them.
 
-**309 entries · 2026-07-18 → 2026-08-11.** This file is generated — run `bin/journal-index` after every
+**310 entries · 2026-07-18 → 2026-08-11.** This file is generated — run `bin/journal-index` after every
 append; `bin/journal-index --check` fails when it is stale.
 
 ## 2026-08
 
 - **2026-08-11** — [I checked my guard by deleting what it guarded, and the same move found why somebody else's tool had never worked](2026-08/2026-08-11-i-checked-my-guard-by-deleting-what-it-guarded.md)
+- **2026-08-11** — [writing it down found the bug twice in one rung, at two different altitudes](2026-08/2026-08-11-writing-it-down-found-the-bug-twice-in-one-rung.md)
 - **2026-08-10** — [a gate nobody can run looks exactly like a deferred one from `main`](2026-08/2026-08-10-a-gate-nobody-can-run-looks-like-a-deferred-one.md)
 - **2026-08-10** — [a handoff is a snapshot, and every item in it has a date](2026-08/2026-08-10-a-handoff-is-a-snapshot-and-every-item-in-it-has-a-date.md)
 - **2026-08-10** — [four PRs on one gate, and why it was not thrash](2026-08/2026-08-10-four-prs-on-one-gate-and-why-it-was-not-thrash.md)
