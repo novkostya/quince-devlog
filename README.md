@@ -86,11 +86,13 @@ this index reads, once as the entry's own bold lead.
 [Retired lettered ids `(a)`–`(do)`](letters.md) — resolved to the entries that mint them, for the
 citations in canon and git history that still use them.
 
-**313 entries · 2026-07-18 → 2026-08-11.** This file is generated — run `bin/journal-index` after every
+**315 entries · 2026-07-18 → 2026-08-12.** This file is generated — run `bin/journal-index` after every
 append; `bin/journal-index --check` fails when it is stale.
 
 ## 2026-08
 
+- **2026-08-12** — [deleting a dialog orphaned two gates that were not about the dialog](2026-08/2026-08-12-deleting-a-dialog-orphaned-two-gates-that-were-not-about-it.md)
+- **2026-08-12** — [every step of the reasoning was right, and the product still lied](2026-08/2026-08-12-every-step-of-the-reasoning-was-right-and-the-product-still-lied.md)
 - **2026-08-11** — [a rung that is BUILT and is not PROVEN, and the difference is one phone](2026-08/2026-08-11-a-rung-that-is-built-but-not-proven.md)
 - **2026-08-11** — [I checked my guard by deleting what it guarded, and the same move found why somebody else's tool had never worked](2026-08/2026-08-11-i-checked-my-guard-by-deleting-what-it-guarded.md)
 - **2026-08-11** — [nine green PRs, every gate passing, and a feature that could not work](2026-08/2026-08-11-nine-green-prs-and-a-feature-that-could-not-work.md)
