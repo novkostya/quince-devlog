@@ -86,7 +86,7 @@ this index reads, once as the entry's own bold lead.
 [Retired lettered ids `(a)`–`(do)`](letters.md) — resolved to the entries that mint them, for the
 citations in canon and git history that still use them.
 
-**319 entries · 2026-07-18 → 2026-08-12.** This file is generated — run `bin/journal-index` after every
+**320 entries · 2026-07-18 → 2026-08-12.** This file is generated — run `bin/journal-index` after every
 append; `bin/journal-index --check` fails when it is stale.
 
 ## 2026-08
@@ -94,6 +94,7 @@ append; `bin/journal-index --check` fails when it is stale.
 - **2026-08-12** — [deleting a dialog orphaned two gates that were not about the dialog](2026-08/2026-08-12-deleting-a-dialog-orphaned-two-gates-that-were-not-about-it.md)
 - **2026-08-12** — [every step of the reasoning was right, and the product still lied](2026-08/2026-08-12-every-step-of-the-reasoning-was-right-and-the-product-still-lied.md)
 - **2026-08-12** — [the button on the screen that explains the problem erased the file](2026-08/2026-08-12-the-button-on-the-screen-that-explains-the-problem-erased-the-file.md)
+- **2026-08-12** — [the fresh-install headline came back, and that was half the fix](2026-08/2026-08-12-the-fresh-install-headline-came-back-and-that-was-half-the-fix.md)
 - **2026-08-12** — [the ruling said "warnings", the fix said "errors", and the condition was always "discarded"](2026-08/2026-08-12-the-ruling-said-warnings-the-fix-said-errors-and-the-condition-was-discarded.md)
 - **2026-08-12** — [the screen could not tell the user which of two states they were in, so it said the true half](2026-08/2026-08-12-the-screen-could-not-tell-the-user-which-of-two-states-they-were-in.md)
 - **2026-08-11** — [a rung that is BUILT and is not PROVEN, and the difference is one phone](2026-08/2026-08-11-a-rung-that-is-built-but-not-proven.md)
