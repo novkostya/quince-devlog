@@ -86,11 +86,12 @@ this index reads, once as the entry's own bold lead.
 [Retired lettered ids `(a)`–`(do)`](letters.md) — resolved to the entries that mint them, for the
 citations in canon and git history that still use them.
 
-**322 entries · 2026-07-18 → 2026-08-13.** This file is generated — run `bin/journal-index` after every
+**323 entries · 2026-07-18 → 2026-08-13.** This file is generated — run `bin/journal-index` after every
 append; `bin/journal-index --check` fails when it is stale.
 
 ## 2026-08
 
+- **2026-08-13** — [deleting a config key quietly deletes whatever a test used it to prove](2026-08/2026-08-13-deleting-a-config-key-quietly-deletes-whatever-a-test-used-it-to-prove.md)
 - **2026-08-13** — [two reapers that cannot reap, and one merge rule that explains one of them](2026-08/2026-08-13-two-reapers-that-cannot-reap-and-one-merge-rule-that-explains-one-of-them.md)
 - **2026-08-12** — [deleting a dialog orphaned two gates that were not about the dialog](2026-08/2026-08-12-deleting-a-dialog-orphaned-two-gates-that-were-not-about-it.md)
 - **2026-08-12** — [every step of the reasoning was right, and the product still lied](2026-08/2026-08-12-every-step-of-the-reasoning-was-right-and-the-product-still-lied.md)
