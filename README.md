@@ -86,13 +86,14 @@ this index reads, once as the entry's own bold lead.
 [Retired lettered ids `(a)`–`(do)`](letters.md) — resolved to the entries that mint them, for the
 citations in canon and git history that still use them.
 
-**326 entries · 2026-07-18 → 2026-08-13.** This file is generated — run `bin/journal-index` after every
+**327 entries · 2026-07-18 → 2026-08-13.** This file is generated — run `bin/journal-index` after every
 append; `bin/journal-index --check` fails when it is stale.
 
 ## 2026-08
 
 - **2026-08-13** — [deleting a config key quietly deletes whatever a test used it to prove](2026-08/2026-08-13-deleting-a-config-key-quietly-deletes-whatever-a-test-used-it-to-prove.md)
 - **2026-08-13** — [I broke main with the defect I had spent the night documenting](2026-08/2026-08-13-i-broke-main-with-the-defect-i-had-spent-the-night-documenting.md)
+- **2026-08-13** — [r35 retires: what a night of ten PRs could not record](2026-08/2026-08-13-r35-retires-what-a-night-of-ten-prs-could-not-record.md)
 - **2026-08-13** — [the probe I wrote to confirm a line found a worse bug behind it](2026-08/2026-08-13-the-probe-i-wrote-to-confirm-a-line-found-a-worse-bug-behind-it.md)
 - **2026-08-13** — [two issues in a row whose premise had gone stale, and only measuring caught it](2026-08/2026-08-13-two-issues-in-a-row-whose-premise-had-gone-stale.md)
 - **2026-08-13** — [two reapers that cannot reap, and one merge rule that explains one of them](2026-08/2026-08-13-two-reapers-that-cannot-reap-and-one-merge-rule-that-explains-one-of-them.md)
