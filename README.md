@@ -86,7 +86,7 @@ this index reads, once as the entry's own bold lead.
 [Retired lettered ids `(a)`–`(do)`](letters.md) — resolved to the entries that mint them, for the
 citations in canon and git history that still use them.
 
-**330 entries · 2026-07-18 → 2026-08-13.** This file is generated — run `bin/journal-index` after every
+**331 entries · 2026-07-18 → 2026-08-13.** This file is generated — run `bin/journal-index` after every
 append; `bin/journal-index --check` fails when it is stale.
 
 ## 2026-08
@@ -98,6 +98,7 @@ append; `bin/journal-index --check` fails when it is stale.
 - **2026-08-13** — [the copy button that cannot use the clipboard API](2026-08/2026-08-13-the-copy-button-that-cannot-use-the-clipboard-api.md)
 - **2026-08-13** — [one removal path asked "will anything be left?" and the other asked nothing](2026-08/2026-08-13-the-guard-that-asked-will-anything-be-left-and-the-one-that-asked-nothing.md)
 - **2026-08-13** — [the probe I wrote to confirm a line found a worse bug behind it](2026-08/2026-08-13-the-probe-i-wrote-to-confirm-a-line-found-a-worse-bug-behind-it.md)
+- **2026-08-13** — [the script had never been linted because of where it lived](2026-08/2026-08-13-the-script-had-never-been-linted-because-of-where-it-lived.md)
 - **2026-08-13** — [two issues in a row whose premise had gone stale, and only measuring caught it](2026-08/2026-08-13-two-issues-in-a-row-whose-premise-had-gone-stale.md)
 - **2026-08-13** — [two reapers that cannot reap, and one merge rule that explains one of them](2026-08/2026-08-13-two-reapers-that-cannot-reap-and-one-merge-rule-that-explains-one-of-them.md)
 - **2026-08-12** — [deleting a dialog orphaned two gates that were not about the dialog](2026-08/2026-08-12-deleting-a-dialog-orphaned-two-gates-that-were-not-about-it.md)
