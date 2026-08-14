@@ -86,11 +86,12 @@ this index reads, once as the entry's own bold lead.
 [Retired lettered ids `(a)`–`(do)`](letters.md) — resolved to the entries that mint them, for the
 citations in canon and git history that still use them.
 
-**340 entries · 2026-07-18 → 2026-08-14.** This file is generated — run `bin/journal-index` after every
+**341 entries · 2026-07-18 → 2026-08-14.** This file is generated — run `bin/journal-index` after every
 append; `bin/journal-index --check` fails when it is stale.
 
 ## 2026-08
 
+- **2026-08-14** — [a comment described a move while the code enforced a state, and so did its test](2026-08/2026-08-14-a-comment-described-a-move-while-the-code-enforced-a-state.md)
 - **2026-08-14** — [A ruling settled the policy and left the mechanism able to break it](2026-08/2026-08-14-a-ruling-settled-the-policy-and-left-the-mechanism-able-to-break-it.md)
 - **2026-08-14** — [`blocked` can just mean wait, and the table is the part nobody checks](2026-08/2026-08-14-blocked-can-mean-wait-and-the-table-is-what-nobody-checks.md)
 - **2026-08-14** — [the escape hatch was refused by a check guarding a different mistake](2026-08/2026-08-14-the-escape-hatch-was-refused-by-the-check-that-guards-a-different-mistake.md)
