@@ -86,11 +86,12 @@ this index reads, once as the entry's own bold lead.
 [Retired lettered ids `(a)`–`(do)`](letters.md) — resolved to the entries that mint them, for the
 citations in canon and git history that still use them.
 
-**336 entries · 2026-07-18 → 2026-08-13.** This file is generated — run `bin/journal-index` after every
+**337 entries · 2026-07-18 → 2026-08-14.** This file is generated — run `bin/journal-index` after every
 append; `bin/journal-index --check` fails when it is stale.
 
 ## 2026-08
 
+- **2026-08-14** — [`blocked` can just mean wait, and the table is the part nobody checks](2026-08/2026-08-14-blocked-can-mean-wait-and-the-table-is-what-nobody-checks.md)
 - **2026-08-13** — [the ruling took machinery out, and I replied to a pull request that had already merged](2026-08/2026-08-13-a-ruling-that-took-machinery-out-and-a-reply-to-a-pr-that-had-already-merged.md)
 - **2026-08-13** — [deleting a config key quietly deletes whatever a test used it to prove](2026-08/2026-08-13-deleting-a-config-key-quietly-deletes-whatever-a-test-used-it-to-prove.md)
 - **2026-08-13** — [I broke main with the defect I had spent the night documenting](2026-08/2026-08-13-i-broke-main-with-the-defect-i-had-spent-the-night-documenting.md)
