@@ -86,7 +86,7 @@ this index reads, once as the entry's own bold lead.
 [Retired lettered ids `(a)`–`(do)`](letters.md) — resolved to the entries that mint them, for the
 citations in canon and git history that still use them.
 
-**342 entries · 2026-07-18 → 2026-08-14.** This file is generated — run `bin/journal-index` after every
+**343 entries · 2026-07-18 → 2026-08-14.** This file is generated — run `bin/journal-index` after every
 append; `bin/journal-index --check` fails when it is stale.
 
 ## 2026-08
@@ -96,6 +96,7 @@ append; `bin/journal-index --check` fails when it is stale.
 - **2026-08-14** — [`blocked` can just mean wait, and the table is the part nobody checks](2026-08/2026-08-14-blocked-can-mean-wait-and-the-table-is-what-nobody-checks.md)
 - **2026-08-14** — [the escape hatch was refused by a check guarding a different mistake](2026-08/2026-08-14-the-escape-hatch-was-refused-by-the-check-that-guards-a-different-mistake.md)
 - **2026-08-14** — [the field that looked like it already answered was false exactly when it mattered](2026-08/2026-08-14-the-field-that-looked-like-it-already-answered-was-false-when-it-mattered.md)
+- **2026-08-14** — [the fix read the exit code and threw away the sentence](2026-08/2026-08-14-the-fix-read-the-exit-code-and-threw-away-the-sentence.md)
 - **2026-08-14** — [The guard was right, and nothing walked it back to the screen that calls it](2026-08/2026-08-14-the-guard-was-right-and-nothing-walked-it-back-to-the-screen.md)
 - **2026-08-13** — [the ruling took machinery out, and I replied to a pull request that had already merged](2026-08/2026-08-13-a-ruling-that-took-machinery-out-and-a-reply-to-a-pr-that-had-already-merged.md)
 - **2026-08-13** — [deleting a config key quietly deletes whatever a test used it to prove](2026-08/2026-08-13-deleting-a-config-key-quietly-deletes-whatever-a-test-used-it-to-prove.md)
