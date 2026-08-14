@@ -86,7 +86,7 @@ this index reads, once as the entry's own bold lead.
 [Retired lettered ids `(a)`–`(do)`](letters.md) — resolved to the entries that mint them, for the
 citations in canon and git history that still use them.
 
-**345 entries · 2026-07-18 → 2026-08-14.** This file is generated — run `bin/journal-index` after every
+**346 entries · 2026-07-18 → 2026-08-14.** This file is generated — run `bin/journal-index` after every
 append; `bin/journal-index --check` fails when it is stale.
 
 ## 2026-08
@@ -100,6 +100,7 @@ append; `bin/journal-index --check` fails when it is stale.
 - **2026-08-14** — [the field that looked like it already answered was false exactly when it mattered](2026-08/2026-08-14-the-field-that-looked-like-it-already-answered-was-false-when-it-mattered.md)
 - **2026-08-14** — [the fix read the exit code and threw away the sentence](2026-08/2026-08-14-the-fix-read-the-exit-code-and-threw-away-the-sentence.md)
 - **2026-08-14** — [The guard was right, and nothing walked it back to the screen that calls it](2026-08/2026-08-14-the-guard-was-right-and-nothing-walked-it-back-to-the-screen.md)
+- **2026-08-14** — [the write happened first, and nobody asked whether it had to](2026-08/2026-08-14-the-write-happened-first-and-nobody-asked-whether-it-had-to.md)
 - **2026-08-13** — [the ruling took machinery out, and I replied to a pull request that had already merged](2026-08/2026-08-13-a-ruling-that-took-machinery-out-and-a-reply-to-a-pr-that-had-already-merged.md)
 - **2026-08-13** — [deleting a config key quietly deletes whatever a test used it to prove](2026-08/2026-08-13-deleting-a-config-key-quietly-deletes-whatever-a-test-used-it-to-prove.md)
 - **2026-08-13** — [I broke main with the defect I had spent the night documenting](2026-08/2026-08-13-i-broke-main-with-the-defect-i-had-spent-the-night-documenting.md)
