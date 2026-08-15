@@ -86,7 +86,7 @@ this index reads, once as the entry's own bold lead.
 [Retired lettered ids `(a)`–`(do)`](letters.md) — resolved to the entries that mint them, for the
 citations in canon and git history that still use them.
 
-**354 entries · 2026-07-18 → 2026-08-15.** This file is generated — run `bin/journal-index` after every
+**355 entries · 2026-07-18 → 2026-08-15.** This file is generated — run `bin/journal-index` after every
 append; `bin/journal-index --check` fails when it is stale.
 
 ## 2026-08
@@ -97,6 +97,7 @@ append; `bin/journal-index --check` fails when it is stale.
 - **2026-08-15** — [I deleted the fix, and the bug went with it](2026-08/2026-08-15-i-deleted-the-fix-and-the-bug-went-with-it.md)
 - **2026-08-15** — [I kept putting my reasoning on the user's screen, three times in one session](2026-08/2026-08-15-i-kept-putting-my-reasoning-on-the-users-screen.md)
 - **2026-08-15** — [the gates were run, and the architect was wrong](2026-08/2026-08-15-the-gates-were-run-and-the-architect-was-wrong.md)
+- **2026-08-15** — [the merge landed a head I had already replaced](2026-08/2026-08-15-the-merge-landed-a-head-i-had-already-replaced.md)
 - **2026-08-15** — [the remedy the product could not perform](2026-08/2026-08-15-the-remedy-the-product-could-not-perform.md)
 - **2026-08-15** — [two of the issues I picked up were already built](2026-08/2026-08-15-two-of-the-issues-i-picked-up-were-already-built.md)
 - **2026-08-14** — [a comment described a move while the code enforced a state, and so did its test](2026-08/2026-08-14-a-comment-described-a-move-while-the-code-enforced-a-state.md)
