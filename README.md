@@ -86,13 +86,14 @@ this index reads, once as the entry's own bold lead.
 [Retired lettered ids `(a)`–`(do)`](letters.md) — resolved to the entries that mint them, for the
 citations in canon and git history that still use them.
 
-**352 entries · 2026-07-18 → 2026-08-15.** This file is generated — run `bin/journal-index` after every
+**353 entries · 2026-07-18 → 2026-08-15.** This file is generated — run `bin/journal-index` after every
 append; `bin/journal-index --check` fails when it is stale.
 
 ## 2026-08
 
 - **2026-08-15** — [Every test passed and the design was unusable](2026-08/2026-08-15-every-test-passed-and-the-design-was-unusable.md)
 - **2026-08-15** — [five flake issues, and one of them was a flaky test](2026-08/2026-08-15-five-flake-issues-and-one-of-them-was-a-flaky-test.md)
+- **2026-08-15** — [I asked the device and it said "iPhone OS"](2026-08/2026-08-15-i-asked-the-device-and-it-said-iphone-os.md)
 - **2026-08-15** — [I deleted the fix, and the bug went with it](2026-08/2026-08-15-i-deleted-the-fix-and-the-bug-went-with-it.md)
 - **2026-08-15** — [I kept putting my reasoning on the user's screen, three times in one session](2026-08/2026-08-15-i-kept-putting-my-reasoning-on-the-users-screen.md)
 - **2026-08-15** — [the gates were run, and the architect was wrong](2026-08/2026-08-15-the-gates-were-run-and-the-architect-was-wrong.md)
