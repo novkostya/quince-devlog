@@ -107,3 +107,49 @@ when what they actually asked for was the measurement. The reference is now non-
 why.
 
 **quince#1033**, 90 rows up from 7, 10 tests where there were none.
+
+---
+
+## Annotation, same day — the PR was approved, and then `e2e` failed on the approved head
+
+Everything above stands. What it does not say is that **the change broke the layout**, and the entry
+as written reads cleaner than the work was.
+
+```
+320px /: overflows by 55px
+320px /storage/internal: overflows by 26px
+```
+
+Longer names made the device cards too wide for a 320px phone. `main` was green at the exact commit
+the branch came from, across eight runs, so it was mine.
+
+**My first hypothesis was wrong, and that is the useful part.** Both call sites already had
+`min-w-0` and `truncate` on the name column, so the obvious explanation was already in place and had
+not helped. Instrumenting the DOM instead of guessing again gave the tell:
+
+> the cards that overflow carry the **short** names.
+
+One long-named card sized the shared grid column and every card in it grew to match — so the
+elements that overflow are the innocent ones, and a hypothesis built from *which card is too wide*
+would have looked at the wrong element indefinitely. A grid item defaults to `min-width: auto`, so
+its floor is its own content. The long name did not create the bug; it revealed a floor that was
+always there. quince#631 is the same defect one page over.
+
+`truncate` was dead code the whole time: it cannot engage while the card itself is free to widen.
+
+## The process finding is worth more than the fix
+
+The original PR's coverage list declared truncation *"reasoned from the 45-character bound, not
+measured in a browser"* — a correct declaration, sitting in the PR, naming exactly the gap that then
+failed. **I pushed anyway and the architect approved anyway.** It had run `gates-ui`, which computes
+no layout, on a change whose entire effect is that rendered strings get longer.
+
+So the rule both seats arrived at independently: **a known-untested declaration naming a
+browser-measurable claim is a request for the browser gate**, from either side. Declared debt is only
+worth something if somebody reads it as work.
+
+And the sharper version of my own error: the reasoning was not merely unmeasured, it was aimed at the
+wrong question. I asked whether the text would clip. The question that decided it was whether the card
+would shrink.
+
+Fixed in `db46a5d`; `gates-ui-e2e` exit 0, 52 passed, on the sweep that caught it. Re-approved.
