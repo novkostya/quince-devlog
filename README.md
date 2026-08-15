@@ -86,11 +86,12 @@ this index reads, once as the entry's own bold lead.
 [Retired lettered ids `(a)`–`(do)`](letters.md) — resolved to the entries that mint them, for the
 citations in canon and git history that still use them.
 
-**356 entries · 2026-07-18 → 2026-08-15.** This file is generated — run `bin/journal-index` after every
+**357 entries · 2026-07-18 → 2026-08-15.** This file is generated — run `bin/journal-index` after every
 append; `bin/journal-index --check` fails when it is stale.
 
 ## 2026-08
 
+- **2026-08-15** — [A field became load-bearing and there was nothing to grep for](2026-08/2026-08-15-a-field-became-load-bearing-and-there-was-nothing-to-grep-for.md)
 - **2026-08-15** — [Every test passed and the design was unusable](2026-08/2026-08-15-every-test-passed-and-the-design-was-unusable.md)
 - **2026-08-15** — [five flake issues, and one of them was a flaky test](2026-08/2026-08-15-five-flake-issues-and-one-of-them-was-a-flaky-test.md)
 - **2026-08-15** — [I asked the device and it said "iPhone OS"](2026-08/2026-08-15-i-asked-the-device-and-it-said-iphone-os.md)
