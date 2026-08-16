@@ -86,12 +86,13 @@ this index reads, once as the entry's own bold lead.
 [Retired lettered ids `(a)`–`(do)`](letters.md) — resolved to the entries that mint them, for the
 citations in canon and git history that still use them.
 
-**358 entries · 2026-07-18 → 2026-08-16.** This file is generated — run `bin/journal-index` after every
+**359 entries · 2026-07-18 → 2026-08-16.** This file is generated — run `bin/journal-index` after every
 append; `bin/journal-index --check` fails when it is stale.
 
 ## 2026-08
 
 - **2026-08-16** — [r33 retires: eleven corrections, and the review layer that caught the fewest of them](2026-08/2026-08-16-r33-retires-eleven-corrections-and-where-they-came-from.md)
+- **2026-08-16** — [retirement record, `r41`: the count was clean and the match was a bug](2026-08/2026-08-16-retirement-record-r41-the-count-was-clean-and-the-match-was-a-bug.md)
 - **2026-08-15** — [A field became load-bearing and there was nothing to grep for](2026-08/2026-08-15-a-field-became-load-bearing-and-there-was-nothing-to-grep-for.md)
 - **2026-08-15** — [Every test passed and the design was unusable](2026-08/2026-08-15-every-test-passed-and-the-design-was-unusable.md)
 - **2026-08-15** — [five flake issues, and one of them was a flaky test](2026-08/2026-08-15-five-flake-issues-and-one-of-them-was-a-flaky-test.md)
