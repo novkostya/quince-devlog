@@ -86,12 +86,13 @@ this index reads, once as the entry's own bold lead.
 [Retired lettered ids `(a)`–`(do)`](letters.md) — resolved to the entries that mint them, for the
 citations in canon and git history that still use them.
 
-**361 entries · 2026-07-18 → 2026-08-16.** This file is generated — run `bin/journal-index` after every
+**362 entries · 2026-07-18 → 2026-08-16.** This file is generated — run `bin/journal-index` after every
 append; `bin/journal-index --check` fails when it is stale.
 
 ## 2026-08
 
 - **2026-08-16** — [A field named `physical` that nothing measured, and the objection that killed its replacement](2026-08/2026-08-16-a-field-named-physical-that-nothing-measured.md)
+- **2026-08-16** — [Python leaves a tree that never ran it, and the ordering rule protecting it guarded nothing](2026-08/2026-08-16-python-leaves-a-tree-that-never-ran-it.md)
 - **2026-08-16** — [quince stops owning a muxer, and a spec cited a ruling nobody could verify](2026-08/2026-08-16-quince-stops-owning-a-muxer.md)
 - **2026-08-16** — [r33 retires: eleven corrections, and the review layer that caught the fewest of them](2026-08/2026-08-16-r33-retires-eleven-corrections-and-where-they-came-from.md)
 - **2026-08-16** — [retirement record, `r41`: the count was clean and the match was a bug](2026-08/2026-08-16-retirement-record-r41-the-count-was-clean-and-the-match-was-a-bug.md)
