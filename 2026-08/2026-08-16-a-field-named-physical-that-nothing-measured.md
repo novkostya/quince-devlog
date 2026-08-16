@@ -47,3 +47,15 @@ The architect had told me *"take the oid now, while the branch exists"* while po
 ## Not fixed, and now measured
 
 **quince#1048 — `story12:483` fails intermittently and it is not rare.** Two failures in twelve `main` runs, but two in three today, with an identical signature both times (`Expected: 200, Received: 0`). Every commit between the last green run and the first failure is **test-only**, so the application the browser loads did not change; the second failure's entire diff is 17 lines in one Go test file. The obvious explanation — a page not yet tall enough to scroll — is refuted by the test's own `expectCanHold` guard, which asserts scrollability immediately before the scroll. Two traces now exist and neither has been opened; they are the only artifact separating *scroll never took effect* from *scroll set and undone*.
+
+---
+
+**Annotation, same day, after review** (`decisions/0006` — added, not rewritten).
+
+**A fourth thing this session got told, and it is the one worth keeping.** The `CLAUDE.md` guard above (quince#1052) was blocked on a claim I had *already flagged as unproven and shipped anyway*: **"the branch MOVING is the COMMON one."** The PR body said, in as many words, *"rests on the mechanism, not on a count. If a reviewer wants that softened, say so."*
+
+It is false. `delete_branch_on_merge` is unconditional, so **deletion is the strict upper bound** — a rebase additionally requires the branch to be `BEHIND` *and* awaiting the merging seat. Four of four merges that day deleted the branch; two of four were rebased. The mechanism was in front of me and I wrote a comparative from *"§5 makes it routine"*, which establishes **routine** and nothing else.
+
+**The lesson is not "flag your uncertainty" — I did that, and it did not help.** Flagging converts a false claim into a false claim with a footnote, and canon does not carry footnotes into the next reader's head. **A claim you cannot support does not get softened. It gets removed**, and here removing it produced a *stronger* paragraph: the real distinction was never frequency but **loudness** — deletion fails loud (`fatal: invalid upstream`, nothing replayed) where a moved ref fails silent (real oid, clean rebase, wrong replay range, ending at the silent revert canon already names). That is provable from mechanism alone and needs no count.
+
+Filed under *state honesty*: the rule reaches claims about the project's own process, not only about backups.
