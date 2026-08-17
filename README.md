@@ -86,12 +86,13 @@ this index reads, once as the entry's own bold lead.
 [Retired lettered ids `(a)`–`(do)`](letters.md) — resolved to the entries that mint them, for the
 citations in canon and git history that still use them.
 
-**379 entries · 2026-07-18 → 2026-08-17.** This file is generated — run `bin/journal-index` after every
+**380 entries · 2026-07-18 → 2026-08-17.** This file is generated — run `bin/journal-index` after every
 append; `bin/journal-index --check` fails when it is stale.
 
 ## 2026-08
 
 - **2026-08-17** — [six PRs landed, and the thing worth writing down is the gate that kept reporting green over a claim it could not test](2026-08/2026-08-17-a-green-gate-that-could-not-have-failed.md)
+- **2026-08-17** — [a security policy that claimed an exposure the product never had](2026-08/2026-08-17-a-security-policy-that-claimed-an-exposure-the-product-never-had.md)
 - **2026-08-17** — [a substitution leaves no gap to notice](2026-08/2026-08-17-a-substitution-leaves-no-gap-to-notice.md)
 - **2026-08-17** — [a test that waits for the wrong party](2026-08/2026-08-17-a-test-that-waits-for-the-wrong-party.md)
 - **2026-08-17** — [`qn.12` builds, and the gates that mattered were the ones proven to FAIL](2026-08/2026-08-17-four-gates-that-had-to-be-proven-to-fail.md)
