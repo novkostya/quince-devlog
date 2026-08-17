@@ -70,6 +70,16 @@ threshold, so rotation is forced rather than remembered.
 **Open questions for the Operator** (tracked here until resolved):
 1. LAN registry port + creds (address recorded in `local/environment.md`; env-only,
    never committed).
+2. **Where the VAPID keypair lives** — `qn.12`,
+   [quince#1128](https://github.com/novkostya/quince/issues/1128); the `PROPOSED (gap)` block is in
+   `docs/quince.design.md` §6. D12 forbids secrets in `config.yml`, so the one place every other
+   setting lives is closed by rule. Three homes offered: the app DB · a `0600` file beside the
+   pairing records · operator-supplied. **What makes it a real question is that the keypair is
+   persistent and losing it is SILENT** — the public half is baked into every subscription a phone
+   has ever made, so regenerating it produces a notification that never arrives. **Blocks `qn.12`
+   slices 3 and 4 only**; the spec
+   ([quince#1127](https://github.com/novkostya/quince/pull/1127)) is written so that no story's
+   acceptance criteria depend on the answer.
 
 *`qn.6d`'s two gaps stood here as questions 2 and 3 for nine hours on 2026-08-02/03. **Both were
 ruled on 2026-08-03** — relayed by the architect seat on
