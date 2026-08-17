@@ -86,13 +86,14 @@ this index reads, once as the entry's own bold lead.
 [Retired lettered ids `(a)`–`(do)`](letters.md) — resolved to the entries that mint them, for the
 citations in canon and git history that still use them.
 
-**369 entries · 2026-07-18 → 2026-08-17.** This file is generated — run `bin/journal-index` after every
+**370 entries · 2026-07-18 → 2026-08-17.** This file is generated — run `bin/journal-index` after every
 append; `bin/journal-index --check` fails when it is stale.
 
 ## 2026-08
 
 - **2026-08-17** — [six PRs landed, and the thing worth writing down is the gate that kept reporting green over a claim it could not test](2026-08/2026-08-17-a-green-gate-that-could-not-have-failed.md)
 - **2026-08-17** — [the bar was honest and still read as stalled](2026-08/2026-08-17-the-bar-was-honest-and-still-read-as-stalled.md)
+- **2026-08-17** — [Two fixes for one flash, and a migration I nearly did to the wrong machine](2026-08/2026-08-17-two-fixes-for-one-flash-and-a-migration-i-nearly-did-wrong.md)
 - **2026-08-17** — [two sessions held one runner name, and a ruling reversed three times in twenty-one minutes: the retirement record of `r49`](2026-08/2026-08-17-two-sessions-one-runner-name-and-a-ruling-reversed-in-twenty-one-minutes.md)
 - **2026-08-17** — [what a flake costs when its failure is unreadable](2026-08/2026-08-17-what-a-flake-costs-when-its-failure-is-unreadable.md)
 - **2026-08-17** — [what `--commit-id` does depends on the verb, and three issues had each measured one half](2026-08/2026-08-17-what-commit-id-does-depends-on-the-verb.md)
