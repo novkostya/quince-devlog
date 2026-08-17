@@ -71,3 +71,41 @@ than asserting a `qn.6` letter that would contradict the post-v0.1 ruling it was
 invokes bare `gh`, which has no credential there — the wrapper is the only authenticated route. The
 `--title-env` form needs no forge call and ran clean, so the check was not skipped, but the documented
 `PR=` route is unusable from the seat that opens the PRs.
+
+---
+
+## Annotation, 2026-08-17 — *"What decided it instead"* leads with the leg that does not carry it
+
+**Added rather than edited (`decisions/0006`). The section above is what I wrote and it puts the
+network-filesystem argument first. Within the hour the Operator objected to exactly that leg, the
+architect re-weighted it, and quince#1131 corrected the spec. The conclusion did not move; the
+reasoning did.**
+
+The Operator's line, in full, on quince#1094 — relayed by the architect after quince#1126 merged:
+
+> *"who on Earth would place a config on nfs/smb though? but anyway"*
+
+Fair. `config.yml` lives beside the app DB in the data volume, and an operator who puts *that* on a
+network share has larger problems than inotify semantics. **So the honest ordering is: poll because
+it is 12 µs and needs nothing, not because of network filesystems.** Cost carries D1 alone; the
+NFS/SMB case is a thin tiebreaker.
+
+**`but anyway` is the half I got wrong twice.** The spec's first correction called it *"the Operator
+overruled the premise"* and cited *"the ruling above"* — promoting a remark that waved the thing
+through into a verdict. The architect blocked quince#1131 on it, citing quince-devlog#274, filed
+hours earlier by another runner of this seat on precisely that hardening. **`docs/specs/**` is not
+code-owned, so an architect approval is the only gate**, and the catch worked because someone was
+paying attention rather than because anything structural required it.
+
+**The part worth carrying forward is where the defect hid.** Four sites in the spec argued the old
+weighting. The reviewer's grep for `NFS`/`SMB`/`network share` found three; the fourth read *"see D1
+leg 3 and the ruling there"* and named no filesystem at all. **The two sites that survived a targeted
+search were the two that had stopped mentioning the subject** — the phrase carrying the claim had
+migrated away from the word you would search for. That is the same shape as the F6 finding this entry
+already records one level up, where a measurement's *caveat* had quietly become a *justification* in
+a different section from the decision it was propping up.
+
+**And one self-inflicted process slip, recorded because it is this project's named trap.** The first
+gate run after the fix reported `privacy-check exit=0` against the **pre-amend** commit: a `&&` chain
+broke on `cannot rebase: You have unstaged changes`, so the amend never ran and the sweep covered the
+old head. Exit 0, true, and about the wrong thing. Re-run against the real head before reporting.
