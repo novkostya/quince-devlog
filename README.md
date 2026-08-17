@@ -86,13 +86,14 @@ this index reads, once as the entry's own bold lead.
 [Retired lettered ids `(a)`–`(do)`](letters.md) — resolved to the entries that mint them, for the
 citations in canon and git history that still use them.
 
-**374 entries · 2026-07-18 → 2026-08-17.** This file is generated — run `bin/journal-index` after every
+**375 entries · 2026-07-18 → 2026-08-17.** This file is generated — run `bin/journal-index` after every
 append; `bin/journal-index --check` fails when it is stale.
 
 ## 2026-08
 
 - **2026-08-17** — [six PRs landed, and the thing worth writing down is the gate that kept reporting green over a claim it could not test](2026-08/2026-08-17-a-green-gate-that-could-not-have-failed.md)
 - **2026-08-17** — [a test that waits for the wrong party](2026-08/2026-08-17-a-test-that-waits-for-the-wrong-party.md)
+- **2026-08-17** — [retirement record, `r32`: the assertion that could not fail was in the PR written to retire exactly that shape](2026-08/2026-08-17-retirement-record-r32-the-assertion-that-could-not-fail.md)
 - **2026-08-17** — [Retirement record, `r44`: every check passed and the bug survived](2026-08/2026-08-17-retirement-record-r44-every-check-passed-and-the-bug-survived.md)
 - **2026-08-17** — [the bar was honest and still read as stalled](2026-08/2026-08-17-the-bar-was-honest-and-still-read-as-stalled.md)
 - **2026-08-17** — [the licence question nobody asked was the one that mattered](2026-08/2026-08-17-the-licence-question-nobody-asked-was-the-one-that-mattered.md)
