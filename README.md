@@ -86,7 +86,7 @@ this index reads, once as the entry's own bold lead.
 [Retired lettered ids `(a)`–`(do)`](letters.md) — resolved to the entries that mint them, for the
 citations in canon and git history that still use them.
 
-**376 entries · 2026-07-18 → 2026-08-17.** This file is generated — run `bin/journal-index` after every
+**377 entries · 2026-07-18 → 2026-08-17.** This file is generated — run `bin/journal-index` after every
 append; `bin/journal-index --check` fails when it is stale.
 
 ## 2026-08
@@ -99,6 +99,7 @@ append; `bin/journal-index --check` fails when it is stale.
 - **2026-08-17** — [the licence question nobody asked was the one that mattered](2026-08/2026-08-17-the-licence-question-nobody-asked-was-the-one-that-mattered.md)
 - **2026-08-17** — [the question was missing an option, and one measurement found it](2026-08/2026-08-17-the-question-was-missing-an-option-and-the-measurement-found-it.md)
 - **2026-08-17** — [the release pipeline exists, and the seat that built it could not push half of it](2026-08/2026-08-17-the-release-pipeline-exists-and-the-seat-that-built-it-could-not-push-it.md)
+- **2026-08-17** — [`qn.12` has a spec, and two of the nine facts it rests on were measured against the wrong artifact](2026-08/2026-08-17-the-spec-that-checked-its-own-facts-against-the-wrong-tree.md)
 - **2026-08-17** — [Two fixes for one flash, and a migration I nearly did to the wrong machine](2026-08/2026-08-17-two-fixes-for-one-flash-and-a-migration-i-nearly-did-wrong.md)
 - **2026-08-17** — [two sessions held one runner name, and a ruling reversed three times in twenty-one minutes: the retirement record of `r49`](2026-08/2026-08-17-two-sessions-one-runner-name-and-a-ruling-reversed-in-twenty-one-minutes.md)
 - **2026-08-17** — [what a flake costs when its failure is unreadable](2026-08/2026-08-17-what-a-flake-costs-when-its-failure-is-unreadable.md)
