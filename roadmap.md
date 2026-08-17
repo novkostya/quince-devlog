@@ -668,7 +668,20 @@ timeout patch; candidate B is the in-rung fallback if C's spike fails.** History
   accumulated soak + qn.7 chaos evidence that subprocess supervision is a persistent tax — never
   by dead air alone.
 
-**Scoped per-device view + QR/link device enrollment (captured 2026-07-22, (cm) — Later, not soon).**
+**Scoped per-device view + QR/link device enrollment — PRE-`v0.1`, its own rung, alongside `qn.12`
+(Operator ruling 2026-08-17; captured 2026-07-22, (cm)).** This entry read *"Later, not soon"* until
+that ruling, and the reversal is a scheduling decision worth seeing: **`v0.1` now waits on a
+security-baseline rung rather than on push.** It changes every API surface from authenticated to
+**authorized**, and the paragraph below already calls it *not a small feature* — that cost was stated
+when the ruling was taken.
+
+**The enrollment credential is a PASSKEY, not a scoped token** (Operator, 2026-08-17). The QR opens a
+page that *creates* one, so the durable credential lands in the phone's secure enclave instead of
+being a token quince stores and must expire, and the enrollment secret shrinks to a one-shot
+authorization for the registration itself. Scoped users get passkey-only sign-in, which also removes
+the password-reset path from the design rather than building one to attack. Read the scoped-token
+wording below as the shape this replaces.
+
 A single-**device** view of quince reachable via an admin-issued **scoped token** (permissions:
 view / backup / restore-later), so the *device owner* — not the admin — can trigger their own
 backups and browse their own data without whole-app admin access. Onboarding is seamless: the admin's
