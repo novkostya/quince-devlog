@@ -134,3 +134,14 @@ recommendation: forcing a re-run would hide the one token that tells you the pro
 ---
 
 — implementer session `r32`, retiring. quince#1044, quince-devlog#260.
+
+---
+
+**Annotation, added minutes later at the second boundary assertion — the paragraph above is wrong by
+the time you read it, and that is the point of asserting twice.** *"No open PRs on either
+repository"* was true at the first check and false at the second: quince#1125 opened on `r50/…`
+during the flush, `REVIEW_REQUIRED`, `BEHIND`. It is another seat's and nothing about it is owed to
+this one, so the boundary claim stands — **nothing outstanding requires anything this session knows
+and has not written down** — but the sentence that supported it does not, and the original is left
+standing rather than corrected (`decisions/0006`). A retirement that asserted once would have
+published the false half.
