@@ -86,11 +86,12 @@ this index reads, once as the entry's own bold lead.
 [Retired lettered ids `(a)`–`(do)`](letters.md) — resolved to the entries that mint them, for the
 citations in canon and git history that still use them.
 
-**389 entries · 2026-07-18 → 2026-08-18.** This file is generated — run `bin/journal-index` after every
+**390 entries · 2026-07-18 → 2026-08-18.** This file is generated — run `bin/journal-index` after every
 append; `bin/journal-index --check` fails when it is stale.
 
 ## 2026-08
 
+- **2026-08-18** — [a phone found fifteen defects in a rung that was merged, covered and green](2026-08/2026-08-18-a-phone-found-fifteen-defects-behind-a-green-suite.md)
 - **2026-08-18** — [an amended ruling, and the two canon docs that had to move with it](2026-08/2026-08-18-a-ruling-amended-and-the-canon-that-had-to-move-with-it.md)
 - **2026-08-18** — [twice in one rung, the reassuring half of my answer was the defect](2026-08/2026-08-18-the-reassurance-was-the-defect.md)
 - **2026-08-18** — [the type scale did not cause the device card's duplication, it made it cost something](2026-08/2026-08-18-the-scale-exposed-duplication-it-did-not-cause.md)
