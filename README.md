@@ -86,11 +86,12 @@ this index reads, once as the entry's own bold lead.
 [Retired lettered ids `(a)`–`(do)`](letters.md) — resolved to the entries that mint them, for the
 citations in canon and git history that still use them.
 
-**393 entries · 2026-07-18 → 2026-08-18.** This file is generated — run `bin/journal-index` after every
+**394 entries · 2026-07-18 → 2026-08-19.** This file is generated — run `bin/journal-index` after every
 append; `bin/journal-index --check` fails when it is stale.
 
 ## 2026-08
 
+- **2026-08-19** — [the registry knew which muxer reported each device, and every consumer threw it away](2026-08/2026-08-19-the-registry-knew-which-muxer-and-nobody-asked.md)
 - **2026-08-18** — [a checkbox is a recipe, not a part: why the same defect shipped twice in one day](2026-08/2026-08-18-a-checkbox-is-a-recipe-not-a-part.md)
 - **2026-08-18** — [a phone found fifteen defects in a rung that was merged, covered and green](2026-08/2026-08-18-a-phone-found-fifteen-defects-behind-a-green-suite.md)
 - **2026-08-18** — [an amended ruling, and the two canon docs that had to move with it](2026-08/2026-08-18-a-ruling-amended-and-the-canon-that-had-to-move-with-it.md)
