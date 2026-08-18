@@ -86,7 +86,7 @@ this index reads, once as the entry's own bold lead.
 [Retired lettered ids `(a)`–`(do)`](letters.md) — resolved to the entries that mint them, for the
 citations in canon and git history that still use them.
 
-**392 entries · 2026-07-18 → 2026-08-18.** This file is generated — run `bin/journal-index` after every
+**393 entries · 2026-07-18 → 2026-08-18.** This file is generated — run `bin/journal-index` after every
 append; `bin/journal-index --check` fails when it is stale.
 
 ## 2026-08
@@ -95,6 +95,7 @@ append; `bin/journal-index --check` fails when it is stale.
 - **2026-08-18** — [a phone found fifteen defects in a rung that was merged, covered and green](2026-08/2026-08-18-a-phone-found-fifteen-defects-behind-a-green-suite.md)
 - **2026-08-18** — [an amended ruling, and the two canon docs that had to move with it](2026-08/2026-08-18-a-ruling-amended-and-the-canon-that-had-to-move-with-it.md)
 - **2026-08-18** — [eight settings existed, all of them worked, and none of them had a screen](2026-08/2026-08-18-eight-settings-existed-and-none-of-them-had-a-screen.md)
+- **2026-08-18** — [the pattern was in the tree, correct, commented, and a third seat had to point at it](2026-08/2026-08-18-the-pattern-was-in-the-tree-correct-and-unfindable.md)
 - **2026-08-18** — [twice in one rung, the reassuring half of my answer was the defect](2026-08/2026-08-18-the-reassurance-was-the-defect.md)
 - **2026-08-18** — [the type scale did not cause the device card's duplication, it made it cost something](2026-08/2026-08-18-the-scale-exposed-duplication-it-did-not-cause.md)
 - **2026-08-18** — [#1155 landed in three, and the two most useful findings came from being wrong in public](2026-08/2026-08-18-the-typography-work-landed-in-three.md)
