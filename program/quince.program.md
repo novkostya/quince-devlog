@@ -116,11 +116,33 @@ On hitting one:
 2. **Rung-local** → decide it yourself within canon constraints, record the decision in
    the rung's spec, add one line to the progress decisions log (marked *rung-ruled*).
    It is now canon; a later rung changes it only via this same protocol.
-3. **Architectural** → write the smallest complete decision text INTO the affected
-   canon doc, clearly marked `PROPOSED (gap): …`, add it to the open-questions list in
-   the progress dashboard, report it, and stop that thread (pick up another story of
-   the rung if one is independent). An Operator ruling flips `PROPOSED` to decided —
-   possibly edited. Never build on the proposal while it's pending.
+3. **Architectural** → **file it as an issue and stop that thread** (pick up another story of
+   the rung if one is independent). Never build on it while it is pending.
+
+   **The `PROPOSED (gap)` BLOCK IS RETIRED — Operator ruling 2026-08-18 (quince#1219), written
+   into `CLAUDE.md` by quince#1220.** This step used to require the decision text written INTO
+   the affected canon doc, marked `PROPOSED (gap): …`, *as well as* an entry in the dashboard's
+   open-questions list. That convention predates the forge being the communication substrate:
+   issues are the tracker, so a block plus an issue says the same thing twice and charges two
+   PR round trips before any code exists. **The issue is now the whole of the open-question
+   record.**
+
+   It is also retired because it had already failed as a guard — three times in three days
+   across two seats, once inverted, where a heading still read `PROPOSED (gap)` about an
+   identity that had been ruled, built and in daily use for a day. A stale marker is read as
+   authority, which is worse than no marker.
+
+   **WHAT DOES NOT CHANGE: the ruling lands in git, written out in full — not a link.** When
+   `quince-bot` was suspended, 196 of its commits stayed readable and 0 of its issues and PRs
+   did; a commit's author is metadata, an issue's author is a visibility key. That is the same
+   evidence that put this journal on a git branch. **An issue is where a question is decided;
+   git is where the decision survives.**
+
+   Put it in the **cheapest durable home** — the rung spec or the code comment where it binds,
+   neither of which is code-owned — and ride it in the PR that implements the work. A standalone
+   canon PR is for a ruling no code carries. If a canon doc wants a marker while a question is
+   open, use a **pointer** (`Open question: quince#NNNN`), never an assertion: a pointer cannot
+   go stale about the state because it does not claim it.
 4. **Never**: silently deviate, silently "fix" a doc-vs-reality contradiction, or leave
    a discovered gap undocumented because it was out of scope.
 
