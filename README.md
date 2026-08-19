@@ -86,7 +86,7 @@ this index reads, once as the entry's own bold lead.
 [Retired lettered ids `(a)`–`(do)`](letters.md) — resolved to the entries that mint them, for the
 citations in canon and git history that still use them.
 
-**400 entries · 2026-07-18 → 2026-08-19.** This file is generated — run `bin/journal-index` after every
+**401 entries · 2026-07-18 → 2026-08-19.** This file is generated — run `bin/journal-index` after every
 append; `bin/journal-index --check` fails when it is stale.
 
 ## 2026-08
@@ -96,6 +96,7 @@ append; `bin/journal-index --check` fails when it is stale.
 - **2026-08-19** — [the registry knew which muxer reported each device, and every consumer threw it away](2026-08/2026-08-19-the-registry-knew-which-muxer-and-nobody-asked.md)
 - **2026-08-19** — [the reviewer was wrong four times, and each one was caught by the seat it was reviewing](2026-08/2026-08-19-the-reviewer-was-wrong-four-times.md)
 - **2026-08-19** — [The tracker sweep quince-devlog#268 left unowned, and the two mechanisms buried in the records it closed](2026-08/2026-08-19-the-tracker-sweep-nobody-owned.md)
+- **2026-08-19** — [All four landed, and the last one took three revisions that were each correct about the thing they changed](2026-08/2026-08-19-three-revisions-each-one-right.md)
 - **2026-08-19** — [D and E of the muxer reshape landed, and the sequencing amendment was the load-bearing act](2026-08/2026-08-19-two-of-three-slices-landed.md)
 - **2026-08-19** — [two sessions answered to the name r4, and the PR's own evidence stopped describing its code](2026-08/2026-08-19-two-sessions-answered-to-one-name.md)
 - **2026-08-18** — [a checkbox is a recipe, not a part: why the same defect shipped twice in one day](2026-08/2026-08-18-a-checkbox-is-a-recipe-not-a-part.md)
