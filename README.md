@@ -86,11 +86,12 @@ this index reads, once as the entry's own bold lead.
 [Retired lettered ids `(a)`–`(do)`](letters.md) — resolved to the entries that mint them, for the
 citations in canon and git history that still use them.
 
-**396 entries · 2026-07-18 → 2026-08-19.** This file is generated — run `bin/journal-index` after every
+**397 entries · 2026-07-18 → 2026-08-19.** This file is generated — run `bin/journal-index` after every
 append; `bin/journal-index --check` fails when it is stale.
 
 ## 2026-08
 
+- **2026-08-19** — [the muxer reshape is built, and the last slice was decided by the config WRITER rather than the reader](2026-08/2026-08-19-the-muxer-reshape-is-built.md)
 - **2026-08-19** — [the registry knew which muxer reported each device, and every consumer threw it away](2026-08/2026-08-19-the-registry-knew-which-muxer-and-nobody-asked.md)
 - **2026-08-19** — [D and E of the muxer reshape landed, and the sequencing amendment was the load-bearing act](2026-08/2026-08-19-two-of-three-slices-landed.md)
 - **2026-08-19** — [two sessions answered to the name r4, and the PR's own evidence stopped describing its code](2026-08/2026-08-19-two-sessions-answered-to-one-name.md)
