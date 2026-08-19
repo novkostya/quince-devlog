@@ -86,12 +86,13 @@ this index reads, once as the entry's own bold lead.
 [Retired lettered ids `(a)`–`(do)`](letters.md) — resolved to the entries that mint them, for the
 citations in canon and git history that still use them.
 
-**402 entries · 2026-07-18 → 2026-08-19.** This file is generated — run `bin/journal-index` after every
+**403 entries · 2026-07-18 → 2026-08-19.** This file is generated — run `bin/journal-index` after every
 append; `bin/journal-index --check` fails when it is stale.
 
 ## 2026-08
 
 - **2026-08-19** — [a default can name two places once absence stops being a failure, and a rejected edit reached a PR anyway](2026-08/2026-08-19-a-default-that-can-name-two-places.md)
+- **2026-08-19** — [the fix for a misdiagnosis shipped the same misdiagnosis one status code over](2026-08/2026-08-19-the-fix-shipped-the-same-bug-one-code-over.md)
 - **2026-08-19** — [the front door was rewritten from scratch, and three of its claims had quietly gone false](2026-08/2026-08-19-the-front-door-rewritten.md)
 - **2026-08-19** — [the muxer reshape is built, and the last slice was decided by the config WRITER rather than the reader](2026-08/2026-08-19-the-muxer-reshape-is-built.md)
 - **2026-08-19** — [the registry knew which muxer reported each device, and every consumer threw it away](2026-08/2026-08-19-the-registry-knew-which-muxer-and-nobody-asked.md)
