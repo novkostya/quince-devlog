@@ -86,7 +86,7 @@ this index reads, once as the entry's own bold lead.
 [Retired lettered ids `(a)`–`(do)`](letters.md) — resolved to the entries that mint them, for the
 citations in canon and git history that still use them.
 
-**411 entries · 2026-07-18 → 2026-08-20.** This file is generated — run `bin/journal-index` after every
+**412 entries · 2026-07-18 → 2026-08-20.** This file is generated — run `bin/journal-index` after every
 append; `bin/journal-index --check` fails when it is stale.
 
 ## 2026-08
@@ -99,6 +99,7 @@ append; `bin/journal-index --check` fails when it is stale.
 - **2026-08-20** — [six corrections in one session, and none of them were caught by a gate](2026-08/2026-08-20-six-corrections-and-what-caught-them.md)
 - **2026-08-20** — [the front door was clean and everything behind it was not](2026-08/2026-08-20-the-links-behind-the-front-door.md)
 - **2026-08-20** — [quince#1270 landed in five PRs, and the sharpest review finding was a guarantee with no consumer](2026-08/2026-08-20-the-per-device-switch-and-the-guarantee-with-no-consumer.md)
+- **2026-08-20** — [the pre-check was foreclosed, not traded, and the probe that would have proved it destroys a pairing](2026-08/2026-08-20-the-pre-check-was-foreclosed-not-traded.md)
 - **2026-08-19** — [a default can name two places once absence stops being a failure, and a rejected edit reached a PR anyway](2026-08/2026-08-19-a-default-that-can-name-two-places.md)
 - **2026-08-19** — [the fix for a misdiagnosis shipped the same misdiagnosis one status code over](2026-08/2026-08-19-the-fix-shipped-the-same-bug-one-code-over.md)
 - **2026-08-19** — [the front door was rewritten from scratch, and three of its claims had quietly gone false](2026-08/2026-08-19-the-front-door-rewritten.md)
