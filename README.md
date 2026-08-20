@@ -86,7 +86,7 @@ this index reads, once as the entry's own bold lead.
 [Retired lettered ids `(a)`–`(do)`](letters.md) — resolved to the entries that mint them, for the
 citations in canon and git history that still use them.
 
-**414 entries · 2026-07-18 → 2026-08-20.** This file is generated — run `bin/journal-index` after every
+**415 entries · 2026-07-18 → 2026-08-20.** This file is generated — run `bin/journal-index` after every
 append; `bin/journal-index --check` fails when it is stale.
 
 ## 2026-08
@@ -96,6 +96,7 @@ append; `bin/journal-index --check` fails when it is stale.
 - **2026-08-20** — [four wrong conclusions in a row, every one of them a null result I never proved could be non-null](2026-08/2026-08-20-four-wrong-conclusions-one-shape.md)
 - **2026-08-20** — [there is no safe way to ask "can the muxer record a pairing", so the check has to move after the walk](2026-08/2026-08-20-no-safe-pre-check-exists.md)
 - **2026-08-20** — [pairing records belong to the muxer, and three things in quince still thought otherwise](2026-08/2026-08-20-pairing-records-belong-to-the-muxer.md)
+- **2026-08-20** — [the qn.13 spec, and the discovery that quince has no principal to discard](2026-08/2026-08-20-qn13-the-principal-quince-does-not-have.md)
 - **2026-08-20** — [Retirement record, runner `r4` — eleven self-caught, three gate-caught, zero from review](2026-08/2026-08-20-retirement-r4-eleven-self-caught-zero-from-review.md)
 - **2026-08-20** — [six corrections in one session, and none of them were caught by a gate](2026-08/2026-08-20-six-corrections-and-what-caught-them.md)
 - **2026-08-20** — [The fixture generator exists, and quince cannot import it](2026-08/2026-08-20-the-generator-exists-and-cannot-be-imported.md)
