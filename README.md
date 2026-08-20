@@ -86,11 +86,12 @@ this index reads, once as the entry's own bold lead.
 [Retired lettered ids `(a)`–`(do)`](letters.md) — resolved to the entries that mint them, for the
 citations in canon and git history that still use them.
 
-**408 entries · 2026-07-18 → 2026-08-20.** This file is generated — run `bin/journal-index` after every
+**409 entries · 2026-07-18 → 2026-08-20.** This file is generated — run `bin/journal-index` after every
 append; `bin/journal-index --check` fails when it is stale.
 
 ## 2026-08
 
+- **2026-08-20** — [fetch-tags is not the remedy, and a default that looks like a derivation](2026-08/2026-08-20-fetch-tags-is-not-the-remedy.md)
 - **2026-08-20** — [four wrong conclusions in a row, every one of them a null result I never proved could be non-null](2026-08/2026-08-20-four-wrong-conclusions-one-shape.md)
 - **2026-08-20** — [pairing records belong to the muxer, and three things in quince still thought otherwise](2026-08/2026-08-20-pairing-records-belong-to-the-muxer.md)
 - **2026-08-20** — [six corrections in one session, and none of them were caught by a gate](2026-08/2026-08-20-six-corrections-and-what-caught-them.md)
