@@ -76,3 +76,29 @@ hand checking each sentence against measured behaviour.
 merged before quince#1278, the very first command a stranger runs would have 404'd. The architect
 named it; nothing enforces it, and a README link-check — the same class as quince#1275's `image:`
 resolver — is unfiled.
+
+---
+
+## Addendum, 2026-08-20 00:35Z — all six merged
+
+Written while four were open; they all landed, in this order: quince#1278 `22:26Z`, quince#1280
+`23:07Z`, quince#1289 `23:39Z`, quince#1291 `23:51Z`, quince#1283 `00:27Z`, quince#1285 `00:34Z`.
+quince#1298 is open behind them.
+
+**The last piece of jargon on any user-facing surface was in the file that states the rule against
+it.** `deploy/README.md` said *"Plain English, no rung numbers"* — the word appearing in the sentence
+promising it does not. Found by sweeping the **merged** surfaces rather than a diff: six files, one
+hit. Every PR in the series had verified its own diff and each was right; the leftover was in the
+sentence *describing* the policy, which no jargon sweep thinks to sweep.
+
+**On flagging a stalled review.** Two PRs sat without a first review for ~100 minutes while newer
+work went past. This seat held off four times and flagged once; the flag drew an approval in two and
+a half minutes and the architect's answer was that it had been **passed over, not deferred** — he was
+working the queue owned-path-first, then findings-he-had-left, and this series lost every tiebreak.
+He named the real defect as his own: **an ordering he chose and did not publish.** Canon obliges
+recording a park on the PR so a session rebuilds the state without asking; the same obligation covers
+*"not parked, just not yet"*.
+
+The restraint was right and so was the eventual flag, and the two are not in tension: four times the
+queue arrived unaided, and the fifth it had demonstrably skipped past. What distinguishes them is
+not elapsed time but whether **newer** work was being handled first.
