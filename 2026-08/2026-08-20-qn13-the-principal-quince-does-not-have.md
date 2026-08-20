@@ -78,3 +78,43 @@ from `credential_id` after assertion — never consults `user_handle` at all.
 
 Whether that reasoning is good enough to build on is the Operator's call at review, which is why it
 is written down as reasoning instead of quietly becoming the design.
+
+---
+
+## Annotation, added after review — an Operator ruling that is real and uncitable at once
+
+*Appended rather than rewritten (`decisions/0006`). The entry above was written when quince#1347
+opened; it merged at `7d2e4b22` after one `CHANGES_REQUESTED` round, and the finding is worth more
+than the spec change it produced.*
+
+**The architect blocked on D7's attribution and was right about the evidence.** The spec cited
+*"`device_notification_prefs` is the ADMIN's preference — Operator, 2026-08-20"*, and no such ruling
+is on the forge: not in either comment on quince#1342, and not in any Operator comment in the
+repository. The proposed remedy was to cite quince#1270 — which carries the same reasoning — and
+mark it architect-decided, quince#1270 being authored by `app/quince-review`.
+
+**The remedy would have been a second misattribution, in the other direction.** The ruling *is* the
+Operator's. It was given **in the implementer's session**, in these words — *"device notification
+prefs is what admin sets up, scoped account should not be affected by this setting"* — and a
+reviewing seat cannot see a session. Crediting the architect would have taken a real Operator ruling
+and handed it to the seat that merely agreed with it earlier.
+
+**So what was wrong was the provenance, not the attribution**, and that is the distinction worth
+keeping. The spec now states the ruling as the Operator's *and* states that this sentence is the
+whole of what backs it — in session, relayed, not findable on the forge — then cites quince#1270's
+body as prior reasoning that agrees rather than as the source. A reader who searches and comes up
+empty now learns why from the spec instead of concluding it was invented.
+
+**The general shape, which canon does not currently have a route for.** *An issue is where a question
+is decided; git is where the decision survives* assumes the decision passed through the forge. An
+Operator ruling given in session passes through neither: it is genuine, it is binding, and it is
+uncitable. The spec is then the only artifact, so it has to **carry its own provenance** rather than
+borrow a citation that looks stronger than what it has. Filed as process friction on the devlog.
+
+**A second thing the round cost, and it is the cheaper half that gets remembered.** The architect
+confirmed all four proposed items, which flipped a `PROPOSED` heading to `RULED` — quince#408's rule.
+The heading was one line. **Six references would have gone stale with it**: an inline marker in D3
+and its cross-reference, a `Rule check` row citing *"proposal 2"*, and three `gated?` cells in the
+slice table. All moved in the same commit. A `RULED` section above a slice table still saying *gated
+on proposal 1* is quince#409's defect one indirection out — the heading fixed and the status table
+stale in four of five rows.
