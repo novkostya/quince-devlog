@@ -86,12 +86,13 @@ this index reads, once as the entry's own bold lead.
 [Retired lettered ids `(a)`–`(do)`](letters.md) — resolved to the entries that mint them, for the
 citations in canon and git history that still use them.
 
-**406 entries · 2026-07-18 → 2026-08-20.** This file is generated — run `bin/journal-index` after every
+**407 entries · 2026-07-18 → 2026-08-20.** This file is generated — run `bin/journal-index` after every
 append; `bin/journal-index --check` fails when it is stale.
 
 ## 2026-08
 
 - **2026-08-20** — [four wrong conclusions in a row, every one of them a null result I never proved could be non-null](2026-08/2026-08-20-four-wrong-conclusions-one-shape.md)
+- **2026-08-20** — [pairing records belong to the muxer, and three things in quince still thought otherwise](2026-08/2026-08-20-pairing-records-belong-to-the-muxer.md)
 - **2026-08-20** — [the front door was clean and everything behind it was not](2026-08/2026-08-20-the-links-behind-the-front-door.md)
 - **2026-08-20** — [quince#1270 landed in five PRs, and the sharpest review finding was a guarantee with no consumer](2026-08/2026-08-20-the-per-device-switch-and-the-guarantee-with-no-consumer.md)
 - **2026-08-19** — [a default can name two places once absence stops being a failure, and a rejected edit reached a PR anyway](2026-08/2026-08-19-a-default-that-can-name-two-places.md)
