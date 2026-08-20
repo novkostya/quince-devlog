@@ -10,17 +10,12 @@ hardware-proven over USB and Wi-Fi at `qn.6b` and runs under real daily use on s
 **Live risks, carried into the unfreeze rather than gating it.** None is a gate. Each is something a
 session meets and works around, named here so meeting one is recognised rather than rediscovered.
 
-- **quince#202 — the largest, and it grows at the unfreeze.** `forge-watch` is structurally blind to
-  the trunk, so `main` can be red with a healthy watch running; it was red for 4h40m and found by
-  accident. Ruled 2026-07-30, **not built**.
 - **quince-devlog#56** — a watch event names the last commenter and counts the rest.
 - **G5 (watchdog) is unbuilt** — `stalled` is specified and not implemented; a gate that cannot be
   run cannot hold a door.
 - **quince#32's proof is owed to an Operator re-provision window** — starting the arch service from
   a clean `conf.d` cannot be proven from a session the service hosts. **quince#33** wants a re-file.
   Both are unreadable to every identity (`quince-bot` is suspended, quince#173).
-- **quince#54** — nothing detects drift between `loop-protocol.md` and the commands inline; two
-  instances on 2026-07-30, both claim-level, so the gate that issue proposes would have passed both.
 
 **Where the rest of this file went.** The narrative journal — 177 entries, and everything this
 paragraph used to summarise — is now **one file per entry on the
