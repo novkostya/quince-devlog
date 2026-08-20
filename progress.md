@@ -10,6 +10,10 @@ hardware-proven over USB and Wi-Fi at `qn.6b` and runs under real daily use on s
 **Live risks, carried into the unfreeze rather than gating it.** None is a gate. Each is something a
 session meets and works around, named here so meeting one is recognised rather than rediscovered.
 
+- **quince#1235 — a run of failed trunk reads does not escalate.** `fetch_trunk`'s failure is
+  consumed by its caller, the tick returns 0, and the consecutive-failure counter is reset, so a
+  trunk nobody can read is indistinguishable from clean ticks and `main` can be red behind a
+  healthy-looking watch. The structural blindness quince#202 named is fixed; this is the residue.
 - **quince-devlog#56** — a watch event names the last commenter and counts the rest.
 - **G5 (watchdog) is unbuilt** — `stalled` is specified and not implemented; a gate that cannot be
   run cannot hold a door.
