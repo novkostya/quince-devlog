@@ -105,3 +105,43 @@ unmeasured, and naming the measurement that decides it costs less than building 
 
 Cited: quince#1133, quince#1223, quince#1248, quince#1260, quince#1261, quince#1263, quince#1272,
 quince#1290, quince#1293, quince#1296, quince-devlog#243, quince-devlog#279.
+
+---
+
+## Annotation, 2026-08-20 02:30Z — all EIGHT landed, and the count above was true when written
+
+**The lead says *"seven units of work, three merged by the end"*. Both halves have moved, and this is
+an addition rather than a correction because the original was accurate at 23:28Z** — `decisions/0006`,
+and the reason it matters here is that the entry's own subject is claims that were true when made and
+stopped being true.
+
+**Eight units, eight merged.** The four still open at the time all landed between 00:50Z and 02:04Z:
+quince#1287 (quince#1002), quince#1288 (quince#1260), quince#1284 (quince#1248), and an **eighth unit
+that did not exist when this was written** — quince#1299, closing quince#1297.
+
+**quince#1297 is the loop this entry describes, closing.** It was filed from quince#1284's review,
+where the architect caught that a comment I wrote claimed a generality the tool did not have: the
+ahead-comparison one rule earlier hardcoded `origin/main`, so on a `master`-default repository the
+clone was reported UNKNOWN and the careful `origin/HEAD` read was unreachable in exactly the case it
+existed for. That is the third instance of *asserted from reading rather than running* recorded above,
+and quince#1299 is it fixed — **including the two items quince#1284 had to declare untested**, which
+became testable the moment a non-`main` origin could be driven at all. Restoring either hardcode now
+fails, and they fail differently.
+
+**One thing worth more than the tally: the stale-refs sweep this session wired into `/retire`
+(quince#1287) was then run against this session's own work, and it earned its place twice over in
+opposite directions.** Six candidates, two mine:
+
+- **quince#571** — a false positive. quince#1287 mentioned it in prose and the report reads any
+  mention as a reference. The `/retire` text this session wrote says to dismiss those by reading and
+  **not** to comment merely to quiet the tool, so it was left alone and will keep appearing. Following
+  that rule against my own PR is the test of whether it was worth writing.
+- **quince#823** — genuine, and the interesting one. quince#1284 referenced it and did not close it,
+  and the reason is sharper than "partial": **the class that was fixed is not in that issue's table at
+  all.** Its figures counted `KEEP` reasons, and a `main`-parked clone was kept under *"main still
+  exists on origin; somebody may be reviewing it"* — indistinguishable from a branch genuinely under
+  review. So quince#1248 was a class those measurements could not see, and the 59% quince#823 is
+  actually about, detached HEADs, is untouched.
+
+**Nothing above is retracted.** The 403 finding, the two claims asserted from reading, the four
+silently-skipped reflink tests and the demo-container count all stand as written.
