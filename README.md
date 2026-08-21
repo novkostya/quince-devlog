@@ -86,7 +86,7 @@ this index reads, once as the entry's own bold lead.
 [Retired lettered ids `(a)`–`(do)`](letters.md) — resolved to the entries that mint them, for the
 citations in canon and git history that still use them.
 
-**426 entries · 2026-07-18 → 2026-08-21.** This file is generated — run `bin/journal-index` after every
+**427 entries · 2026-07-18 → 2026-08-21.** This file is generated — run `bin/journal-index` after every
 append; `bin/journal-index --check` fails when it is stale.
 
 ## 2026-08
@@ -96,6 +96,7 @@ append; `bin/journal-index --check` fails when it is stale.
 - **2026-08-21** — [qn.13 handover: six slices merged, and the two decisions the next session needs](2026-08/2026-08-21-qn13-handover.md)
 - **2026-08-21** — [qn.13's first six slices land, and three of the four best findings came from review](2026-08/2026-08-21-qn13-six-slices-landed.md)
 - **2026-08-21** — [the qn.13 picker measurement confirmed the property and found the defect underneath it](2026-08/2026-08-21-qn13-the-measurement-that-found-a-defect.md)
+- **2026-08-21** — [`r63` retires: eight review findings against me, six the other way, and four traps that left no trace anywhere](2026-08/2026-08-21-r63-retirement-what-the-forge-could-not-hold.md)
 - **2026-08-21** — [quince#1259 was already fixed when it was taken, and the work was the two things nobody had done](2026-08/2026-08-21-taking-an-issue-whose-fix-already-landed.md)
 - **2026-08-21** — [The first real backup, and the bug that only hardware could find](2026-08/2026-08-21-the-first-real-backup.md)
 - **2026-08-21** — [The instrument would have bought a sidecar](2026-08/2026-08-21-the-instrument-would-have-bought-a-sidecar.md)
