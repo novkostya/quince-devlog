@@ -565,9 +565,28 @@ same RPC, session lifecycle, scratch jail, and conformance suite, whose goldens 
 from the Python reference regardless. Fixture-backup generator comes from the Go
 library's encrypt/builder side (or a documented lab-only gate if unavailable). No
 persistent indexing — session-scoped reads only. *Gate:
-unlock a real version, browse domains, download a file, lock; keys provably confined to
-the vault process (no password/keys in core logs, env, argv, or disk — and nothing
-persisted after lock).*
+unlock a real version, browse domains, download a file, lock; keys and the password exist only
+between unlock and lock, and are **provably absent** from logs, argv, env, `config.yml`, the app DB
+and disk — nothing derived from them survives the lock.*
+
+**THE GATE SAID "keys provably confined to the vault process" AND THAT NOW NAMES NOTHING** — qn.8's
+D11, ruled with the process model (quince#270, stack D4). Two things were wrong with it:
+
+- **The confinement was never enforced.** There is no `chroot`, `unshare`, `bwrap` or
+  credential-dropping anywhere in quince — it is what the vault is *told*, not what it is *confined
+  to*. A gate cannot be passed on a convention, and the spec's own §8 forbade letting it try.
+- **There is no vault process.** The measurement chose in-process (stack D4: 7.9 MiB peak streaming
+  a 128 MiB file), so the clause claims something that cannot be true rather than something merely
+  unproven.
+
+**The parenthetical the old gate carried is kept whole and promoted**, because it is the half that
+was always checkable and is now checked by a test: no password or key in a log, in argv, in env, in
+`config.yml`, in the app DB, or on disk, and nothing surviving the lock. What is dropped is the word
+`process`.
+
+**If a sidecar is ever built, the original wording returns with it**, and enforcement becomes that
+rung's to build or to decline in writing. `contracts.md` §4 still specifies the RPC and the
+conformance suite still gates both implementations, so nothing here forecloses it.
 
 ### M7 — Domain viewers (`qn.9` overview, `qn.10` messages)
 Each its own release-worthy rung with iOS-versioned adapters + scrubbed fixtures, all
