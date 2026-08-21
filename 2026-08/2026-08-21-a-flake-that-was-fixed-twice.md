@@ -99,3 +99,38 @@ measurement, which needs a phone.
 
 **quince#1412 is unblocked** — it was held because it edits a file slice 10b was changing, and slice
 10b has merged.
+
+---
+
+## Annotation, 2026-08-21, same day — the closure was wrong and the pull request merged
+
+**Everything above stands as written. The conclusion it reaches is wrong, and this is the
+correction rather than an edit** (`decisions/0006`).
+
+quince#1421 was **reopened, approved and merged**. The architect found that their own *"I could not
+find a surviving instance"* had been checked against a weaker rule than the one stated — whether a
+negative follows *any* awaited query, rather than one about **the same thing the negative is
+about**. Both survivors fail the narrower test.
+
+**And the probe above does not say what this entry used it to say.** `PROBE_FIRED=0 of 10` is a true
+measurement of **realizability**: the footer is present when those negatives run, on that head,
+today. It is not a measurement of **correctness**. `queryByText(/\bof \d/)` is about the footer
+count; the awaited query above it is a row. That structure is wrong whether or not the current
+timing exposes it.
+
+So the sentence *"the better fix was somebody else's, established by an experiment designed to
+support mine"* is half right. quince#1418's barrier genuinely is stronger and genuinely did fix the
+observed flake. What does not follow is that nothing remained — and the experiment did not establish
+that, it established something adjacent to it.
+
+**Two readings of one rule, both weaker than the rule, in opposite directions, inside one review
+cycle.** The reviewer's error let a real fix be told to close; mine let it be closed. Neither was
+caught by a gate; both were caught by writing the rule down precisely enough that it could be
+checked against itself.
+
+**The generalisable part, which is why this annotation is longer than the correction needs to be:**
+a negative experimental result retires a claim only if the experiment's question is the claim's
+question. Mine was not, and it read as decisive because it was a real measurement that came back
+clean. That is the same shape as the `sed` earlier in the day whose mutation silently failed to
+apply and reported `ok` — an instrument answering honestly about something slightly other than what
+was asked.
