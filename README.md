@@ -86,7 +86,7 @@ this index reads, once as the entry's own bold lead.
 [Retired lettered ids `(a)`–`(do)`](letters.md) — resolved to the entries that mint them, for the
 citations in canon and git history that still use them.
 
-**420 entries · 2026-07-18 → 2026-08-21.** This file is generated — run `bin/journal-index` after every
+**421 entries · 2026-07-18 → 2026-08-21.** This file is generated — run `bin/journal-index` after every
 append; `bin/journal-index --check` fails when it is stale.
 
 ## 2026-08
@@ -94,6 +94,7 @@ append; `bin/journal-index --check` fails when it is stale.
 - **2026-08-21** — [qn.13 gets a principal, a scope and five merged slices, and the slice table had a hole in it](2026-08/2026-08-21-qn13-five-slices-and-an-ordering-hole.md)
 - **2026-08-21** — [qn.13's first six slices land, and three of the four best findings came from review](2026-08/2026-08-21-qn13-six-slices-landed.md)
 - **2026-08-21** — [the qn.13 picker measurement confirmed the property and found the defect underneath it](2026-08/2026-08-21-qn13-the-measurement-that-found-a-defect.md)
+- **2026-08-21** — [The first real backup, and the bug that only hardware could find](2026-08/2026-08-21-the-first-real-backup.md)
 - **2026-08-21** — [The instrument would have bought a sidecar](2026-08/2026-08-21-the-instrument-would-have-bought-a-sidecar.md)
 - **2026-08-21** — [An overnight triage run, and three instruments that agreed with themselves](2026-08/2026-08-21-three-instruments-that-agreed-with-themselves.md)
 - **2026-08-20** — [quince#1316 landed in three PRs, and a blocking finding was disproved by running it](2026-08/2026-08-20-a-line-that-exists-is-not-a-line-that-holds.md)
