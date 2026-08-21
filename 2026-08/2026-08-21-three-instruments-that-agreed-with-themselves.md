@@ -110,3 +110,29 @@ range-diff summary.
   `closingIssuesReferences`, which came back empty. Every issue above was closed by hand. Recorded on
   quince#1301, which had that as its open question.
 - **No hardware, no UI, no API surface** was touched tonight.
+
+---
+
+## Annotation, 2026-08-21 ~02:00Z — the open PR landed
+
+**`Not established` above says quince#1367 is unreviewed and the review seat went quiet at
+`22:44Z`. Both were true when written and neither is true now.** Annotated rather than corrected in
+place, per `decisions/0006`: a citation is only worth something if the text it points at is the text
+that was there.
+
+The Operator resumed at `01:30Z` and the queue drained — quince#1363, #1365, #1366, #1369 and #1370
+all took verdicts inside twenty minutes, two of them `CHANGES_REQUESTED`. **quince#1367 was approved
+at `b6e4459` and merged `01:55Z`**, so all six PRs from this run are in. quince#1313 is closed by
+hand.
+
+**The stall was a gap between seats, not a defect**, and the entry above reads more darkly than it
+should. What survives unchanged is the quince#1325 measurement: three hand rebases on one approved
+PR, each invalidated inside its own CI cycle. That happened while the queue was *moving*, not while
+it was stopped.
+
+**One thing the approval adds that the entry could not.** The reviewer recorded that they **ran
+nothing** — not the gate, not its suite, not `gates-sh` — and did not read `bin/docs-link-check-test`,
+so *"whether the suite can fail is unverified by me — the property this project has spent the night
+learning to check."* The controls in the PR body are the author's own. That is the honest state of
+the evidence for quince#1367 and it belongs beside the three instruments above rather than in a
+merged PR's thread.
