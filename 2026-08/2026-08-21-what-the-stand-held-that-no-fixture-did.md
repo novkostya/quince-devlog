@@ -108,3 +108,14 @@ still never run.
 And a product question this slice deliberately did not answer: **the first page of a real backup is
 451 directories, 43 files and 6 symlinks.** Whether the browser should open file-first is a
 decision, not a default — and hiding rows would be the silent cap the hard rules forbid.
+
+---
+
+**Annotation, same day, 17:05Z.** The fourth pull request merged; slice 7 is complete and the lead's
+*"waiting on a green check as this is written"* is now history rather than state. Left as written
+per `decisions/0006` — an entry is corrected by addition, and the original sentence was true when
+it was pushed.
+
+**The stand is back on `main`** — `0.1.0-alpha.2-191-gb355c47`, verified by grepping the served
+bundle for five of the slice's own strings rather than by reading the version it reports. It had
+been running a branch build since the walk, which quince#1410 declared at the time.
