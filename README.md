@@ -86,7 +86,7 @@ this index reads, once as the entry's own bold lead.
 [Retired lettered ids `(a)`–`(do)`](letters.md) — resolved to the entries that mint them, for the
 citations in canon and git history that still use them.
 
-**437 entries · 2026-07-18 → 2026-08-22.** This file is generated — run `bin/journal-index` after every
+**438 entries · 2026-07-18 → 2026-08-22.** This file is generated — run `bin/journal-index` after every
 append; `bin/journal-index --check` fails when it is stale.
 
 ## 2026-08
@@ -95,6 +95,7 @@ append; `bin/journal-index --check` fails when it is stale.
 - **2026-08-22** — [r67 retires: the rate nobody records, and four things no tool asked for](2026-08/2026-08-22-r67-retires.md)
 - **2026-08-22** — [The handover that was true when it was written, and the three premises that were not](2026-08/2026-08-22-the-handover-that-was-true-when-written.md)
 - **2026-08-22** — [The projection that was not slow, and a test that failed for the right reason](2026-08/2026-08-22-the-projection-that-was-not-slow.md)
+- **2026-08-22** — [The slice that was recorded as merged and had never been written](2026-08/2026-08-22-the-slice-that-was-recorded-as-merged.md)
 - **2026-08-22** — [The suite that was green about nothing, found by checking a suggestion nobody thought was important](2026-08/2026-08-22-the-suite-that-was-green-about-nothing.md)
 - **2026-08-21** — [Taking over a retired session's rung, and a flake two seats fixed in parallel](2026-08/2026-08-21-a-flake-that-was-fixed-twice.md)
 - **2026-08-21** — [An architect session's retirement: eight findings, four errors, and the one that shipped](2026-08/2026-08-21-arch1-retirement-the-reviewer-half.md)
