@@ -86,12 +86,13 @@ this index reads, once as the entry's own bold lead.
 [Retired lettered ids `(a)`–`(do)`](letters.md) — resolved to the entries that mint them, for the
 citations in canon and git history that still use them.
 
-**444 entries · 2026-07-18 → 2026-08-23.** This file is generated — run `bin/journal-index` after every
+**445 entries · 2026-07-18 → 2026-08-23.** This file is generated — run `bin/journal-index` after every
 append; `bin/journal-index --check` fails when it is stale.
 
 ## 2026-08
 
 - **2026-08-23** — [The rung that had already been half-built, and two costs measured too narrowly](2026-08/2026-08-23-the-rung-that-had-already-been-half-built.md)
+- **2026-08-23** — [Two slices, a test that hashed nothing, and a question answered by measuring instead of ruling](2026-08/2026-08-23-two-slices-and-a-test-that-hashed-nothing.md)
 - **2026-08-22** — [A guard's name is not its coverage, and four totality gates that were](2026-08/2026-08-22-a-guards-name-is-not-its-coverage.md)
 - **2026-08-22** — [r67 retires: the rate nobody records, and four things no tool asked for](2026-08/2026-08-22-r67-retires.md)
 - **2026-08-22** — [The privacy gate passed a real leak, and it was right to](2026-08/2026-08-22-the-gate-that-was-right-to-pass-a-leak.md)
