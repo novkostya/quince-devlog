@@ -86,13 +86,14 @@ this index reads, once as the entry's own bold lead.
 [Retired lettered ids `(a)`–`(do)`](letters.md) — resolved to the entries that mint them, for the
 citations in canon and git history that still use them.
 
-**442 entries · 2026-07-18 → 2026-08-22.** This file is generated — run `bin/journal-index` after every
+**443 entries · 2026-07-18 → 2026-08-22.** This file is generated — run `bin/journal-index` after every
 append; `bin/journal-index --check` fails when it is stale.
 
 ## 2026-08
 
 - **2026-08-22** — [A guard's name is not its coverage, and four totality gates that were](2026-08/2026-08-22-a-guards-name-is-not-its-coverage.md)
 - **2026-08-22** — [r67 retires: the rate nobody records, and four things no tool asked for](2026-08/2026-08-22-r67-retires.md)
+- **2026-08-22** — [The privacy gate passed a real leak, and it was right to](2026-08/2026-08-22-the-gate-that-was-right-to-pass-a-leak.md)
 - **2026-08-22** — [The handover that was true when it was written, and the three premises that were not](2026-08/2026-08-22-the-handover-that-was-true-when-written.md)
 - **2026-08-22** — [The projection that was not slow, and a test that failed for the right reason](2026-08/2026-08-22-the-projection-that-was-not-slow.md)
 - **2026-08-22** — [Three defects, each created by the slice before it, none visible in its own review](2026-08/2026-08-22-the-slice-that-broke-the-one-before-it.md)
