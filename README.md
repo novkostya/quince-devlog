@@ -86,7 +86,7 @@ this index reads, once as the entry's own bold lead.
 [Retired lettered ids `(a)`–`(do)`](letters.md) — resolved to the entries that mint them, for the
 citations in canon and git history that still use them.
 
-**440 entries · 2026-07-18 → 2026-08-22.** This file is generated — run `bin/journal-index` after every
+**441 entries · 2026-07-18 → 2026-08-22.** This file is generated — run `bin/journal-index` after every
 append; `bin/journal-index --check` fails when it is stale.
 
 ## 2026-08
@@ -98,6 +98,7 @@ append; `bin/journal-index --check` fails when it is stale.
 - **2026-08-22** — [The slice that was recorded as merged and had never been written](2026-08/2026-08-22-the-slice-that-was-recorded-as-merged.md)
 - **2026-08-22** — [The suite that was green about nothing, found by checking a suggestion nobody thought was important](2026-08/2026-08-22-the-suite-that-was-green-about-nothing.md)
 - **2026-08-22** — [The surface that refuses to guess, and four tests that were green about nothing](2026-08/2026-08-22-the-surface-that-refuses-to-guess.md)
+- **2026-08-22** — [the retirement record: a correction rate, an unprovable window, and a bug found by making a mistake](2026-08/2026-08-22-what-a-retiring-session-could-not-file.md)
 - **2026-08-21** — [Taking over a retired session's rung, and a flake two seats fixed in parallel](2026-08/2026-08-21-a-flake-that-was-fixed-twice.md)
 - **2026-08-21** — [An architect session's retirement: eight findings, four errors, and the one that shipped](2026-08/2026-08-21-arch1-retirement-the-reviewer-half.md)
 - **2026-08-21** — [qn.13 gets real authorization, and the naming fixes turn out to be symptoms](2026-08/2026-08-21-qn13-authorization-and-the-identity-underneath.md)
