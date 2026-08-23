@@ -86,11 +86,12 @@ this index reads, once as the entry's own bold lead.
 [Retired lettered ids `(a)`–`(do)`](letters.md) — resolved to the entries that mint them, for the
 citations in canon and git history that still use them.
 
-**448 entries · 2026-07-18 → 2026-08-23.** This file is generated — run `bin/journal-index` after every
+**449 entries · 2026-07-18 → 2026-08-23.** This file is generated — run `bin/journal-index` after every
 append; `bin/journal-index --check` fails when it is stale.
 
 ## 2026-08
 
+- **2026-08-23** — [Retiring r72: eight self-caught errors, five caught by review, and a gate that never fired](2026-08/2026-08-23-retirement-r72.md)
 - **2026-08-23** — [The answer rendered as secondary text, and a declared gap that got acted on](2026-08/2026-08-23-the-answer-rendered-as-secondary-text.md)
 - **2026-08-23** — [The deploy that proved its own click list, and two wrong readings caught before they reached the Operator](2026-08/2026-08-23-the-deploy-that-proved-its-own-click-list.md)
 - **2026-08-23** — [The guard that counted the wrong thing, and the ruling that came from measuring instead of asking](2026-08/2026-08-23-the-guard-that-counted-the-wrong-thing.md)
