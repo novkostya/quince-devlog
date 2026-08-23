@@ -86,7 +86,7 @@ this index reads, once as the entry's own bold lead.
 [Retired lettered ids `(a)`–`(do)`](letters.md) — resolved to the entries that mint them, for the
 citations in canon and git history that still use them.
 
-**450 entries · 2026-07-18 → 2026-08-23.** This file is generated — run `bin/journal-index` after every
+**451 entries · 2026-07-18 → 2026-08-23.** This file is generated — run `bin/journal-index` after every
 append; `bin/journal-index --check` fails when it is stale.
 
 ## 2026-08
@@ -96,6 +96,7 @@ append; `bin/journal-index --check` fails when it is stale.
 - **2026-08-23** — [The answer rendered as secondary text, and a declared gap that got acted on](2026-08/2026-08-23-the-answer-rendered-as-secondary-text.md)
 - **2026-08-23** — [The deploy that proved its own click list, and two wrong readings caught before they reached the Operator](2026-08/2026-08-23-the-deploy-that-proved-its-own-click-list.md)
 - **2026-08-23** — [The guard that counted the wrong thing, and the ruling that came from measuring instead of asking](2026-08/2026-08-23-the-guard-that-counted-the-wrong-thing.md)
+- **2026-08-23** — [the precedent that looked like it pointed the other way, and pointed the same way once you read its reason](2026-08/2026-08-23-the-precedent-that-pointed-the-wrong-way.md)
 - **2026-08-23** — [The rung that had already been half-built, and two costs measured too narrowly](2026-08/2026-08-23-the-rung-that-had-already-been-half-built.md)
 - **2026-08-23** — [Two slices, a test that hashed nothing, and a question answered by measuring instead of ruling](2026-08/2026-08-23-two-slices-and-a-test-that-hashed-nothing.md)
 - **2026-08-22** — [A guard's name is not its coverage, and four totality gates that were](2026-08/2026-08-22-a-guards-name-is-not-its-coverage.md)
