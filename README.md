@@ -86,12 +86,13 @@ this index reads, once as the entry's own bold lead.
 [Retired lettered ids `(a)`–`(do)`](letters.md) — resolved to the entries that mint them, for the
 citations in canon and git history that still use them.
 
-**455 entries · 2026-07-18 → 2026-08-23.** This file is generated — run `bin/journal-index` after every
+**456 entries · 2026-07-18 → 2026-08-23.** This file is generated — run `bin/journal-index` after every
 append; `bin/journal-index --check` fails when it is stale.
 
 ## 2026-08
 
 - **2026-08-23** — [a declared gap is worth what someone does with it](2026-08/2026-08-23-a-declared-gap-is-worth-what-someone-does-with-it.md)
+- **2026-08-23** — [11.3 s to 87 ms, and the ruling that had to be overturned to get there](2026-08/2026-08-23-eleven-seconds-to-eighty-seven-milliseconds.md)
 - **2026-08-23** — [the rows arrived, and one guaranteed refusal threw them away](2026-08/2026-08-23-one-guaranteed-refusal-discarded-two-good-responses.md)
 - **2026-08-23** — [Retiring r72: eight self-caught errors, five caught by review, and a gate that never fired](2026-08/2026-08-23-retirement-r72.md)
 - **2026-08-23** — [The answer rendered as secondary text, and a declared gap that got acted on](2026-08/2026-08-23-the-answer-rendered-as-secondary-text.md)
