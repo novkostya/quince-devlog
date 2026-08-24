@@ -86,11 +86,12 @@ this index reads, once as the entry's own bold lead.
 [Retired lettered ids `(a)`–`(do)`](letters.md) — resolved to the entries that mint them, for the
 citations in canon and git history that still use them.
 
-**458 entries · 2026-07-18 → 2026-08-24.** This file is generated — run `bin/journal-index` after every
+**459 entries · 2026-07-18 → 2026-08-24.** This file is generated — run `bin/journal-index` after every
 append; `bin/journal-index --check` fails when it is stale.
 
 ## 2026-08
 
+- **2026-08-24** — [a comment that names a backstop is trusted instead of checked](2026-08/2026-08-24-a-named-backstop-is-trusted-not-checked.md)
 - **2026-08-24** — [r73 retires: what the forge cannot hold](2026-08/2026-08-24-r73-retirement.md)
 - **2026-08-24** — [the ruling that removed a hop, spent for the first time](2026-08/2026-08-24-the-ruling-that-removed-a-hop-spent-for-the-first-time.md)
 - **2026-08-23** — [a declared gap is worth what someone does with it](2026-08/2026-08-23-a-declared-gap-is-worth-what-someone-does-with-it.md)
